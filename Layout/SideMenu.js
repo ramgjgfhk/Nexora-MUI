@@ -6,12 +6,11 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import SelectContent from './SelectContent';
+import Logo from './Logo';
 import MenuContent from './MenuContent';
-import CardAlert from './CardAlert';
 import OptionsMenu from './OptionsMenu';
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const Drawer = styled(MuiDrawer)({
   width: drawerWidth,
@@ -31,7 +30,7 @@ export default function SideMenu() {
       sx={{
         display: { xs: 'none', md: 'block' },
         [`& .${drawerClasses.paper}`]: {
-          backgroundColor: 'background.paper',
+          backgroundColor: "#1E1E2F	",
         },
       }}
     >
@@ -42,7 +41,7 @@ export default function SideMenu() {
           p: 1.5,
         }}
       >
-        <SelectContent />
+        <Logo />
       </Box>
       <Divider />
       <Box
@@ -54,7 +53,6 @@ export default function SideMenu() {
         }}
       >
         <MenuContent />
-        <CardAlert />
       </Box>
       <Stack
         direction="row"
