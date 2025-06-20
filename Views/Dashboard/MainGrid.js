@@ -3,14 +3,14 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import Copyright from '../../Views/Dashboard/internals/components/Copyright';
-import ChartUserByCountry from '../../Views/Dashboard/ChartUserByCountry';
-import CustomizedTreeView from '../../Views/Dashboard/CustomizedTreeView';
+import ChartUserByCountry from './ChartUserByCountry';
+import CustomizedTreeView from './CustomizedTreeView';
 import CustomizedDataGrid from './CustomizedDataGrid';
-import HighlightedCard from '../../Views/Dashboard/HighlightedCard';
-import PageViewsBarChart from '../../Views/Dashboard/PageViewsBarChart';
-import SessionsChart from '../../Views/Dashboard/SessionsChart';
-import StatCard from '../../Views/Dashboard/StatCard';
+import HighlightedCard from './HighlightedCard';
+import PageViewsBarChart from './PageViewsBarChart';
+import SessionsChart from './SessionsChart';
+import StatCard from './StatCard';
+import Copyright from './internals/components/Copyright';
 
 const data = [
   {
