@@ -7,7 +7,12 @@ import Stack from "@mui/material/Stack";
 import AppTheme from "../shared-theme/AppTheme";
 import AppNavbar from "./AppNavBar";
 import SideMenu from "./SideMenu";
-import { chartsCustomizations, dataGridCustomizations, datePickersCustomizations, treeViewCustomizations } from "@/dashboard/theme/customizations";
+import {
+  chartsCustomizations,
+  dataGridCustomizations,
+  datePickersCustomizations,
+  treeViewCustomizations,
+} from "@/shared-theme/theme";
 
 const xThemeComponents = {
   ...chartsCustomizations,
@@ -16,13 +21,13 @@ const xThemeComponents = {
   ...treeViewCustomizations,
 };
 
-export default function MainLayout({ children,props }) {
+export default function MainLayout({ children, props }) {
   return (
     <AppTheme {...props} themeComponents={xThemeComponents}>
       <CssBaseline enableColorScheme />
       <Box sx={{ display: "flex" }}>
-        <SideMenu />
         <AppNavbar />
+        <SideMenu />
         {/* Main content */}
         <Box
           component="main"
