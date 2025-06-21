@@ -1,11 +1,11 @@
 import * as React from "react";
 
-import { alpha } from "@mui/material/styles";
+import { alpha, useTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import AppTheme from "../shared-theme/AppTheme";
-import AppNavbar from "./AppNavBar";
+import MobileHeader from "./MobileHeader";
 import SideMenu from "./SideMenu";
 import {
   chartsCustomizations,
@@ -13,6 +13,8 @@ import {
   datePickersCustomizations,
   treeViewCustomizations,
 } from "@/shared-theme/theme";
+import { useMediaQuery } from "@mui/material";
+import Header from "./Header";
 
 const xThemeComponents = {
   ...chartsCustomizations,
@@ -22,11 +24,12 @@ const xThemeComponents = {
 };
 
 export default function MainLayout({ children, props }) {
+  const theme = useTheme();
+  const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
   return (
     <AppTheme {...props} themeComponents={xThemeComponents}>
       <CssBaseline enableColorScheme />
       <Box sx={{ display: "flex" }}>
-        <AppNavbar />
         <SideMenu />
         {/* Main content */}
         <Box
@@ -34,11 +37,12 @@ export default function MainLayout({ children, props }) {
           sx={(theme) => ({
             flexGrow: 1,
             backgroundColor: theme.vars
-              ? `rgba(${theme.vars.palette.background.defaultChannel} / 1)`
-              : alpha(theme.palette.background.default, 1),
+            ? `rgba(${theme.vars.palette.background.defaultChannel} / 1)`
+            : alpha(theme.palette.background.default, 1),
             overflow: "auto",
           })}
-        >
+          >
+          {isMdUp ? <Header /> : <MobileHeader />}
           <Stack
             spacing={2}
             sx={{
