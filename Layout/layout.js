@@ -15,6 +15,8 @@ import {
 } from "@/shared-theme/theme";
 import { useMediaQuery } from "@mui/material";
 import Header from "./Header";
+import { getCookie, setCookie } from "cookies-next";
+import { menuItems } from "@/Components/Variables/sideMenus";
 
 const xThemeComponents = {
   ...chartsCustomizations,
@@ -26,6 +28,43 @@ const xThemeComponents = {
 export default function MainLayout({ children, props }) {
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
+
+  const [openItems, setOpenItems] = React.useState({});
+  const [selectedPath, setSelectedPath] = React.useState("");
+
+  const handleToggle = (itemId) => {
+    setOpenItems((prev) => ({
+      ...prev,
+      [itemId]: !prev[itemId],
+    }));
+  };
+
+  const handleNavigation = (path) => {
+    setCookie("currentPath", path);
+    setSelectedPath(path);
+    router.push(path);
+  };
+
+  React.useEffect(() => {
+    const currentPath = getCookie("currentPath") || "/dashboard";
+    setSelectedPath(currentPath);
+
+    const expandedItems = {};
+
+    const findAndExpandParents = (items, parentId = null) => {
+      for (const item of items) {
+        if (item.path === currentPath) {
+          if (parentId) expandedItems[parentId] = true;
+        }
+        if (item.children) {
+          findAndExpandParents(item.children, item.id);
+        }
+      }
+    };
+
+    findAndExpandParents(menuItems);
+    setOpenItems(expandedItems);
+  }, []);
 
   return (
     <AppTheme {...props} themeComponents={xThemeComponents}>
@@ -57,7 +96,13 @@ export default function MainLayout({ children, props }) {
                 flexDirection: "column",
               }}
             >
-              <SideMenu />
+              <SideMenu
+                openItems={openItems}
+                setOpenItems={setOpenItems}
+                handleNavigation={handleNavigation}
+                handleToggle={handleToggle}
+                selectedPath={selectedPath}
+              />
             </Box>
           </Box>
 

@@ -11,6 +11,7 @@ import {
   Box,
   Typography,
 } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import {
   Search as SearchIcon,
   Notifications as NotificationsIcon,
@@ -52,9 +53,14 @@ export default function Header() {
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
           {/* Search */}
-          <Box>
-            <Logo />
-          </Box>
+          <Grid container spacing={2}>
+            <Grid item xs={3}>
+              <Logo />
+            </Grid>
+            <Grid item xs={9}></Grid>
+          </Grid>
+          {/* <Box >
+          </Box> */}
 
           {/* Right Icons */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
