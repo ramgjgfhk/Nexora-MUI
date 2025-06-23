@@ -105,6 +105,7 @@ export default function LoginPage() {
               background: `linear-gradient(145deg, ${theme.palette.background.paper}95, ${theme.palette.background.paper}98)`,
               backdropFilter: "blur(20px)",
               border: `1px solid ${theme.palette.divider}30`,
+              // height:'500px'
             }}
           >
             <Box sx={{ p: 0 }}>
@@ -275,14 +276,14 @@ export default function LoginPage() {
                     {isLoading ? "Signing In..." : "Sign In"}
                   </Button>
 
-                  <Divider sx={{ my: 3 }}>
+                  {/* <Divider sx={{ my: 3 }}>
                     <Typography variant="body2" color="text.secondary">
                       Or continue with
                     </Typography>
-                  </Divider>
+                  </Divider> */}
 
                   {/* Social Login Buttons */}
-                  <Box sx={{ display: "flex", gap: 2, mb: 3 }}>
+                  {/* <Box sx={{ display: "flex", gap: 2, mb: 3 }}>
                     <Button
                       fullWidth
                       variant="outlined"
@@ -340,7 +341,7 @@ export default function LoginPage() {
                     >
                       Apple
                     </Button>
-                  </Box>
+                  </Box> */}
 
                   <Box sx={{ textAlign: "center" }}>
                     <Typography variant="body2" color="text.secondary">

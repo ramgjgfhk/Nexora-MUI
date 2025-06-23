@@ -14,7 +14,7 @@ import MenuContent from "./MenuContent";
 function SideMenuMobile({ open, toggleDrawer }) {
   return (
     <Drawer
-      anchor="right"
+      anchor="left"
       open={open}
       onClose={toggleDrawer(false)}
       sx={{

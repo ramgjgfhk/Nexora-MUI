@@ -11,7 +11,7 @@ export default function Logo() {
         margin:'0 auto'
       }}
     >
-      <Image src="/en_full_logo.png" alt="Logo" width={170} height={25} />
+      <Image src="/en_full_logo.png" alt="Logo" width={170} height={35} />
     </div>
   );
 }

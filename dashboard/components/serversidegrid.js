@@ -1,12 +1,6 @@
+import { flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
 import React, { useEffect, useMemo, useState } from "react";
-import {
-  useReactTable,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  flexRender,
-} from "@tanstack/react-table";
+
 import {
   FiChevronDown,
   FiChevronUp,
@@ -97,7 +91,7 @@ const TableComponent = ({ columns, fetchData, datas, searchText }) => {
   return (
     <div
       style={{
-        fontFamily: "Segoe UI, sans-serif",
+        fontFamily: "Inter, system-ui, sans-serif",
         fontSize: "13px",
         color: "#1f2937",
         // padding: "12px",

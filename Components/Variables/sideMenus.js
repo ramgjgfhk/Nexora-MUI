@@ -1,3 +1,4 @@
+import UserList from "@/Views/User/UserList";
 import {
   AccountBox,
   AdminPanelSettings,
@@ -46,6 +47,7 @@ export const menuItems = [
         id: "segment",
         title: "Segment",
         icon: <BarChart />,
+        path:'/segment'
       },
       {
         id: "rfm",
@@ -97,7 +99,7 @@ export const menuItems = [
         id: "user-list",
         title: "Users",
         icon: <Group />,
-        path: "/users/list",
+        path: "/users",
       },
       {
         id: "user-roles",
