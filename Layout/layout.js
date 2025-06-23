@@ -26,36 +26,50 @@ const xThemeComponents = {
 export default function MainLayout({ children, props }) {
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
+
   return (
     <AppTheme {...props} themeComponents={xThemeComponents}>
       <CssBaseline enableColorScheme />
-      <Box sx={{ display: "flex" }}>
-        <SideMenu />
-        {/* Main content */}
-        <Box
-          component="main"
-          sx={(theme) => ({
-            flexGrow: 1,
-            backgroundColor: theme.vars
-            ? `rgba(${theme.vars.palette.background.defaultChannel} / 1)`
-            : alpha(theme.palette.background.default, 1),
-            overflow: "auto",
-          })}
-          >
+
+      {/* Main Wrapper */}
+      <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+        
+        {/* Navbar Always on Top */}
+        <Box sx={{ zIndex: 2 }}>
           {isMdUp ? <Header /> : <MobileHeader />}
-          <Stack
-            spacing={2}
+        </Box>
+
+        {/* Below Navbar - Sidebar + Main Content */}
+        <Box sx={{ display: "flex", flexGrow: 1, minHeight: 0 }}>
+          
+          {/* Sidebar */}
+          <SideMenu
             sx={{
-              alignItems: "center",
-              mx: 3,
-              pb: 5,
-              mt: { xs: 8, md: 0 },
+              width: 240,
+              flexShrink: 0,
+              height: "100%",
+              position: "relative", // Prevent fixed overlay
+              zIndex: 1,
             }}
+          />
+
+          {/* Main Content */}
+          <Box
+            component="main"
+            sx={(theme) => ({
+              flexGrow: 1,
+              overflow: "auto",
+              backgroundColor: theme.vars
+                ? `rgba(${theme.vars.palette.background.defaultChannel} / 1)`
+                : alpha(theme.palette.background.default, 1),
+              p: 2,
+            })}
           >
             {children}
-          </Stack>
+          </Box>
         </Box>
       </Box>
     </AppTheme>
   );
 }
+
