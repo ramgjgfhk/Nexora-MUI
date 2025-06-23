@@ -1,10 +1,16 @@
 import TableComponent from "@/dashboard/components/serversidegrid";
 import { Box, Button, Stack, Typography } from "@mui/material";
-import React, { useState } from "react";    import { Inbox } from '@novu/nextjs';
+import React, { useState } from "react";
+import { Inbox } from "@novu/nextjs";
+import FromToDatePicker from "@/Components/resuable components/fromToDatePicker";
+// import FromToDatePicker from "./FromToDatePicker";
+// import dayjs from "dayjs";
 
 const SegmentList = () => {
   //   const { ActiveThemeColor } = useActiveColor();
   //   const { setSegmentModal } = useSegmentContext();
+  const [fromDate, setFromDate] = useState(null);
+  const [toDate, setToDate] = useState(null);
   const [range, setRange] = React.useState([
     {
       startDate: new Date(),
@@ -167,8 +173,6 @@ const SegmentList = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showPicker]);
-  const [fromDate, setFromDate] = useState(null);
-  const [toDate, setToDate] = useState(null);
 
   const handleFromChange = (date) => {
     setFromDate(date);
@@ -178,18 +182,46 @@ const SegmentList = () => {
   };
   return (
     <Box
-      sx={{ display: "flex", gap: 1, flexDirection: "column", width: "100%" }}
+      sx={{ display: "flex", gap: 2, flexDirection: "column", width: "100%" }}
     >
-      <Stack direction="row" sx={{ justifyContent: "space-between" ,mt:2}}>
-        <Typography>Segment</Typography>
+      {" "}
+      <Typography
+        component="h1"
+        variant="subtitle2"
+        gutterBottom
+        sx={{ fontWeight: "600", fontSize: "18px" }}
+      >
+        Segment
+      </Typography>
+      <Stack
+        direction="row"
+        sx={{ justifyContent: "end", mt: 0, alignItems: "end" }}
+      >
+        {/* <Box sx={{ maxWidth: 400 ,backgroundColor:" #f5f5f5",p:1,borderRadius:"6px"}}>
+          <Typography
+            //  component="h2"
+            variant="subtitle2"
+            gutterBottom
+            sx={{ fontWeight: "600", fontSize: "13px", color: "grey" }}
+          >
+            Filter Segment By date
+          </Typography>
+          <FromToDatePicker
+            fromDate={fromDate}
+            toDate={toDate}
+            setFromDate={setFromDate}
+            setToDate={setToDate}
+          />
+        </Box> */}
 
-        <Button variant="contained" sx={{ height: "80px" }}>
-          Containessd
+        <Button
+          variant="contained"
+          sx={{ height: "26px", fontSize: "12px", borderRadius: "6px" }}
+        >
+          Create Segment
         </Button>
-   
 
-
-    <Inbox
+        {/* <Inbox
       applicationIdentifier="KxsvqMOiei9I"
       subscriberId="685919ded80e094dc6b1edce"
       appearance={{
@@ -198,11 +230,10 @@ const SegmentList = () => {
           colorForeground: "#0E121B"
         }
       }}
-    />
+    /> */}
 
         {/* <button           color={ActiveThemeColor} onClick={() => setSegmentModal(true)}></button> */}
       </Stack>
-
       {/* <Container className="py-4">
       <Card className="shadow-sm border-0">
         <CardBody>
@@ -265,8 +296,30 @@ const SegmentList = () => {
           setGlobalFilter: (val) => setPartialState({ globalFilter: val }),
         }}
         loading={false}
-      />
+        customFilters = {{
+  text: [
+    { label: "Name", name: "name" },
+    { label: "City", name: "city" },
+  ],
+  date: [
+    { label: "From", name: "startDate" },
+    { label: "To", name: "endDate" },  { label: "Created At", name: "created_at" },  { label: "Updated At", name: "updated_at" },
+  ],
+  autocomplete: [
+    {
+      label: "Status",
+      name: "status",
+      options: ["Active", "Inactive", ]
+    },
+        {
+      label: "Type",
+      name: "status",
+      options: ["Past Behaviour", "Live Action", ]
+    },
+  ],
+}}
 
+      />
       {/* <SegmentTypeModal /> */}
     </Box>
   );

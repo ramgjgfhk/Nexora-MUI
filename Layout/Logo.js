@@ -5,7 +5,7 @@ export default function Logo() {
   return (
     <div
       style={{
-        backgroundColor: "#F7FAFC",
+        // backgroundColor: "#F7FAFC",
         padding: "8px",
         borderRadius: "8px",
         margin:'0 auto'

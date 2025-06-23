@@ -16,7 +16,10 @@ import {
 } from "react-icons/fi";
 // import axios from 'axios';
 
-const TableComponent = ({ columns, fetchData, datas, searchText }) => {
+const TableComponent = ({ columns, fetchData, datas, searchText, customFilters }) => {
+  
+  const [filterPanelOpen, setFilterPanelOpen] = useState(false);
+  const [filterValues, setFilterValues] = useState({});
   const [data, setData] = useState(datas);
   const [pageIndex, setPageIndex] = useState(0);
   const [pageSize, setPageSize] = useState(10);
@@ -123,9 +126,9 @@ const TableComponent = ({ columns, fetchData, datas, searchText }) => {
         >
           <div style={{ display: "flex", gap: "12px" }}>
             <FiFilter
-              title="Toggle Filters"
-              onClick={() => setShowFilters(!showFilters)}
-              style={{ cursor: "pointer", fontSize: "18px", color: "#6b7280" }}
+           title="Toggle Filters"
+  onClick={() => setFilterPanelOpen(true)}
+  style={{ cursor: "pointer", fontSize: "18px", color: "#6b7280" }}
             />
             <FiDownload
               title="Export"
@@ -205,14 +208,109 @@ const TableComponent = ({ columns, fetchData, datas, searchText }) => {
                               />
                             )}
                           </span>
-                          {header.column.getCanFilter() && (
-                            <FiFilter
-                              title="Column Filter"
-                              size={14}
-                              style={{ cursor: "pointer", color: "#6b7280", marginLeft:"5px" }}
-                              // onClick={() => setActiveFilterColumn(activeFilterColumn === header.column.id ? null : header.column.id)}
-                            />
-                          )}
+                 {header.column.getCanFilter() && (
+  <div style={{ display: "inline-block" }}>
+    <FiFilter
+      title="Column Filter"
+      size={14}
+      style={{
+        cursor: "pointer",
+        color: columnFilters[header.column.id]
+          ? "#1f2937" // darker color when active
+          : "#9ca3af",
+        marginLeft: "5px",
+      }}
+      onClick={() =>
+        setActiveFilterColumn(
+          activeFilterColumn === header.column.id ? null : header.column.id
+        )
+      }
+    />
+    {activeFilterColumn === header.column.id && (
+      <div
+        style={{
+          position: "absolute",
+          marginTop: "4px",
+          backgroundColor: "#fff",
+          border: "1px solid #d1d5db",
+          borderRadius: "4px",
+          padding: "6px",
+          boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)",
+          zIndex: 10,
+        }}
+      >
+        <input
+          type="text"
+          value={columnFilters[header.column.id] || ""}
+          onChange={(e) =>
+            setColumnFilters((prev) => ({
+              ...prev,
+              [header.column.id]: e.target.value,
+            }))
+          }
+          style={{
+            padding: "4px 8px",
+            fontSize: "12px",
+            width: "180px",
+            marginBottom: "6px",borderRadius:"4px"
+          }}
+          placeholder="Type to filter"
+        />
+            {/* <span
+            onClick={() => {
+              setActiveFilterColumn(null);
+              // already applied onChange above
+            }}
+            style={{ cursor: "pointer", fontSize: "14px", color: "#10b981" }}
+            title="Apply"
+          >
+            ✅
+          </span> */}
+              <span
+            onClick={() => {
+              setColumnFilters((prev) => {
+                const updated = { ...prev };
+                delete updated[header.column.id];
+                return updated;
+              });
+              setActiveFilterColumn(null);
+            }}
+            style={{ cursor: "pointer", fontSize: "11px", color: "#ef4444",marginLeft:"4px" }}
+            title="Clear"
+          >
+            ❌
+          </span>
+        {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <span
+            onClick={() => {
+              setActiveFilterColumn(null);
+              // already applied onChange above
+            }}
+            style={{ cursor: "pointer", fontSize: "14px", color: "#10b981" }}
+            title="Apply"
+          >
+            ✅
+          </span>
+          <span
+            onClick={() => {
+              setColumnFilters((prev) => {
+                const updated = { ...prev };
+                delete updated[header.column.id];
+                return updated;
+              });
+              setActiveFilterColumn(null);
+            }}
+            style={{ cursor: "pointer", fontSize: "14px", color: "#ef4444" }}
+            title="Clear"
+          >
+            ❌
+          </span>
+        </div> */}
+      </div>
+    )}
+  </div>
+)}
+
                         </div>
                       </div>
                       {/* {header.column.getCanFilter() && activeFilterColumn === header.column.id && (
@@ -354,6 +452,94 @@ const TableComponent = ({ columns, fetchData, datas, searchText }) => {
           </div>
         </div>
       </div>
+      {filterPanelOpen && (
+  <div
+    style={{
+      position: "fixed",
+      top: 0,
+      right: 0,
+      height: "100%",
+      width: "300px",
+      backgroundColor: "#ffffff",
+      borderLeft: "1px solid #e5e7eb",
+      boxShadow: "-2px 0 5px rgba(0,0,0,0.05)",
+      padding: "16px",
+      zIndex: 9999,
+      overflowY: "auto",
+    }}
+  >
+    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "16px" }}>
+      <strong>Filters</strong>
+      <button onClick={() => setFilterPanelOpen(false)} style={{ border: "none", background: "transparent", cursor: "pointer" }}>✕</button>
+    </div>
+
+    {/* Text Fields */}
+    {customFilters?.text?.map((field) => (
+      <div key={field.name} style={{ marginBottom: "12px" }}>
+        <label style={{ display: "block", fontSize: "13px", marginBottom: "4px" }}>{field.label}</label>
+        <input
+          type="text"
+          value={filterValues[field.name] || ""}
+          onChange={(e) => setFilterValues(prev => ({ ...prev, [field.name]: e.target.value }))}
+          style={{ padding: "6px", width: "100%", border: "1px solid #ccc", borderRadius: "6px" }}
+        />
+      </div>
+    ))}
+
+    {/* Date Pickers */}
+    {customFilters?.date?.map((field) => (
+      <div key={field.name} style={{ marginBottom: "12px" }}>
+        <label style={{ display: "block", fontSize: "13px", marginBottom: "4px" }}>{field.label}</label>
+        <input
+          type="date"
+          value={filterValues[field.name] || ""}
+          onChange={(e) => setFilterValues(prev => ({ ...prev, [field.name]: e.target.value }))}
+          style={{ padding: "6px", width: "100%", border: "1px solid #ccc", borderRadius: "6px" }}
+        />
+      </div>
+    ))}
+
+    {/* Autocomplete (Select Dropdown) */}
+    {customFilters?.autocomplete?.map((field) => (
+      <div key={field.name} style={{ marginBottom: "12px" }}>
+        <label style={{ display: "block", fontSize: "13px", marginBottom: "4px" }}>{field.label}</label>
+        <select
+          value={filterValues[field.name] || ""}
+          onChange={(e) => setFilterValues(prev => ({ ...prev, [field.name]: e.target.value }))}
+          style={{ padding: "6px", width: "100%", border: "1px solid #ccc", borderRadius: "4px" }}
+        >
+          <option value="">-- Select --</option>
+          {field.options.map(opt => (
+            <option key={opt} value={opt}>{opt}</option>
+          ))}
+        </select>
+      </div>
+    ))}
+
+    <div style={{ display: "flex", justifyContent: "space-between", marginTop: "20px",alignSelf:"end" }}>
+      <button
+        onClick={() => {
+          setFilterValues({});
+          setColumnFilters({});
+        }}
+        style={{ fontSize: "13px", background: "#f3f4f6", border: "1px solid #ccc", padding: "6px 12px", borderRadius: "4px" }}
+      >
+        Clear
+      </button>
+
+      <button
+        onClick={() => {
+          setColumnFilters(filterValues);
+          setFilterPanelOpen(false);
+        }}
+        style={{ fontSize: "13px", background: "#2563eb", color: "white", border: "none", padding: "6px 12px", borderRadius: "4px" }}
+      >
+        Apply
+      </button>
+    </div>
+  </div>
+)}
+
     </div>
   );
 };
