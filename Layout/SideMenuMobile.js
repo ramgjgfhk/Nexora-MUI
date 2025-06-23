@@ -21,7 +21,7 @@ function SideMenuMobile({ open, toggleDrawer }) {
         zIndex: (theme) => theme.zIndex.drawer + 1,
         [`& .${drawerClasses.paper}`]: {
           backgroundImage: "none",
-          backgroundColor: "background.paper",
+          backgroundColor: "#1E1E2F",
         },
       }}
     >
@@ -39,10 +39,11 @@ function SideMenuMobile({ open, toggleDrawer }) {
             <Avatar
               sizes="small"
               alt="Riley Carter"
-              src="/static/images/avatar/7.jpg"
-              sx={{ width: 24, height: 24 }}
-            />
-            <Typography component="p" variant="h6">
+              sx={{ width: 20, height: 20 }}
+            >
+              R
+            </Avatar>
+            <Typography component="p" variant="h6" color="white">
               Riley Carter
             </Typography>
           </Stack>
@@ -53,13 +54,14 @@ function SideMenuMobile({ open, toggleDrawer }) {
         <Divider />
         <Stack sx={{ flexGrow: 1 }}>
           <MenuContent />
-          <Divider />
+          {/* <Divider /> */}
         </Stack>
         <Stack sx={{ p: 2 }}>
           <Button
             variant="outlined"
             fullWidth
             startIcon={<LogoutRoundedIcon />}
+            sx={{ backgroundColor: "#fff" }}
           >
             Logout
           </Button>

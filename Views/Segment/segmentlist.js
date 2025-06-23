@@ -1,6 +1,6 @@
 import TableComponent from "@/dashboard/components/serversidegrid";
 import { Box, Button, Stack, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState } from "react";    import { Inbox } from '@novu/nextjs';
 
 const SegmentList = () => {
   //   const { ActiveThemeColor } = useActiveColor();
@@ -180,12 +180,26 @@ const SegmentList = () => {
     <Box
       sx={{ display: "flex", gap: 1, flexDirection: "column", width: "100%" }}
     >
-      <Stack direction="row" sx={{ justifyContent: "space-between" }}>
+      <Stack direction="row" sx={{ justifyContent: "space-between" ,mt:2}}>
         <Typography>Segment</Typography>
 
-        <Button variant="contained" sx={{ height: "20px" }}>
-          Contained
+        <Button variant="contained" sx={{ height: "80px" }}>
+          Containessd
         </Button>
+   
+
+
+    <Inbox
+      applicationIdentifier="KxsvqMOiei9I"
+      subscriberId="685919ded80e094dc6b1edce"
+      appearance={{
+        variables: {
+          colorPrimary: "#7D52F4",
+          colorForeground: "#0E121B"
+        }
+      }}
+    />
+
         {/* <button           color={ActiveThemeColor} onClick={() => setSegmentModal(true)}></button> */}
       </Stack>
 

@@ -40,3 +40,7 @@ a {
     color-scheme: dark;
   }
 }
+
+[data-nextjs-dialog] {
+  display: none !important;
+}
