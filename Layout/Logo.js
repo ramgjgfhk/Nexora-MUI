@@ -6,12 +6,12 @@ export default function Logo() {
     <div
       style={{
         // backgroundColor: "#F7FAFC",
-        padding: "8px",
+        // padding: "8px",
         borderRadius: "8px",
         margin:'0 auto'
       }}
     >
-      <Image src="/en_full_logo.png" alt="Logo" width={170} height={35} />
+      <Image src="/en_full_logo.png" alt="Logo" width={100} height={20} />
     </div>
   );
 }

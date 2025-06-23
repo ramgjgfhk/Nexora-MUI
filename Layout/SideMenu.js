@@ -92,7 +92,7 @@ export default function SideMenu() {
       sx={{
         width: drawerWidth,
         flexShrink: 0,
-        bgcolor: "#1E1E2F",
+        bgcolor: "#FCFCFC",
         // bgcolor: "#F0DA77",
         height: "100%",
         display: { xs: "none", md: "block" },

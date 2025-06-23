@@ -44,7 +44,7 @@ export default function Header() {
           flexDirection: "column",
           justifyContent: "center",
           boxShadow: "0 4px 20px rgba(0,0,0,0.1)", // extra depth
-          px: 2,
+          // px: 2,
           border: "1px solid",
           borderColor: "divider",
           width: "100%",

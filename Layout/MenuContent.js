@@ -37,85 +37,6 @@ export default function MenuContent() {
     const paddingLeft = 16 + level * 20;
 
     return (
-      // <React.Fragment key={item.id}>
-      //   <ListItemButton
-      //     selected={isSelected}
-      //     onClick={() => {
-      //       if (hasChildren) {
-      //         handleToggle(item.id);
-      //       } else if (item.path) {
-      //         handleNavigation(item.path);
-      //       }
-      //     }}
-      //     sx={{
-      //       pl: `${paddingLeft}px`,
-      //       maxHeight: 38,
-      //       opacity: level > 0 ? 0.8 : 1,
-      //       borderRadius: "8px",
-
-      //       // Move selected styling into `.Mui-selected`
-      //       "&.Mui-selected": {
-      //         bgcolor: "#fff",
-      //         "&:hover": {
-      //           bgcolor: "#ccc", // optional: keep same on hover
-      //         },
-      //       },
-
-      //       "&:hover": {
-      //         bgcolor: "#585889",
-      //       },
-      //     }}
-      //   >
-      //     <ListItemIcon sx={{ minWidth: 30 }}>
-      //       {level === 0 ? (
-      //         React.cloneElement(item.icon, {
-      //           sx: {
-      //             color: isSelected ? "#1E1E2F" : "black",
-      //             fontSize: 18,
-      //           },
-      //         })
-      //       ) : (
-      //         <ChevronRight
-      //           sx={{
-      //             fontSize: 16,
-      //             color: isSelected ? "#1E1E2F" : "black",
-      //           }}
-      //         />
-      //       )}
-      //     </ListItemIcon>
-
-      //     <ListItemText
-      //       primary={
-      //         <Typography
-      //           variant="body1"
-      //           sx={{
-      //             fontSize: level === 0 ? "0.9rem" : "0.875rem",
-      //             // fontWeight: level === 0 ? 600 : 600,
-      //             fontFamily: "Inter, system-ui, sans-serif !important",
-      //             color: isSelected ? "#1E1E2F" : "black",
-      //           }}
-      //         >
-      //           {item.title}
-      //         </Typography>
-      //       }
-      //     />
-
-      //     {hasChildren &&
-      //       (isOpen ? (
-      //         <ExpandLess sx={{ color: isSelected ? "#FFFFFF" : "black" }} />
-      //       ) : (
-      //         <ExpandMore sx={{ color: isSelected ? "#FFFFFF" : "black" }} />
-      //       ))}
-      //   </ListItemButton>
-
-      //   {hasChildren && (
-      //     <Collapse in={isOpen} timeout="auto" unmountOnExit>
-      //       <List component="div" disablePadding>
-      //         {item.children.map((child) => renderMenuItem(child, level + 1))}
-      //       </List>
-      //     </Collapse>
-      //   )}
-      // </React.Fragment>
       <React.Fragment key={item.id}>
         <ListItemButton
           selected={isSelected}
@@ -134,14 +55,14 @@ export default function MenuContent() {
 
             // Move selected styling into `.Mui-selected`
             "&.Mui-selected": {
-              bgcolor: "#FFFFFF",
+              bgcolor: "#C2E0FF",
               "&:hover": {
-                bgcolor: "#ccc", // optional: keep same on hover
+                bgcolor: "#E0EEF5", // optional: keep same on hover
               },
             },
 
             "&:hover": {
-              bgcolor: "#585889",
+              bgcolor: "#E0EEF5",
             },
           }}
         >
@@ -149,7 +70,7 @@ export default function MenuContent() {
             {level === 0 ? (
               React.cloneElement(item.icon, {
                 sx: {
-                  color: isSelected ? "#1E1E2F" : "#CBD5E0",
+                  color: isSelected ? "#1E1E2F" : "black",
                   fontSize: 18,
                 },
               })
@@ -157,7 +78,7 @@ export default function MenuContent() {
               <ChevronRight
                 sx={{
                   fontSize: 16,
-                  color: isSelected ? "#1E1E2F" : "#CBD5E0",
+                  color: isSelected ? "#1E1E2F" : "black",
                 }}
               />
             )}
@@ -171,7 +92,7 @@ export default function MenuContent() {
                   fontSize: level === 0 ? "0.9rem" : "0.875rem",
                   // fontWeight: level === 0 ? 800 : 600,
                   fontFamily: "inherit", // ✅ your custom font
-                  color: isSelected ? "#1E1E2F" : "#CBD5E0",
+                  color: isSelected ? "#1E1E2F" : "black",
                 }}
               >
                 {item.title}
@@ -181,9 +102,9 @@ export default function MenuContent() {
 
           {hasChildren &&
             (isOpen ? (
-              <ExpandLess sx={{ color: isSelected ? "#FFFFFF" : "#CBD5E0" }} />
+              <ExpandLess sx={{ color: isSelected ? "#FFFFFF" : "black" }} />
             ) : (
-              <ExpandMore sx={{ color: isSelected ? "#FFFFFF" : "#CBD5E0" }} />
+              <ExpandMore sx={{ color: isSelected ? "#FFFFFF" : "black" }} />
             ))}
         </ListItemButton>
 
