@@ -296,29 +296,30 @@ const SegmentList = () => {
           setGlobalFilter: (val) => setPartialState({ globalFilter: val }),
         }}
         loading={false}
-        customFilters = {{
-  text: [
-    { label: "Name", name: "name" },
-    { label: "City", name: "city" },
-  ],
-  date: [
-    { label: "From", name: "startDate" },
-    { label: "To", name: "endDate" },  { label: "Created At", name: "created_at" },  { label: "Updated At", name: "updated_at" },
-  ],
-  autocomplete: [
-    {
-      label: "Status",
-      name: "status",
-      options: ["Active", "Inactive", ]
-    },
-        {
-      label: "Type",
-      name: "status",
-      options: ["Past Behaviour", "Live Action", ]
-    },
-  ],
-}}
-
+        customFilters={{
+          text: [
+            { label: "Name", name: "name" },
+            { label: "City", name: "city" },
+          ],
+          date: [
+            { label: "From", name: "startDate" },
+            { label: "To", name: "endDate" },
+            { label: "Created At", name: "created_at" },
+            { label: "Updated At", name: "updated_at" },
+          ],
+          autocomplete: [
+            {
+              label: "Statssus",
+              name: "status",
+              options: ['Active', 'Inactive'],
+            },
+            {
+              label: "Type",
+              name: "status",
+              options: ["Past Behaviour", "Live Action"],
+            },
+          ],
+        }}
       />
       {/* <SegmentTypeModal /> */}
     </Box>

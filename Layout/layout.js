@@ -33,27 +33,34 @@ export default function MainLayout({ children, props }) {
 
       {/* Main Wrapper */}
       <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
-        
         {/* Navbar Always on Top */}
-        <Box sx={{ zIndex: 2 }}>
-          {isMdUp ? <Header /> : <MobileHeader />}
-        </Box>
+        <Box sx={{ zIndex: 2 }}>{isMdUp ? <Header /> : <MobileHeader />}</Box>
 
         {/* Below Navbar - Sidebar + Main Content */}
         <Box sx={{ display: "flex", flexGrow: 1, minHeight: 0 }}>
-          
           {/* Sidebar */}
-          <SideMenu
+          <Box
             sx={{
-              width: 240,
-              flexShrink: 0,
               height: "100%",
-              position: "relative", // Prevent fixed overlay
+              p: 1,
               zIndex: 1,
             }}
-          />
+          >
+            <Box
+              sx={{
+                bgcolor: "#fff",
+                height: "100%",
+                borderRadius: "8px",
+                boxShadow: "10px 0 20px rgba(0,0,0,0.1)",
+                overflow: "hidden",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <SideMenu />
+            </Box>
+          </Box>
 
-          {/* Main Content */}
           <Box
             component="main"
             sx={(theme) => ({
@@ -72,4 +79,3 @@ export default function MainLayout({ children, props }) {
     </AppTheme>
   );
 }
-

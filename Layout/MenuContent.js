@@ -9,8 +9,10 @@ import { useTheme } from "@emotion/react";
 import { ChevronRight, ExpandLess, ExpandMore } from "@mui/icons-material";
 import { Collapse, Typography } from "@mui/material";
 import { getCookie, setCookie } from "cookies-next";
+import { useRouter } from "next/router";
 
 export default function MenuContent() {
+  const router = useRouter();
   const [openItems, setOpenItems] = React.useState({});
   const [selectedPath, setSelectedPath] = React.useState("");
   const theme = useTheme();
@@ -24,8 +26,8 @@ export default function MenuContent() {
 
   const handleNavigation = (path) => {
     setCookie("currentPath", path);
-
     setSelectedPath(path);
+    router.push(path);
   };
 
   const renderMenuItem = (item, level = 0) => {
@@ -53,14 +55,14 @@ export default function MenuContent() {
 
             // Move selected styling into `.Mui-selected`
             "&.Mui-selected": {
-              bgcolor: "#fff",
+              bgcolor: "#C2E0FF",
               "&:hover": {
-                bgcolor: "#ccc", // optional: keep same on hover
+                bgcolor: "#E0EEF5", // optional: keep same on hover
               },
             },
 
             "&:hover": {
-              bgcolor: "#585889",
+              bgcolor: "#E0EEF5",
             },
           }}
         >
@@ -68,7 +70,7 @@ export default function MenuContent() {
             {level === 0 ? (
               React.cloneElement(item.icon, {
                 sx: {
-                  color: isSelected ? "#1E1E2F" : "#CBD5E0",
+                  color: isSelected ? "#1E1E2F" : "black",
                   fontSize: 18,
                 },
               })
@@ -76,7 +78,7 @@ export default function MenuContent() {
               <ChevronRight
                 sx={{
                   fontSize: 16,
-                  color: isSelected ? "#1E1E2F" : "#CBD5E0",
+                  color: isSelected ? "#1E1E2F" : "black",
                 }}
               />
             )}
@@ -88,9 +90,9 @@ export default function MenuContent() {
                 variant="body1"
                 sx={{
                   fontSize: level === 0 ? "0.9rem" : "0.875rem",
-                  fontWeight: level === 0 ? 800 : 600,
+                  // fontWeight: level === 0 ? 800 : 600,
                   fontFamily: "inherit", // ✅ your custom font
-                  color: isSelected ? "#1E1E2F" : "#CBD5E0",
+                  color: isSelected ? "#1E1E2F" : "black",
                 }}
               >
                 {item.title}
@@ -100,9 +102,9 @@ export default function MenuContent() {
 
           {hasChildren &&
             (isOpen ? (
-              <ExpandLess sx={{ color: isSelected ? "#FFFFFF" : "#CBD5E0" }} />
+              <ExpandLess sx={{ color: isSelected ? "#FFFFFF" : "black" }} />
             ) : (
-              <ExpandMore sx={{ color: isSelected ? "#FFFFFF" : "#CBD5E0" }} />
+              <ExpandMore sx={{ color: isSelected ? "#FFFFFF" : "black" }} />
             ))}
         </ListItemButton>
 
@@ -116,15 +118,27 @@ export default function MenuContent() {
       </React.Fragment>
     );
   };
-
   React.useEffect(() => {
-    const currentPath = getCookie("currentPath");
-    if (currentPath) {
-      setSelectedPath(currentPath);
-    } else {
-      setSelectedPath("/dashboard");
-    }
+    const currentPath = getCookie("currentPath") || "/dashboard";
+    setSelectedPath(currentPath);
+
+    const expandedItems = {};
+
+    const findAndExpandParents = (items, parentId = null) => {
+      for (const item of items) {
+        if (item.path === currentPath) {
+          if (parentId) expandedItems[parentId] = true;
+        }
+        if (item.children) {
+          findAndExpandParents(item.children, item.id);
+        }
+      }
+    };
+
+    findAndExpandParents(menuItems);
+    setOpenItems(expandedItems);
   }, []);
+
   return (
     <Stack>
       <List sx={{ pt: 2, px: 1 }}>
