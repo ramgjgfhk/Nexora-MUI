@@ -15,6 +15,9 @@ import {
 } from "@/shared-theme/theme";
 import { useMediaQuery } from "@mui/material";
 import Header from "./Header";
+import { getCookie, setCookie } from "cookies-next";
+import { menuItems } from "@/Components/Variables/sideMenus";
+import { useRouter } from "next/router";
 
 const xThemeComponents = {
   ...chartsCustomizations,
@@ -26,6 +29,49 @@ const xThemeComponents = {
 export default function MainLayout({ children, props }) {
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
+  const router = useRouter();
+
+  const [openItems, setOpenItems] = React.useState({});
+  const [selectedPath, setSelectedPath] = React.useState("");
+  console.log("selectPath", selectedPath);
+
+  const handleToggle = (itemId) => {
+    setOpenItems((prev) => ({
+      ...prev,
+      [itemId]: !prev[itemId],
+    }));
+  };
+
+  const handleNavigation = (path) => {
+    setCookie("currentPath", path);
+    setSelectedPath(path);
+    router.push(path);
+  };
+
+  React.useEffect(() => {
+    const currentPath = getCookie("currentPath") || "/dashboard";
+    setSelectedPath(currentPath);
+
+    const expandedItems = {};
+
+    const findAndExpandParents = (items, parentId = null) => {
+      for (const item of items) {
+        if (item.path === currentPath) {
+          if (parentId) expandedItems[parentId] = true;
+        }
+        if (item.children) {
+          findAndExpandParents(item.children, item.id);
+        }
+      }
+    };
+
+    findAndExpandParents(menuItems);
+    setOpenItems(expandedItems);
+  }, []);
+
+  React.useEffect(() => {
+  setSelectedPath(router.pathname);
+}, [router.pathname]);
 
   return (
     <AppTheme {...props} themeComponents={xThemeComponents}>
@@ -34,7 +80,9 @@ export default function MainLayout({ children, props }) {
       {/* Main Wrapper */}
       <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
         {/* Navbar Always on Top */}
-        <Box sx={{ zIndex: 2 }}>{isMdUp ? <Header /> : <MobileHeader />}</Box>
+        <Box sx={{ zIndex: 2 }}>
+          {isMdUp ? <Header selectedPath={selectedPath} /> : <MobileHeader />}
+        </Box>
 
         {/* Below Navbar - Sidebar + Main Content */}
         <Box sx={{ display: "flex", flexGrow: 1, minHeight: 0 }}>
@@ -57,7 +105,13 @@ export default function MainLayout({ children, props }) {
                 flexDirection: "column",
               }}
             >
-              <SideMenu />
+              <SideMenu
+                openItems={openItems}
+                setOpenItems={setOpenItems}
+                handleNavigation={handleNavigation}
+                handleToggle={handleToggle}
+                selectedPath={selectedPath}
+              />
             </Box>
           </Box>
 
