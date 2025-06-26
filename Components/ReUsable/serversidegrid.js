@@ -518,7 +518,7 @@ const TableComponent = ({
             >
               ✕
             </button> */}
-              <DisabledByDefaultRounded color="error" fontSize="small" />
+              <DisabledByDefaultRounded color="error" fontSize="small"  onClick={() => setFilterPanelOpen(true)}/>
             </div>
 
             {/* Text Fields */}

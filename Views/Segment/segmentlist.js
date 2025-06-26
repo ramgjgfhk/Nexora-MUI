@@ -3,6 +3,8 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { Inbox } from "@novu/nextjs";
 import FromToDatePicker from "@/Components/resuable components/fromToDatePicker";
+import ServerSideGrid from "@/Components/ReUsable/gridfromscreenfacts";
+import { fetchQALList } from "@/pages/api/sampleapies";
 // import FromToDatePicker from "./FromToDatePicker";
 // import dayjs from "dayjs";
 
@@ -20,7 +22,180 @@ const SegmentList = () => {
   ]);
   const pickerRef = React.useRef(null);
   //   const navigate = useNavigate();
+  const columns1 = [  
+    //  ...(privilege.includes("view_qa_form")
+      // ? [
+      //     {
+      //       field: "action",
+      //       headerName: "Action",
+      //       flex: 1,
+      //       minWidth: 90,
+      //       headerAlign: "center",
+      //       cellClassName: "sticky-action-column",
+      //       headerClassName: "sticky-action-header",
+      //       renderCell: (params) => (
+      //         <CustomViewButton
+      //           style={{ cursor: "pointer", padding: 5 }}
+      //           onClick={async () => {
+      //             setloader(true); // Start loader
 
+      //             try {
+      //               const cookieData = getCookie("data");
+      //               if (!cookieData) throw new Error("Cookie 'data' not found");
+
+      //               const parsedData = JSON.parse(cookieData);
+      //               const myObj = {
+      //                 id: params.row.id,
+      //                 user_id: parsedData.user_id,
+      //               };
+
+      //               console.log(
+      //                 "id-user_id",
+      //                 params.row.id,
+      //                 parsedData.user_id
+      //               );
+
+      //               const encodedData = btoa(JSON.stringify(myObj));
+
+      //               await route.push({
+      //                 pathname: "/QA-form",
+      //                 query: { data: encodedData },
+      //               });
+
+      //               setloader(false); // Stop loader after successful navigation
+      //             } catch (error) {
+      //               setloader(false); // Stop loader on error
+      //               console.error("Error:", error);
+      //               setAction((prev) => ({
+      //                 ...prev,
+      //                 openSnackbar: true,
+      //                 snackBarData: {
+      //                   title: "Error",
+      //                   text: error.message || "An unexpected error occurred.",
+      //                   severity: "error",
+      //                 },
+      //               }));
+      //             }
+      //           }}
+      //         />
+      //       ),
+      //     },
+      //   ]
+      // : []),
+    {
+      field: "slNo",
+      headerName: "Sl No",
+      flex: 1,
+      minWidth: 80,
+      headerAlign: "center",
+    },
+    {
+      field: "client_name",
+      headerName: "Client Name",
+      // width: 150,
+      headerAlign: "center",
+      flex: 3,
+      minWidth: 170,
+    },
+    {
+      field: "batch_no",
+      headerName: "Batch No",
+      flex: 1,
+      minWidth: 130,
+      headerAlign: "center",
+    },
+    {
+      field: "sf_ref_no",
+      headerName: "SF Ref No",
+      flex: 1,
+      minWidth: 130,
+      headerAlign: "center",
+    },
+
+    {
+      field: "candidate_name",
+      headerName: "Candidate Name",
+      flex: 4,
+      minWidth: 200,
+      headerAlign: "center",
+      valueGetter: (value, row) => {
+        return `${row?.candidate_fname || ""} ${row?.candidate_lname || ""}`;
+      },
+    },
+   
+    {
+      field: "tat",
+      headerName: "TAT",
+      flex: 1,
+      minWidth: 80,
+      headerAlign: "center",
+    },
+  //  {
+  //     filterable: true,
+  //     field: "stage",
+  //     headerName: "Status",
+  //     flex: 1.5,
+  //     minWidth: 250,
+  //     headerAlign: "center",
+  //     renderCell: (params) => {
+  //       const value = params.row.stage;
+
+  //       if (!value) {
+  //         return (
+  //           <span style={{ textTransform: "capitalize" }}>Not Available</span>
+  //         );
+  //       }
+
+  //       // Format value: replace underscores and capitalize words
+  //       const formattedValue = value
+  //         .split("_")
+  //         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+  //         .join(" ");
+
+  //       return (
+  //         <Chip
+  //           label={formattedValue}
+  //           size="small"
+  //           sx={{
+  //             backgroundColor: "#e0e1dd",
+  //             color: "#0d1b2a",
+  //             borderRadius: "8px",
+  //             fontSize: "0.75rem",
+  //             fontWeight: 600,
+  //             height: "24px",
+  //             textTransform: "none",
+  //             px: 0.5,
+  //             py: 0.5,
+  //             border: "2px solid #0d1b2a",
+  //           }}
+  //         />
+  //       );
+  //     },
+  //   },
+     {
+      field: "date_of_receipt",
+      headerName: "Receipt date",
+      minWidth: 110,
+      flex: 2,
+      headerAlign: "center",
+      renderCell: (params) => {
+        const rawDate = params.value;
+        const date = rawDate ? new Date(rawDate) : null;
+
+        if (!date || isNaN(date.getTime())) {
+          return "Invalid Date"; // Or return '-' or leave it empty
+        }
+
+        return date.toLocaleDateString("en-GB", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        });
+      },
+    }
+    ,
+ 
+  ];
   const data = [
     {
       id: 1,
@@ -321,6 +496,27 @@ const SegmentList = () => {
           ],
         }}
       />
+
+
+
+
+
+       <ServerSideGrid
+          columns={columns1}
+          // rowss={list}
+          fieldsForFilter={[
+            "client_name",
+            "batch_no",
+            "TAT",
+            "status",
+            "CV ID",
+          ]}
+        
+          apiurl={fetchQALList}
+     
+     
+        
+        />
       {/* <SegmentTypeModal /> */}
     </Box>
   );
