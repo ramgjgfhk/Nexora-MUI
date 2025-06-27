@@ -383,7 +383,7 @@ const TableComponent = ({
                 {row.getVisibleCells().map((cell) => (
                   <td
                     key={cell.id}
-                    style={{ padding: "6px", fontSize: "13px" }}
+                    style={{ padding: "6px", fontSize: "11.5px" }}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>

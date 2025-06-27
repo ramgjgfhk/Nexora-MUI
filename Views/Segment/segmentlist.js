@@ -23,98 +23,40 @@ const SegmentList = () => {
   const pickerRef = React.useRef(null);
   //   const navigate = useNavigate();
   const columns1 = [  
-    //  ...(privilege.includes("view_qa_form")
-      // ? [
-      //     {
-      //       field: "action",
-      //       headerName: "Action",
-      //       flex: 1,
-      //       minWidth: 90,
-      //       headerAlign: "center",
-      //       cellClassName: "sticky-action-column",
-      //       headerClassName: "sticky-action-header",
-      //       renderCell: (params) => (
-      //         <CustomViewButton
-      //           style={{ cursor: "pointer", padding: 5 }}
-      //           onClick={async () => {
-      //             setloader(true); // Start loader
-
-      //             try {
-      //               const cookieData = getCookie("data");
-      //               if (!cookieData) throw new Error("Cookie 'data' not found");
-
-      //               const parsedData = JSON.parse(cookieData);
-      //               const myObj = {
-      //                 id: params.row.id,
-      //                 user_id: parsedData.user_id,
-      //               };
-
-      //               console.log(
-      //                 "id-user_id",
-      //                 params.row.id,
-      //                 parsedData.user_id
-      //               );
-
-      //               const encodedData = btoa(JSON.stringify(myObj));
-
-      //               await route.push({
-      //                 pathname: "/QA-form",
-      //                 query: { data: encodedData },
-      //               });
-
-      //               setloader(false); // Stop loader after successful navigation
-      //             } catch (error) {
-      //               setloader(false); // Stop loader on error
-      //               console.error("Error:", error);
-      //               setAction((prev) => ({
-      //                 ...prev,
-      //                 openSnackbar: true,
-      //                 snackBarData: {
-      //                   title: "Error",
-      //                   text: error.message || "An unexpected error occurred.",
-      //                   severity: "error",
-      //                 },
-      //               }));
-      //             }
-      //           }}
-      //         />
-      //       ),
-      //     },
-      //   ]
-      // : []),
+    
     {
-      field: "slNo",
-      headerName: "Sl No",
+      field: "id",
+      headerName: "ID",
       flex: 1,
       minWidth: 80,
       headerAlign: "center",
     },
     {
-      field: "client_name",
-      headerName: "Client Name",
+      field: "Segment_name",
+      headerName: "Name",
       // width: 150,
       headerAlign: "center",
       flex: 3,
       minWidth: 170,
     },
     {
-      field: "batch_no",
-      headerName: "Batch No",
+      field: "created_by",
+      headerName: "Created By",
       flex: 1,
       minWidth: 130,
       headerAlign: "center",
     },
     {
-      field: "sf_ref_no",
-      headerName: "SF Ref No",
+      field: "created_at",
+      headerName: "Created At",
       flex: 1,
       minWidth: 130,
       headerAlign: "center",
     },
 
     {
-      field: "candidate_name",
-      headerName: "Candidate Name",
+      field: "updated_by",
+      headerName: "Updated By",
       flex: 4,
       minWidth: 200,
       headerAlign: "center",
@@ -124,144 +66,81 @@ const SegmentList = () => {
     },
    
     {
-      field: "tat",
-      headerName: "TAT",
+      field: "updated_at",
+      headerName: "Updated At",
       flex: 1,
       minWidth: 80,
       headerAlign: "center",
     },
-  //  {
-  //     filterable: true,
-  //     field: "stage",
-  //     headerName: "Status",
-  //     flex: 1.5,
-  //     minWidth: 250,
-  //     headerAlign: "center",
-  //     renderCell: (params) => {
-  //       const value = params.row.stage;
-
-  //       if (!value) {
-  //         return (
-  //           <span style={{ textTransform: "capitalize" }}>Not Available</span>
-  //         );
-  //       }
-
-  //       // Format value: replace underscores and capitalize words
-  //       const formattedValue = value
-  //         .split("_")
-  //         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-  //         .join(" ");
-
-  //       return (
-  //         <Chip
-  //           label={formattedValue}
-  //           size="small"
-  //           sx={{
-  //             backgroundColor: "#e0e1dd",
-  //             color: "#0d1b2a",
-  //             borderRadius: "8px",
-  //             fontSize: "0.75rem",
-  //             fontWeight: 600,
-  //             height: "24px",
-  //             textTransform: "none",
-  //             px: 0.5,
-  //             py: 0.5,
-  //             border: "2px solid #0d1b2a",
-  //           }}
-  //         />
-  //       );
-  //     },
-  //   },
-     {
-      field: "date_of_receipt",
-      headerName: "Receipt date",
-      minWidth: 110,
-      flex: 2,
-      headerAlign: "center",
-      renderCell: (params) => {
-        const rawDate = params.value;
-        const date = rawDate ? new Date(rawDate) : null;
-
-        if (!date || isNaN(date.getTime())) {
-          return "Invalid Date"; // Or return '-' or leave it empty
-        }
-
-        return date.toLocaleDateString("en-GB", {
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
-        });
-      },
-    }
-    ,
+  //
  
   ];
   const data = [
     {
-      id: 1,
+      id: 100000001,
       type: "Past Behavior",
       created_on: "Apr 27 2001",
       updated_on: "Apr 27 2001",
       updated_by: "Raju",
     },
     {
-      id: 2,
+      id: 100000002,
       type: "Live Behavior",
       created_on: "Feb 27 2010",
       updated_on: "Jul 27 2012",
       updated_by: "Gopi",
     },
     {
-      id: 3,
+      id: 100000003,
       type: "In-App Activity",
       created_on: "Jan 15 2018",
       updated_on: "Jan 16 2018",
       updated_by: "Anjali",
     },
     {
-      id: 4,
+      id: 100000004,
       type: "Web Activity",
       created_on: "Oct 01 2019",
       updated_on: "Oct 02 2019",
       updated_by: "Suresh",
     },
     {
-      id: 5,
+      id: 100000005,
       type: "Purchase History",
       created_on: "Jul 12 2020",
       updated_on: "Aug 05 2020",
       updated_by: "Divya",
     },
     {
-      id: 6,
+      id: 100000006,
       type: "Location Trigger",
       created_on: "Nov 11 2021",
       updated_on: "Dec 25 2021",
       updated_by: "Vikram",
     },
     {
-      id: 7,
+      id: 100000007,
       type: "Push Click",
       created_on: "Mar 09 2022",
       updated_on: "Mar 10 2022",
       updated_by: "Neha",
     },
     {
-      id: 8,
+      id: 100000008,
       type: "Email Open",
       created_on: "Apr 03 2022",
       updated_on: "Apr 04 2022",
       updated_by: "Ramesh",
     },
     {
-      id: 9,
+      id: 100000009,
       type: "Notification View",
       created_on: "May 18 2023",
       updated_on: "May 20 2023",
       updated_by: "Kiran",
     },
     {
-      id: 10,
+      id: 100000010,
       type: "Segment Entry",
       created_on: "Jan 01 2024",
       updated_on: "Jan 05 2024",
@@ -536,6 +415,110 @@ const SegmentList = () => {
           ],
         }}
           apiurl={fetchQALList}
+        Rows = {[
+  {
+    id: 1,
+    Segment_name: "Purchased",
+    created_by: "John Doe",
+    created_at: "2025-06-01",
+    candidate_fname: "Alice",
+    candidate_lname: "Johnson",
+    updated_by: "Verifier1",
+    updated_at: "2025-06-05",
+  },
+  {
+    id: 2,
+    Segment_name: "Trigger Web Login",
+    created_by: "Jane Smith",
+    created_at: "2025-06-02",
+    candidate_fname: "Bob",
+    candidate_lname: "Williams",
+    updated_by: "Verifier2",
+    updated_at: "2025-06-06",
+  },
+  {
+    id: 3,
+    Segment_name: "Email For Login",
+    created_by: "Raj Patel",
+    created_at: "2025-06-03",
+    candidate_fname: "Charlie",
+    candidate_lname: "Brown",
+    updated_by: "Verifier3",
+    updated_at: "2025-06-07",
+  },
+  {
+    id: 4,
+    Segment_name: "In App SMS",
+    created_by: "Li Wei",
+    created_at: "2025-06-04",
+    candidate_fname: "Daisy",
+    candidate_lname: "Miller",
+    updated_by: "Verifier4",
+    updated_at: "2025-06-08",
+  },
+  {
+    id: 5,
+    Segment_name: "Add To Cart",
+    created_by: "Maria Lopez",
+    created_at: "2025-06-05",
+    candidate_fname: "Ethan",
+    candidate_lname: "Davis",
+    updated_by: "Verifier5",
+    updated_at: "2025-06-09",
+  },
+  {
+    id: 6,
+    Segment_name: "Inactive User",
+    created_by: "Ahmed Khan",
+    created_at: "2025-06-06",
+    candidate_fname: "Fiona",
+    candidate_lname: "Clark",
+    updated_by: "Verifier6",
+    updated_at: "2025-06-10",
+  },
+  {
+    id: 7,
+    Segment_name: "Loyal User",
+    created_by: "Emily Johnson",
+    created_at: "2025-06-07",
+    candidate_fname: "George",
+    candidate_lname: "Martinez",
+    updated_by: "Verifier7",
+    updated_at: "2025-06-11",
+  },
+  {
+    id: 8,
+    Segment_name: "Valuable Customer",
+    created_by: "David Kim",
+    created_at: "2025-06-08",
+    candidate_fname: "Hannah",
+    candidate_lname: "Lewis",
+    updated_by: "Verifier8",
+    updated_at: "2025-06-12",
+  },
+  {
+    id: 9,
+    Segment_name: "Trigger SDK",
+    created_by: "Olivia Brown",
+    created_at: "2025-06-09",
+    candidate_fname: "Ian",
+    candidate_lname: "Walker",
+    updated_by: "Verifier9",
+    updated_at: "2025-06-13",
+  },
+  {
+    id: 10,
+    Segment_name: "Network Error",
+    created_by: "Michael Green",
+    created_at: "2025-06-10",
+    candidate_fname: "Julia",
+    candidate_lname: "Hall",
+    updated_by: "Verifier10",
+    updated_at: "2025-06-14",
+  },
+]}
+
+          
      
      
         

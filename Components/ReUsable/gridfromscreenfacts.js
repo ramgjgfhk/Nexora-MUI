@@ -104,7 +104,7 @@ const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin-ext"],
 });
 const ServerSideGrid = (
-  {
+  {Rows=[],
     fieldsForFilter = {},
     columns,
 
@@ -161,7 +161,7 @@ const ServerSideGrid = (
         ...row,
         slNo: offset + index + 1,
       }));
-      setRows(rowsWithSlNo);
+      setRows(Rows);
       setRowCount(total);
       setPreviousPaginationModel(paginationModel);
       const clientIsNotEmpty = client && Object.keys(client).length > 0;
@@ -294,6 +294,7 @@ const ServerSideGrid = (
   return (
     <Box sx={{ width: "100%" }}>
       <DataGrid
+      checkboxSelection
         autoHeight
         disableColumnMenu
         rows={rows}
@@ -301,7 +302,7 @@ const ServerSideGrid = (
         loading={loading}
         paginationMode="server"
         rowCount={rowCount}
-        getRowId={(row) => row.slNo} // 👈 use slNo as unique ID
+        getRowId={(row) => row.id} // 👈 use slNo as unique ID
         slots={{
           toolbar: CustomToolbar, // Pass memoized component directly
         }}
