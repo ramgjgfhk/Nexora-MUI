@@ -456,7 +456,7 @@ const SegmentList = () => {
         </CardBody>
       </Card>
     </Container> */}
-      <TableComponent
+      {/* <TableComponent
         columns={columns}
         datas={data}
         searchText="Search by ID/Name"
@@ -495,7 +495,7 @@ const SegmentList = () => {
             },
           ],
         }}
-      />
+      /> */}
 
 
 

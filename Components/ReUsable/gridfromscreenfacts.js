@@ -46,14 +46,15 @@ const CustomToolbar = ({
   setSearchTerm,
 }) => (
   <GridToolbarContainer
-    sx={{ mt: 1, mb: 0, pr: 1, backgroundColor: "#f9f9f9" }}
+    sx={{  mb: 0, pr: 1, backgroundColor: "#f9f9f9" }}
   >
     <FilterModalComponent
       onApply={handleApplyFilters}
       fields={fieldsForFilter}
       appliedFilters={appliedFilters}
       setAppliedFilters={setAppliedFilters}
-    />  <GridToolbarFilterButton />
+    /> 
+     {/* <GridToolbarFilterButton /> */}
     <GridToolbarColumnsButton />
     <GridToolbarDensitySelector />
     <GridToolbarExport />
@@ -323,7 +324,7 @@ const ServerSideGrid = (
           borderRadius: "8px",
           '& .MuiDataGrid-container--top [role="row"], & .MuiDataGrid-container--bottom [role="row"]':
             {
-              backgroundColor: "#f9f9f9", // Example: Change background
+              backgroundColor: "#F9FAFB", // Example: Change background
               color: "#333",
             },
           "& .MuiDataGrid-cell": {
@@ -332,8 +333,8 @@ const ServerSideGrid = (
             textAlign: "center", // Text alignment
             fontFamily: jakarta.style.fontFamily,
           },
-          "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: "#F4F6F8", // Header background
+          "& .MuiDataGrid-columnHeader": {
+            backgroundColor: "#F9FAFB !important", // Header background
             color: "#000", // Header text color
             borderBottom: "0.5px solid #e0e0e0",
             fontFamily: jakarta.style.fontFamily,
@@ -343,7 +344,7 @@ const ServerSideGrid = (
             fontSize: "12px", // Ensure font size is 12px
           },
           "& .MuiDataGrid-footerContainer": {
-            backgroundColor: "#f9f9f9", // Footer background
+            backgroundColor: "#F9FAFB", // Footer background
           },
           "& .Mui-selected": {
             backgroundColor: "white !important", // Selected row background
