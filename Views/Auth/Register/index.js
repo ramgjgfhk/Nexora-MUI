@@ -126,7 +126,7 @@ export default function RegisterPage() {
               {/* Header Section */}
               <Box
                 sx={{
-                  background: `linear-gradient(135deg, ${theme.palette.secondary.main}, ${theme.palette.secondary.dark})`,
+                  background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
                   color: "white",
                   p: 4,
                   textAlign: "center",
@@ -156,8 +156,8 @@ export default function RegisterPage() {
               </Box>
 
               {/* Form Section */}
-              <CardContent sx={{ p: 4 }}>
-                <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+              <CardContent sx={{ p: 4,mt:-1 }}>
+                <Box component="form" onSubmit={handleSubmit} >
                   <Box sx={{ display: "flex", gap: 2 }}>
                     <TextField
                       margin="normal"
@@ -330,68 +330,35 @@ export default function RegisterPage() {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    disabled={isLoading || !formData.agreeTerms}
-                    sx={{
-                      mt: 3,
+                    disabled={isLoading}
+                     sx={{
                       mb: 2,
                       py: 1.5,
                       borderRadius: 2,
                       fontSize: "1.1rem",
                       fontWeight: 600,
                       textTransform: "none",
-                      background: `linear-gradient(135deg, ${theme.palette.secondary.main}, ${theme.palette.secondary.dark})`,
+                      background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
+                      transition: "all 0.3s ease",
                       "&:hover": {
                         transform: "translateY(-2px)",
-                        boxShadow: `0 8px 25px ${theme.palette.secondary.main}40`,
+                        boxShadow: `0 8px 25px ${theme.palette.primary.main}40`,
+                        background: `linear-gradient(135deg, ${theme.palette.primary.dark}, ${theme.palette.primary.main})`,
+                      },
+                      "&:disabled": {
+                        background: theme.palette.action.disabledBackground,
                       },
                     }}
                   >
                     {isLoading ? "Creating Account..." : "Create Account"}
                   </Button>
-
-                  <Divider sx={{ my: 3 }}>
-                    <Typography variant="body2" color="text.secondary">
-                      Or register with
-                    </Typography>
-                  </Divider>
-
-                  {/* Social Login Buttons */}
-                  <Box sx={{ display: "flex", gap: 2, mb: 3 }}>
-                    <Button
-                      fullWidth
-                      variant="outlined"
-                      onClick={() => handleSocialLogin("Google")}
-                      startIcon={<GoogleIcon />}
-                      sx={{
-                        py: 1.2,
-                        borderRadius: 2,
-                        textTransform: "none",
-                      }}
-                    >
-                      Google
-                    </Button>
-                    <Button
-                      fullWidth
-                      variant="outlined"
-                      onClick={() => handleSocialLogin("GitHub")}
-                      startIcon={<GitHubIcon />}
-                      sx={{
-                        py: 1.2,
-                        borderRadius: 2,
-                        textTransform: "none",
-                      }}
-                    >
-                      GitHub
-                    </Button>
-                  </Box>
-
                   <Box sx={{ textAlign: "center" }}>
                     <Typography variant="body2" color="text.secondary">
                       Already have an account?{" "}
                       <Link
                         href="/"
                         sx={{
-                          color: theme.palette.secondary.main,
+                          color: theme.palette.primary.main,
                           textDecoration: "none",
                           fontWeight: 600,
                           "&:hover": { textDecoration: "underline" },

@@ -1,4 +1,4 @@
-import RegisterPage from "@/Views/Register";
+import RegisterPage from "@/Views/Auth/Register";
 import React from "react";
 
 const register = () => {

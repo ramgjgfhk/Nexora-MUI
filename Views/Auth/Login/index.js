@@ -94,7 +94,7 @@ export default function LoginPage() {
       <Container
         component="main"
         maxWidth="sm"
-        sx={{ position: "relative", zIndex: 1 }}
+        sx={{ position: "relative", zIndex: 1 ,width:'500px'}}
       >
         <Fade in timeout={800}>
           <Paper
@@ -236,7 +236,7 @@ export default function LoginPage() {
                       label="Remember me"
                     />
                     <Link
-                      href="#"
+                      href="/forgot-password"
                       variant="body2"
                       sx={{
                         textDecoration: "none",
