@@ -9,6 +9,9 @@ import {
   IconButton,
   InputAdornment,
   Tooltip,
+  Box,
+  Autocomplete,
+  Typography,
 } from "@mui/material";
 import {
   FilterList,
@@ -16,14 +19,18 @@ import {
   Search,
   FilterAlt,
   Cancel,
+  DisabledByDefaultRounded,
 } from "@mui/icons-material";
 import { GridToolbarContainer, GridToolbarFilterButton } from "@mui/x-data-grid";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
 
 const FilterModalComponent = (
-  ({ fields = [], onApply, appliedFilters, setAppliedFilters }) => {
+  ({ customFilters = {}, onApply, appliedFilters, setAppliedFilters }) => {
     const [open, setOpen] = useState(false);
     // const [appliedFilters, setAppliedFilters] = useState({});
-    // console.log("filter",filterValues)
+    console.log("filter",appliedFilters)
 
     const handleClickOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -71,127 +78,258 @@ const FilterModalComponent = (
   }}
 /> */}
 
-        <Dialog
-          open={open}
-          onClose={handleClose}
-          maxWidth="sm"
-          fullWidth
-          keepMounted
-        >
-          <DialogTitle>
-            Apply Filters
-            <IconButton
-              onClick={handleClose}
-              sx={{ position: "absolute", right: 8, top: 8 }}
-            >
-              <Close />
-            </IconButton>
-          </DialogTitle>
-          <DialogContent sx={{ pr: 0, mb: 0 }}>
-            {/* Your content here */}
+   
 
-            {fields.length === 0 ? (
-              <p>No fields available to filter</p>
-            ) : (
-              fields.map((field, index) => (
-                <TextField
-                  key={index}
-                  label={`Filter by ${field.replace(/_/g, " ")}`}
-                  variant="outlined"
-                  size="small"
-                  sx={{
-                    "& .MuiInputBase-root": {
-                      height: "2.4rem",
-                    },
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: "8px",
-                      "&:hover fieldset": {
-                        borderColor: "#1976d2",
-                      },
-                      "&.Mui-focused fieldset": {
-                        border: "1px solid #1976d2",
-                      },
-                      "&.Mui-disabled": {
-                        "& fieldset": {
-                          borderColor: "#d1d1d1 !important", // Set a light gray border when disabled
-                        },
-                        "& input": {
-                          color: "#a0a0a0", // Light gray text for disabled state
-                        },
-                      },
-                    },
-                    my: 1.5,
-                    mr: 2,
-                    width: "30%",
-                    "& .MuiInputLabel-root": {
-                      textTransform: "capitalize",
-                    },
-                  }}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Tooltip title="Search">
-                          <Search sx={{ color: "#42A5F5", fontSize: "20px" }} />
-                        </Tooltip>
-                      </InputAdornment>
-                    ),
-                  }}
-                  // fullWidth
-                  // margin="normal"
-                  value={appliedFilters[field] || ""}
-                  onChange={(e) => handleInputChange(field, e.target.value)}
-                />
-              ))
-            )}
-          </DialogContent>
-          <DialogActions>
-            <Button
-              size="small"
-              color="error"
-              onClick={() => {
+
+        <Dialog
+        open={open}
+        onClose={handleClose}
+        keepMounted
+        PaperProps={{
+          sx: {
+            position: "fixed",
+            right: 0,
+            m: 0,
+            top: 0,
+            height: "100vh",
+            width: { xs: "100%", sm: "330px" },
+            maxHeight: "100%",
+            borderRadius: "0 !important",px:1.5,py:1.5,backgroundColor:"white"
+          },
+        }}
+      >
+                  <section>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        marginBottom: "16px",
+                      }}
+                    >
+                      <Typography variant="h6" sx={{ fontSize: "16px" }}>
+                        Filters
+                      </Typography>
+                      {/* <button
+                      onClick={() => setFilterPanelOpen(false)}
+                      style={{
+                        border: "none",
+                        background: "transparent",
+                        cursor: "pointer",
+                      }}
+                    >
+                      ✕
+                    </button> */}
+                      <DisabledByDefaultRounded color="error" fontSize="small"  onClick={handleClose}/>
+                    </div>
+        
+                    {/* Text Fields */}
+                    {customFilters?.text?.map((field) => (
+                      <div key={field.name} style={{ marginBottom: "12px" }}>
+                        {/* <label
+                          style={{
+                            display: "block",
+                            fontSize: "13px",
+                            marginBottom: "4px",
+                          }}
+                        >
+                          {field.label}
+                        </label> */}
+                        <Typography
+                          variant="subtitle2"
+                          sx={{ fontSize: "11.5px", mb: 0.3 }}
+                        >
+                          {" "}
+                          {field.label}
+                        </Typography>
+                        <TextField
+                          fullWidth
+                    value={appliedFilters[field.name] || ""}
+                  onChange={(e) => handleInputChange(field.name, e.target.value)}
+                          size="small"
+                          // placeholder="Enter text"
+                          sx={{
+                            "& .MuiInputBase-root": {
+                              height: 30, // Total height
+                              borderRadius: "6px", // Optional: Rounded corners
+                            },
+                            "& .MuiInputBase-input": {
+                              // padding: "8px 12px", // Control inner text padding
+                            },
+                          }}
+                        ></TextField>
+                      </div>
+                    ))}
+        
+                    {/* Date Pickers */}
+                    {customFilters?.date?.map((field) => (
+                      <div key={field.name} style={{ marginBottom: "12px" }}>
+                        <Typography
+                          variant="subtitle2"
+                          sx={{ fontSize: "11.5px", mb: 0.3 }}
+                        >
+                          {" "}
+                          {field.label}
+                        </Typography>{" "}
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <DatePicker
+                            // label="a"
+                            // value={toDate}
+                            // minDate={fromDate || minDate}
+                            // onChange={(newValue) => setToDate(newValue)}
+
+                      value={appliedFilters[field.name] ? dayjs(appliedFilters[field.name]) : null}
+onChange={(newValue) => handleInputChange(field.name, newValue)}
+                            slotProps={{
+                              textField: {
+                                size: "small",
+                                // placeholder:"s",
+                                fullWidth: true,
+                                sx: {
+                                  "& label": {
+                                    fontSize: "12px", // 👈 Smaller label
+                                    // fontWeight: 500,
+                                  },
+                                  "& .MuiInputAdornment-root svg": {
+                                    fontSize: "18px", // Reduce icon size
+                                  },
+                                  "& .MuiIconButton-root": {
+                                    border: "none",
+                                    padding: 0,
+                                    backgroundColor: "transparent",
+                                  },
+                                  "& .MuiPickersInputBase-root": { height: "30px" },
+                                },
+                              },
+                            }}
+                          />
+                        </LocalizationProvider>
+                        {/* <input
+                          type="date"
+                          value={filterValues[field.name] || ""}
+                          onChange={(e) =>
+                            setFilterValues((prev) => ({
+                              ...prev,
+                              [field.name]: e.target.value,
+                            }))
+                          }
+                          style={{
+                            padding: "6px",
+                            width: "100%",
+                            border: "1px solid #ccc",
+                            borderRadius: "6px",
+                          }}
+                        /> */}
+                      </div>
+                    ))}
+        
+                    {/* Autocomplete (Select Dropdown) */}
+                    {customFilters?.autocomplete?.map((field) => (
+                      <div key={field.name} style={{ marginBottom: "12px" }}>
+                        <Typography
+                          variant="subtitle2"
+                          sx={{ fontSize: "11.5px", mb: 0.3 }}
+                        >
+                          {" "}
+                          {field.label}
+                        </Typography>
+                        <Autocomplete
+                          options={field.options}
+                          size="small"
+                           value={appliedFilters[field.name] || ""}
+                  onChange={(e) => handleInputChange(field.name, e.target.value)}
+                          renderInput={(params) => (
+                            <TextField
+                              {...params}
+                              variant="outlined"
+                              sx={{
+                                "& .MuiInputBase-root": {
+                                  height: 30,
+                                  borderRadius: "6px",
+                                  // minHeight: 30,
+                                },
+                                "& .MuiInputBase-input": {
+                                  // padding: "4px 8px",
+                                },
+                                "& .MuiAutocomplete-endAdornment": {
+                                  display: "none", // Hides the default clear icon
+                                },
+                              }}
+                              // value={filterValues[field.name] || ""}
+                              // onChange={(e) =>
+                              //   setFilterValues((prev) => ({
+                              //     ...prev,
+                              //     [field.name]: e.target.value,
+                              //   }))
+                              // }
+                            />
+                          )}
+                        />
+                      </div>
+                    ))}
+                  </section>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      width: "100%",
+                      gap: 1,
+                      mt: 2,mt:"auto"
+                      // alignSelf: "flex-end",
+                    }}
+                  >
+                    <Button
+                      size="small"
+                      onClick={() => {
                 setAppliedFilters({});
                 onApply({}); // Send filter data to parent
                 handleClose(); // Close the modal
               }}
-              variant="outlined"
-              // startIcon={<Cancel />}
-              sx={{
-                height: "29px",
-                borderRadius: "5px",
-                // padding: '4px 12px',
-                borderColor: "#d32f2f",
-                textTransform: "capitalize",
-                fontSize: "12px",
-                "&:hover": {
-                  backgroundColor: "#ffebee",
-                  borderColor: "#d32f2f",
-                },
-              }}
-            >
-              Remove Filters
-            </Button>
-            <Button
-              size="small"
-              onClick={handleApplyClick}
-              variant="contained"
-              sx={{
-                backgroundColor: "#1875FF",
-                color: "white",
-                fontSize: "12px",
-                textTransform: "capitalize",
-                height: "29px",
-                borderRadius: "5px",
-                transition: "background-color 0.3s, box-shadow 0.3s",
-                "&:hover": {
-                  backgroundColor: "#1565C0", // Darker blue on hover
-                  boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)", // Soft shadow effect
-                },
-              }}
-            >
-              Apply Filters
-            </Button>
-          </DialogActions>
-        </Dialog>
+                      // startIcon={<FilterAltOff />}
+                      sx={{
+                        flex: 1,
+                        textTransform: "none",
+                        borderRadius: "6px",
+                        fontWeight: 500,
+                        height: "30px",
+                        // px: 2,
+                        // py: 0.8,
+                        backgroundColor: "#d32f2f",
+                        color: "#fff",
+                        transition: "all 0.2s ease-in-out",
+                        "&:hover": {
+                          backgroundColor: "#b71c1c",
+                          boxShadow: "0 2px 8px rgba(211, 47, 47, 0.3)",
+                        },
+                      }}
+                    >
+                      Remove Filters
+                    </Button>
+        
+                    <Button
+                      size="small"
+                      onClick={handleApplyClick}
+                      // startIcon={<FilterAlt />}
+                      sx={{
+                        flex: 1,
+                        textTransform: "none",
+                        borderRadius: "6px",
+                        height: "30px",
+                        fontWeight: 500,
+                        // px: 2,
+                        // py: 0.1,
+                        backgroundColor: "#4CC713",
+                        color: "#fff",
+                        transition: "all 0.2s ease-in-out",
+                        "&:hover": {
+                          backgroundColor: "#43b012",
+                          boxShadow: "0 2px 8px rgba(76, 199, 19, 0.3)",
+                        },
+                      }}
+                    >
+                      Apply Filters
+                    </Button>
+                  </Box>
+                </Dialog>
       </>
     );
   }

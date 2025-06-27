@@ -50,7 +50,7 @@ const CustomToolbar = ({
   >
     <FilterModalComponent
       onApply={handleApplyFilters}
-      fields={fieldsForFilter}
+      customFilters={fieldsForFilter}
       appliedFilters={appliedFilters}
       setAppliedFilters={setAppliedFilters}
     /> 
@@ -105,7 +105,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 const ServerSideGrid = (
   {
-    fieldsForFilter = [],
+    fieldsForFilter = {},
     columns,
 
     apiurl,
@@ -315,7 +315,7 @@ const ServerSideGrid = (
             setSearchTerm,
           },
         }}
-        rowHeight={30}
+        rowHeight={32}
         paginationModel={paginationModel}
         onPaginationModelChange={handlePaginationChange}
         pageSizeOptions={[5, 10, 25, 50]}
@@ -336,7 +336,7 @@ const ServerSideGrid = (
           "& .MuiDataGrid-columnHeader": {
             backgroundColor: "#F9FAFB !important", // Header background
             color: "#000", // Header text color
-            borderBottom: "0.5px solid #e0e0e0",
+            // borderBottom: "7px solid #e0e0e0",
             fontFamily: jakarta.style.fontFamily,
           },
           "& .MuiDataGrid-columnHeaderTitle": {
@@ -355,7 +355,7 @@ const ServerSideGrid = (
             transform: "scale(0.8)", // Scale up the checkbox size
           },
           "& .MuiDataGrid-row": {
-            borderBottom: "0.5px solid #e0e0e0",
+            // borderBottom: "0.1px solid #e0e0e0",
           },
           "& .MuiTablePagination-selectLabel": {
             fontSize: "12px", // Adjusts the label font size

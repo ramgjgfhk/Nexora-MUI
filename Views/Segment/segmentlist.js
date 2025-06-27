@@ -359,7 +359,7 @@ const SegmentList = () => {
     <Box
       sx={{ display: "flex", gap: 2, flexDirection: "column", width: "100%" }}
     >
-      {" "}
+      {/* {" "}
       <Typography
         component="h1"
         variant="subtitle2"
@@ -367,7 +367,7 @@ const SegmentList = () => {
         sx={{ fontWeight: "600", fontSize: "18px" }}
       >
         Segment
-      </Typography>
+      </Typography> */}
       <Stack
         direction="row"
         sx={{ justifyContent: "end", mt: 0, alignItems: "end" }}
@@ -504,14 +504,37 @@ const SegmentList = () => {
        <ServerSideGrid
           columns={columns1}
           // rowss={list}
-          fieldsForFilter={[
-            "client_name",
-            "batch_no",
-            "TAT",
-            "status",
-            "CV ID",
-          ]}
-        
+          // fieldsForFilter={[
+          //   "client_name",
+          //   "batch_no",
+          //   "TAT",
+          //   "status",
+          //   "CV ID",
+          // ]}
+             fieldsForFilter={{
+          text: [
+            { label: "Name", name: "name" },
+            { label: "City", name: "city" },
+          ],
+          date: [
+            { label: "From", name: "startDate" },
+            { label: "To", name: "endDate" },
+            { label: "Created At", name: "created_at" },
+            { label: "Updated At", name: "updated_at" },
+          ],
+          autocomplete: [
+            {
+              label: "Statssus",
+              name: "status",
+              options: ['Active', 'Inactive'],
+            },
+            {
+              label: "Type",
+              name: "status",
+              options: ["Past Behaviour", "Live Action"],
+            },
+          ],
+        }}
           apiurl={fetchQALList}
      
      
