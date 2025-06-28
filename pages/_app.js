@@ -17,10 +17,10 @@ export default function App({ Component, pageProps }) {
         <title>Nexora</title>
         <meta name="description" content="Nexora" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link
+        {/* <link
           href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
           rel="stylesheet"
-        />
+        /> */}
       </Head>
       {/* <MainLayout> */}
       <Component {...pageProps} />

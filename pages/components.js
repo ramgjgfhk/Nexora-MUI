@@ -28,43 +28,6 @@ export default function UiPalette() {
 
 
 
-      <ServerSideGrid
-          columns={columns1}
-          // rowss={list}
-          // fieldsForFilter={[
-          //   "client_name",
-          //   "batch_no",
-          //   "TAT",
-          //   "status",
-          //   "CV ID",
-          // ]}
-             fieldsForFilter={{
-          text: [
-            { label: "Name", name: "name" },
-            { label: "City", name: "city" },
-          ],
-          date: [
-            { label: "From", name: "startDate" },
-            { label: "To", name: "endDate" },
-            { label: "Created At", name: "created_at" },
-            { label: "Updated At", name: "updated_at" },
-          ],
-          autocomplete: [
-            {
-              label: "Statssus",
-              name: "status",
-              options: ['Active', 'Inactive'],
-            },
-            {
-              label: "Type",
-              name: "status",
-              options: ["Past Behaviour", "Live Action"],
-            },
-          ],
-        }}
-          // apiurl={fetchQALList}
-
-
 
 
 
