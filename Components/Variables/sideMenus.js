@@ -90,6 +90,7 @@ export const menuItems = [
         title: "Events",
         icon: <BarChart />,
         name: "Schema / Event",
+        path:"/schema",
       },
       {
         id: "user_properties",
