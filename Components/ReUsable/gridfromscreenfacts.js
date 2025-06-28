@@ -46,7 +46,7 @@ const CustomToolbar = ({
   setSearchTerm,
 }) => (
   <GridToolbarContainer
-    sx={{  mb: 0, pr: 1, backgroundColor: "#f9f9f9" }}
+    sx={{  mb: 0, pr: 1, backgroundColor:"#f9fafb",}}
   >
     <FilterModalComponent
       onApply={handleApplyFilters}
