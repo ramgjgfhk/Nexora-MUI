@@ -1,153 +1,217 @@
+"use client";
+
 import React from "react";
-import { useRouter } from "next/router";
 import {
   Box,
-  Button,
-  Grid,
-  InputAdornment,
-  TextField,
-  Tooltip,
+  Typography,
+  MenuItem as SelectMenuItem,
+  TableContainer,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  IconButton,
+  Menu,
+  MenuItem,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import AddIcon from "@mui/icons-material/Add";
-import ServerSideGrid from "@/Components/ReUsable/gridfromscreenfacts";
-import { fetchQALList } from "@/pages/api/sampleapies";
+import { MoreVert as MoreVertIcon } from "@mui/icons-material";
 import { FaEye } from "react-icons/fa";
+import UserDetails from "./userDetails";
 
-const ActiveThemeColor = "primary";
+const mockData = [
+  {
+    id: "1",
+    subId: "asdfasdfasdf",
+    name: "Alexander Mitchell",
+    email: "alexander@example.com",
+    created_at: "June 11, 2025",
+    updated_at: "June 11, 2025",
+    location: "USA",
+  },
+  {
+    id: "2",
+    subId: "asdfasdfasdf",
+    name: "Samantha Reynolds",
+    email: "samantha@example.com",
+    created_at: "June 10, 2025",
+    updated_at: "June 11, 2025",
+    location: "UN",
+  },
+  {
+    id: "3",
+    subId: "asdfasdfasdf",
+    name: "Daniel Washington",
+    email: "d.washington@example.com",
+    created_at: "June 9, 2025",
+    updated_at: "June 11, 2025",
+    location: "India",
+  },
+  {
+    id: "4",
+    subId: "asdfasdfasdf",
+    name: "Olivia Hernandez",
+    email: "olivia@example.com",
+    created_at: "June 8, 2025",
+    updated_at: "June 11, 2025",
+    location: "Pakistan",
+  },
+  {
+    id: "5",
+    subId: "asdfasdfasdf",
+    name: "James Richardson",
+    email: "j.richardson@example.com",
+    created_at: "June 7, 2025",
+    updated_at: "June 11, 2025",
+    location: "China",
+  },
+];
 
-const UserList = () => {
-  const router = useRouter();
+const UsersList = () => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const [dialogOpen, setDialogOpen] = React.useState(true);
 
-  const [searchFocused, setSearchFocused] = React.useState(false);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-  const userColumns = [
-    { field: "id", headerName: "ID", flex: 1, headerAlign: "center" },
-    { field: "name", headerName: "Name", flex: 3, headerAlign: "center" },
-    { field: "role", headerName: "Role", flex: 2, headerAlign: "center" },
-    { field: "email", headerName: "Email", flex: 3, headerAlign: "center" },
-    { field: "status", headerName: "Status", flex: 2, headerAlign: "center" },
-    {
-      field: "lastAccessed",
-      headerName: "Last Accessed",
-      flex: 4,
-      headerAlign: "center",
-    },
-    {
-      field: "passcodeStatus",
-      headerName: "Passcode Status",
-      flex: 2,
-      headerAlign: "center",
-    },
-    {
-      field: "action",
-      headerName: "Action",
-      flex: 2,
-      headerAlign: "center",
-      textAlign: "start",
-      cellClassName: "sticky-action-column",
-      headerClassName: "sticky-action-header",
-      renderCell: (params) => {
-        const row = params.row;
-        return (
-          <Tooltip title="View">
-            <FaEye
-              size={15}
-              style={{ cursor: "pointer" }}
-              onClick={() => router.push("/userProfile")}
-            />
-          </Tooltip>
-        );
-      },
-    },
-  ];
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleCloseModal = () => {
+    setDialogOpen(null);
+  };
+
+  const userInitial = (userName) => {
+    const initial = userName
+      .split(" ")
+      .map((n) => n[0])
+      .join("");
+
+    return initial;
+  };
   return (
-    <Box sx={{ fontFamily: "Roboto, sans-serif" }}>
-      <Grid container spacing={2} justifyContent="flex-end">
-        <Grid item xs={12} sm={6} md={3} sx={{ textAlign: "right" }}>
-          <Button
-            variant="contained"
-            size="small"
-            color={ActiveThemeColor}
-            startIcon={<AddIcon />}
-          >
-            User
-          </Button>
-        </Grid>
-      </Grid>
-      <div style={{ height: 600, width: "100%", marginTop: "20px" }}>
-        <ServerSideGrid
-          apiurl={fetchQALList}
-          Rows={[
-            {
-              id: 1,
-              name: "John Doe",
-              role: "Admin",
-              email: "john@example.com",
-              status: "Active",
-              lastAccessed: "Sep 01, 2022, 00:00 AM",
-              passcodeStatus: "Inactive",
-            },
-            {
-              id: 2,
-              name: "Jane Smith",
-              role: "Admin",
-              email: "jane@example.com",
-              status: "Active",
-              lastAccessed: "Aug 23, 2023, 03:28 PM",
-              passcodeStatus: "Inactive",
-            },
-            {
-              id: 3,
-              name: "Alice Johnson",
-              role: "Admin",
-              email: "alice@example.com",
-              status: "Active",
-              lastAccessed: "Sep 01, 2022, 00:00 AM",
-              passcodeStatus: "Inactive",
-            },
-            {
-              id: 4,
-              name: "Bob Thomas",
-              role: "Admin",
-              email: "bob@example.com",
-              status: "Active",
-              lastAccessed: "Jun 28, 2023, 02:04 AM",
-              passcodeStatus: "Inactive",
-            },
-            {
-              id: 5,
-              name: "Charlie Brown",
-              role: "Admin",
-              email: "charlie@example.com",
-              status: "Invited",
-              lastAccessed: "Never Logged In",
-              passcodeStatus: "Inactive",
-            },
-            {
-              id: 6,
-              name: "Eve Watson",
-              role: "Admin",
-              email: "eve@example.com",
-              status: "Active",
-              lastAccessed: "Aug 24, 2023, 01:36 PM",
-              passcodeStatus: "Inactive",
-            },
-            {
-              id: 7,
-              name: "Mike Lee",
-              role: "Admin",
-              email: "mike@example.com",
-              status: "Active",
-              lastAccessed: "Sep 01, 2022, 00:00 AM",
-              passcodeStatus: "Inactive",
-            },
-          ]}
-          columns={userColumns}
-        />
-      </div>
-    </Box>
+    <>
+      <div>UsersList</div>
+      <TableContainer sx={{ border: "1px solid #ccc", borderRadius: "5px" }}>
+        <Table size="small">
+          <TableHead sx={{ bgcolor: "#F4F6FA" }}>
+            <TableRow>
+              <TableCell sx={{ fontSize: "12px" }}>Subscriber</TableCell>
+              <TableCell sx={{ fontSize: "12px" }}>Email</TableCell>
+              <TableCell sx={{ fontSize: "12px" }}>Location</TableCell>
+              <TableCell sx={{ fontSize: "12px" }}>Created at</TableCell>
+              <TableCell sx={{ fontSize: "12px" }}>Updated at</TableCell>
+              <TableCell sx={{ fontSize: "12px" }}>Action</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {mockData?.map((user, index) => (
+              <TableRow className="tableRowStyle" key={index}>
+                <TableCell className="tableCellStyle">
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        width: "40px",
+                        height: "40px",
+                        bgcolor: "#F4F6FA",
+                        borderRadius: "50%",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        fontSize: 15,
+                      }}
+                    >
+                      <Typography
+                        variant="h6"
+                        fontSize={15}
+                        color="#79C0F6"
+                        sx={{ fontFamily: "Inter,system-ui,sans-serif" }}
+                      >
+                        {userInitial(user.name)}
+                      </Typography>
+                    </Box>
+                    <Box sx={{ ml: 2 }}>
+                      <Typography
+                        variant="h5"
+                        sx={{ fontSize: 11, color: "#4B5058" }}
+                      >
+                        {user.name}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{ color: "#9197A1", fontSize: 9 }}
+                      >
+                        {user.subId}
+                      </Typography>
+                    </Box>
+                  </Box>
+                </TableCell>
+                <TableCell className="tableCellStyle">{user.email}</TableCell>
+                <TableCell className="tableCellStyle">
+                  {user.location}
+                </TableCell>
+                <TableCell className="tableCellStyle">
+                  {user.created_at}
+                </TableCell>
+                <TableCell className="tableCellStyle">
+                  {user.updated_at}
+                </TableCell>
+                <TableCell className="tableCellStyle">
+                  <IconButton
+                    aria-label="more"
+                    aria-controls={open ? "menu" : undefined}
+                    aria-haspopup="true"
+                    onClick={handleClick}
+                    size="small"
+                  >
+                    <MoreVertIcon fontSize="small" />
+                  </IconButton>
+
+                  <Menu
+                    id="menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "right",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                  >
+                    <MenuItem onClick={handleClose}>Edit</MenuItem>
+                    <MenuItem onClick={handleClose}>Delete</MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        handleClose(), setDialogOpen(true);
+                      }}
+                    >
+                      View Details
+                    </MenuItem>
+                  </Menu>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <UserDetails
+        open={Boolean(dialogOpen)}
+        onClose={handleCloseModal}
+        user={dialogOpen}
+      />
+    </>
   );
 };
 
-export default UserList;
+export default UsersList;

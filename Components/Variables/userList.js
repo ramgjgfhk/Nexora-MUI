@@ -2,7 +2,7 @@ import { Tooltip } from "@mui/material";
 import { FaEye } from "react-icons/fa";
 
 const usersList = [
-  {
+  {id:2,
     name: "John Doe",
     role: "Admin",
     email: "john@example.com",
@@ -10,7 +10,7 @@ const usersList = [
     lastAccessed: "Sep 01, 2022, 00:00 AM",
     passcodeStatus: "Inactive",
   },
-  {
+  {id:1,
     name: "Jane Smith",
     role: "Admin",
     email: "jane@example.com",
@@ -18,7 +18,7 @@ const usersList = [
     lastAccessed: "Aug 23, 2023, 03:28 PM",
     passcodeStatus: "Inactive",
   },
-  {
+  {id:1,
     name: "Alice Johnson",
     role: "Admin",
     email: "alice@example.com",
@@ -26,7 +26,7 @@ const usersList = [
     lastAccessed: "Sep 01, 2022, 00:00 AM",
     passcodeStatus: "Inactive",
   },
-  {
+  {id:1,
     name: "Bob Thomas",
     role: "Admin",
     email: "bob@example.com",
@@ -34,7 +34,7 @@ const usersList = [
     lastAccessed: "Jun 28, 2023, 02:04 AM",
     passcodeStatus: "Inactive",
   },
-  {
+  {id:1,
     name: "Charlie Brown",
     role: "Admin",
     email: "charlie@example.com",
@@ -42,7 +42,7 @@ const usersList = [
     lastAccessed: "Never Logged In",
     passcodeStatus: "Inactive",
   },
-  {
+  {id:1,
     name: "Eve Watson",
     role: "Admin",
     email: "eve@example.com",
@@ -50,7 +50,7 @@ const usersList = [
     lastAccessed: "Aug 24, 2023, 01:36 PM",
     passcodeStatus: "Inactive",
   },
-  {
+  {id:1,
     name: "Mike Lee",
     role: "Admin",
     email: "mike@example.com",

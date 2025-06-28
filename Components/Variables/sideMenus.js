@@ -41,29 +41,35 @@ export const menuItems = [
     ],
   },
   {
-    id: "segments",
-    title: "Segments",
+    id: "audience",
+    title: "Audiences",
     icon: <Segment />,
     children: [
       {
-        id: "segment",
+        id: "segments",
         title: "Segment",
         icon: <BarChart />,
         path: "/segment",
         name: "Segment",
+      }, {
+        id: "user-list",
+        title: "Explorer",
+        icon: <Group />,
+        path: "/users",
+        name: "Audience / Explorer",
       },
-      {
-        id: "rfm",
-        title: "RFM",
-        icon: <BarChart />,
-        name: "Segment / RFM",
-      },
-      {
-        id: "find_people",
-        title: "Find People",
-        icon: <BarChart />,
-        name: "Segment / Find People",
-      },
+      // {
+      //   id: "rfm",
+      //   title: "RFM",
+      //   icon: <BarChart />,
+      //   name: "Segment / RFM",
+      // },
+      // {
+      //   id: "find_people",
+      //   title: "Find People",
+      //   icon: <BarChart />,
+      //   name: "Segment / Find People",
+      // },
     ],
   },
   {
@@ -100,52 +106,52 @@ export const menuItems = [
       },
     ],
   },
-  {
-    id: "users",
-    title: "User Management",
-    icon: <People />,
-    children: [
-      {
-        id: "user-list",
-        title: "Users",
-        icon: <Group />,
-        path: "/users",
-        name: "User Management / Users",
-      },
-      // {
-      //   id: "user-roles",
-      //   title: "Roles & Permissions",
-      //   icon: <AdminPanelSettings />,
-      //   children: [
-      //     {
-      //       id: "roles",
-      //       title: "Roles",
-      //       path: "/users/roles/list",
-      //       name: "User Management / Role & Permission / Roles",
-      //     },
-      //     {
-      //       id: "permissions",
-      //       title: "Permissions",
-      //       path: "/users/roles/permissions",
-      //       name: "User Management / Role & Permission / Permissions",
-      //     },
-      //     {
-      //       id: "assignments",
-      //       title: "Assignments",
-      //       path: "/users/roles/assignments",
-      //       name: "User Management / Role & Permission / Assignments",
-      //     },
-      //   ],
-      // },
-      // {
-      //   id: "add-user",
-      //   title: "Add User",
-      //   icon: <PersonAdd />,
-      //   path: "/users/add",
-      //   name: "User Management / Add user",
-      // },
-    ],
-  },
+  // {
+  //   id: "users",
+  //   title: "User Management",
+  //   icon: <People />,
+  //   children: [
+  //     {
+  //       id: "user-list",
+  //       title: "Users",
+  //       icon: <Group />,
+  //       path: "/users",
+  //       name: "User Management / Users",
+  //     },
+  //     // {
+  //     //   id: "user-roles",
+  //     //   title: "Roles & Permissions",
+  //     //   icon: <AdminPanelSettings />,
+  //     //   children: [
+  //     //     {
+  //     //       id: "roles",
+  //     //       title: "Roles",
+  //     //       path: "/users/roles/list",
+  //     //       name: "User Management / Role & Permission / Roles",
+  //     //     },
+  //     //     {
+  //     //       id: "permissions",
+  //     //       title: "Permissions",
+  //     //       path: "/users/roles/permissions",
+  //     //       name: "User Management / Role & Permission / Permissions",
+  //     //     },
+  //     //     {
+  //     //       id: "assignments",
+  //     //       title: "Assignments",
+  //     //       path: "/users/roles/assignments",
+  //     //       name: "User Management / Role & Permission / Assignments",
+  //     //     },
+  //     //   ],
+  //     // },
+  //     // {
+  //     //   id: "add-user",
+  //     //   title: "Add User",
+  //     //   icon: <PersonAdd />,
+  //     //   path: "/users/add",
+  //     //   name: "User Management / Add user",
+  //     // },
+  //   ],
+  // },
   {
     id: "settings",
     title: "Settings",

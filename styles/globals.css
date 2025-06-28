@@ -65,3 +65,26 @@ a {
 [data-nextjs-dialog] {
   display: none !important;
 }
+
+.tableCellStyle {
+  font-size:11px !important;
+  color: #000 !important;
+  border-bottom: 0.2px solid #ccc !important;
+  font-family: Inter, system-ui, sans-serif !important;
+}
+ .tableCellStyle:hover{
+  background-color: F4F6FA;
+ }
+
+ .tableRowStyle:hover{
+  background-color: #F4F6FA;
+ }
+
+ .labelSize {
+  font-size: 10px !important;
+  font-weight: 500 !important;
+ }
+
+ .textFieldSize{
+  font-size: 12px !important;
+ }
