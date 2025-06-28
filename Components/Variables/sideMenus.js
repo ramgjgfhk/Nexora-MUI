@@ -1,4 +1,4 @@
-import UserList from "@/Views/User/UserList";
+
 import {
   AccountBox,
   AdminPanelSettings,
@@ -111,38 +111,38 @@ export const menuItems = [
         path: "/users",
         name: "User Management / Users",
       },
-      {
-        id: "user-roles",
-        title: "Roles & Permissions",
-        icon: <AdminPanelSettings />,
-        children: [
-          {
-            id: "roles",
-            title: "Roles",
-            path: "/users/roles/list",
-            name: "User Management / Role & Permission / Roles",
-          },
-          {
-            id: "permissions",
-            title: "Permissions",
-            path: "/users/roles/permissions",
-            name: "User Management / Role & Permission / Permissions",
-          },
-          {
-            id: "assignments",
-            title: "Assignments",
-            path: "/users/roles/assignments",
-            name: "User Management / Role & Permission / Assignments",
-          },
-        ],
-      },
-      {
-        id: "add-user",
-        title: "Add User",
-        icon: <PersonAdd />,
-        path: "/users/add",
-        name: "User Management / Add user",
-      },
+      // {
+      //   id: "user-roles",
+      //   title: "Roles & Permissions",
+      //   icon: <AdminPanelSettings />,
+      //   children: [
+      //     {
+      //       id: "roles",
+      //       title: "Roles",
+      //       path: "/users/roles/list",
+      //       name: "User Management / Role & Permission / Roles",
+      //     },
+      //     {
+      //       id: "permissions",
+      //       title: "Permissions",
+      //       path: "/users/roles/permissions",
+      //       name: "User Management / Role & Permission / Permissions",
+      //     },
+      //     {
+      //       id: "assignments",
+      //       title: "Assignments",
+      //       path: "/users/roles/assignments",
+      //       name: "User Management / Role & Permission / Assignments",
+      //     },
+      //   ],
+      // },
+      // {
+      //   id: "add-user",
+      //   title: "Add User",
+      //   icon: <PersonAdd />,
+      //   path: "/users/add",
+      //   name: "User Management / Add user",
+      // },
     ],
   },
   {
