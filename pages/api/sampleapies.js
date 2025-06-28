@@ -5,10 +5,11 @@ import { getCookie } from "cookies-next";
 
 // uat url
 const uat_url = process.env.NEXT_PUBLIC_UAT_URL;
+const nexora_url = process.env.NEXT_PUBLIC_NEXORA_URL;
 
 // verifierPage apies
 const uat_role_create = "api/master/role/create";
-const uat_qa_list = "api/data_entry/list";
+const uat_qa_list = "api/data_entry/list";const uat_user_list = "api/users/list";
 const uat_case_details = "api/qa/get";
 const uat_case_save = "api/qa/save";
 const uat_case_submit = "api/qa/submit";
@@ -70,6 +71,60 @@ async function fetchQAList({ pagination_detail, search, filters, user_id }) {
     throw error; // Re-throw the error to be handled by the calling function
   }
 }
+
+
+
+async function fetchUserListNexora({ limit,offset, search, filters, }) {
+  try {
+    // console.log("user_id", user_id);
+    // const cookieData = getCookie("data");
+
+    // // Check if cookie exists
+    // if (!cookieData) {
+    //   throw new Error("Cookie 'data' is missing.");
+    // }
+
+    // Parse cookie data
+    // const parsedData = JSON.parse(cookieData);
+    // console.log("parsed cookie", parsedData);
+    const response = await fetch(`${nexora_url}/${uat_user_list}`, {
+      headers,
+      method,
+      body: JSON.stringify({
+       nexora_id : "cccc-ddee-33-dd",
+          pagination_detail: {
+          limit,
+          offset,
+        },
+        ...(search && { search }), // Only include 'search' if it's not empty
+        ...(filters && { filters }), // Only include 'filters' if it's not empty
+      }),
+      credentials,
+    });
+
+    // Check if the response status is not OK
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    // Check if the response contains an error or missing data
+    if (!data || data.status_code !== 200) {
+      throw new Error(data?.message || "Failed to fetch ");
+    }
+
+    return data.data; // Return the data if everything is successful
+  } catch (error) {
+    console.error("Error fetching :", error.message);
+
+    // Optional: You can throw the error to the caller or return a fallback value
+    throw error; // Re-throw the error to be handled by the calling function
+  }
+}
+
+
+
 // function for fetch details of Each acse
 async function deatilsOfEachCaseForQA(id, user_id) {
   try {
@@ -461,7 +516,7 @@ export const fetchQALList = async ({
 };
 export {
   fetchQAList,
-  deatilsOfEachCaseForQA,
+  deatilsOfEachCaseForQA,fetchUserListNexora,
   veriferSave,
   acceptApi,
   reworkApi,

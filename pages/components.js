@@ -17,6 +17,7 @@ import {
   InputLabel,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
+import ServerSideGrid from "@/Components/ReUsable/tanstacktesttable";
 
 export default function UiPalette() {
   const [date, setDate] = React.useState(null);
@@ -24,6 +25,51 @@ export default function UiPalette() {
 
   return (
     <Box p={2} sx={{ maxWidth: 600 }}>
+
+
+
+      <ServerSideGrid
+          columns={columns1}
+          // rowss={list}
+          // fieldsForFilter={[
+          //   "client_name",
+          //   "batch_no",
+          //   "TAT",
+          //   "status",
+          //   "CV ID",
+          // ]}
+             fieldsForFilter={{
+          text: [
+            { label: "Name", name: "name" },
+            { label: "City", name: "city" },
+          ],
+          date: [
+            { label: "From", name: "startDate" },
+            { label: "To", name: "endDate" },
+            { label: "Created At", name: "created_at" },
+            { label: "Updated At", name: "updated_at" },
+          ],
+          autocomplete: [
+            {
+              label: "Statssus",
+              name: "status",
+              options: ['Active', 'Inactive'],
+            },
+            {
+              label: "Type",
+              name: "status",
+              options: ["Past Behaviour", "Live Action"],
+            },
+          ],
+        }}
+          // apiurl={fetchQALList}
+
+
+
+
+
+
+
       <Typography variant="h6" gutterBottom>
         🎨 UI Component Palette
       </Typography>

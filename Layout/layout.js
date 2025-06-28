@@ -18,6 +18,7 @@ import Header from "./Header";
 import { getCookie, setCookie } from "cookies-next";
 import { menuItems } from "@/Components/Variables/sideMenus";
 import { useRouter } from "next/router";
+import ReactQueryProvider from "@/Components/TanstackSetup/Context/QueryClientProvider";
 
 const xThemeComponents = {
   ...chartsCustomizations,
@@ -70,13 +71,13 @@ export default function MainLayout({ children, props }) {
   }, []);
 
   React.useEffect(() => {
-  setSelectedPath(router.pathname);
-}, [router.pathname]);
+    setSelectedPath(router.pathname);
+  }, [router.pathname]);
 
   return (
     <AppTheme {...props} themeComponents={xThemeComponents}>
       <CssBaseline enableColorScheme />
-
+      <ReactQueryProvider>
       {/* Main Wrapper */}
       <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
         {/* Navbar Always on Top */}
@@ -129,7 +130,7 @@ export default function MainLayout({ children, props }) {
             {children}
           </Box>
         </Box>
-      </Box>
+      </Box></ReactQueryProvider>
     </AppTheme>
   );
 }

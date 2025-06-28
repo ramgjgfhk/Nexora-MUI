@@ -1,4 +1,4 @@
-import TableComponent from "@/Components/ReUsable/serversidegrid";
+// import TableComponent from "@/Components/ReUsable/serversidegrid";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 // import { Inbox } from "@novu/nextjs";
