@@ -21,7 +21,7 @@ import {
 import React from "react";
 import { motion } from "framer-motion";
 
-const Overview = () => {
+const Overview = ({ data }) => {
   return (
     <Box mt={2}>
       <Grid container spacing={2} alignItems="center">
@@ -40,7 +40,7 @@ const Overview = () => {
                 type="text"
                 size="small"
                 InputProps={{ sx: { fontSize: "10px" } }}
-                defaultValue="Anish"
+                value={data?.name}
               />
             </motion.div>
           </Grid>
@@ -55,7 +55,6 @@ const Overview = () => {
                 type="text"
                 size="small"
                 InputProps={{ sx: { fontSize: "10px" } }}
-                defaultValue="Krishnan"
               />
             </motion.div>
           </Grid>
@@ -103,7 +102,7 @@ const Overview = () => {
                   </InputAdornment>
                 ),
               }}
-              defaultValue="5bd1bbb0-c733-43cb-a39b-26a9ff9f1d6d"
+              value={data?.nexora_id}
             />
           </motion.div>
         </Grid>
@@ -118,7 +117,7 @@ const Overview = () => {
               <TextField
                 type="text"
                 size="small"
-                defaultValue="anish.k@gmail.com"
+                value={data?.email}
                 InputProps={{
                   sx: { fontSize: "10px" },
                   startAdornment: (
@@ -140,7 +139,7 @@ const Overview = () => {
               <TextField
                 type="text"
                 size="small"
-                defaultValue="8878989658"
+                value={data?.mobile}
                 InputProps={{
                   sx: { fontSize: "10px" },
                   startAdornment: (

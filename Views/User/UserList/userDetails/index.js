@@ -20,24 +20,30 @@ import Preference from "./preference";
 const MotionBox = motion(Box);
 const tabs = ["Overview", "Preferences", "Subscriptions", "Activity Feed"];
 
-export default function UserDetailsModal({ open, onClose, user }) {
+export default function UserDetailsModal({ open, onClose, selectedRow }) {
+
   const [activeTab, setActiveTab] = React.useState(0);
   return (
-    <Modal open={open} onClose={onClose}>
-      <AnimatePresence>
-        {open && (
+    <AnimatePresence>
+      {open && (
+        <Modal
+          open={open}
+          onClose={onClose}
+          // closeAfterTransition
+          // slots={{ backdrop: () => null }}
+        >
           <MotionBox
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -30 }}
-            transition={{ duration: 0.4 }}
+            exit={{ opacity: 0, x: 30 }}
+            transition={{ duration: 0.2 }}
             sx={{
               position: "fixed",
               right: 0,
               m: 0,
               top: 0,
               height: "100vh",
-              width: { xs: "100%", sm: "500px" },
+              width: { xs: "100%", sm: "450px" },
               bgcolor: "#fff",
               boxShadow: 24,
               py: 2,
@@ -54,7 +60,7 @@ export default function UserDetailsModal({ open, onClose, user }) {
                   alignItems: "center",
                 }}
               >
-                <Typography variant="h6" gutterBottom>
+                <Typography variant="h3" sx={{ fontSize: "15px" }} gutterBottom>
                   User Details
                 </Typography>
                 <IconButton
@@ -111,7 +117,7 @@ export default function UserDetailsModal({ open, onClose, user }) {
               </Box>
               <Divider />
               {activeTab === 0 ? (
-                <Overview />
+                <Overview data={selectedRow} />
               ) : activeTab === 2 ? (
                 <Subscriptions />
               ) : activeTab === 3 ? (
@@ -124,9 +130,9 @@ export default function UserDetailsModal({ open, onClose, user }) {
               <Typography>Loading...</Typography>
             )} */}
           </MotionBox>
-        )}
-      </AnimatePresence>
-    </Modal>
+        </Modal>
+      )}
+    </AnimatePresence>
   );
 }
 
