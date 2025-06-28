@@ -236,35 +236,12 @@ const SegmentList = () => {
     <Box
       sx={{ display: "flex", gap: 2, flexDirection: "column", width: "100%" }}
     >
-      {/* {" "}
-      <Typography
-        component="h1"
-        variant="subtitle2"
-        gutterBottom
-        sx={{ fontWeight: "600", fontSize: "18px" }}
-      >
-        Segment
-      </Typography> */}
+ 
       <Stack
         direction="row"
         sx={{ justifyContent: "end", mt: 0, alignItems: "end" }}
       >
-        {/* <Box sx={{ maxWidth: 400 ,backgroundColor:" #f5f5f5",p:1,borderRadius:"6px"}}>
-          <Typography
-            //  component="h2"
-            variant="subtitle2"
-            gutterBottom
-            sx={{ fontWeight: "600", fontSize: "13px", color: "grey" }}
-          >
-            Filter Segment By date
-          </Typography>
-          <FromToDatePicker
-            fromDate={fromDate}
-            toDate={toDate}
-            setFromDate={setFromDate}
-            setToDate={setToDate}
-          />
-        </Box> */}
+ 
 
         <Button
           variant="contained"

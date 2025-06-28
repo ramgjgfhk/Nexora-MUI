@@ -45,16 +45,14 @@ const CustomToolbar = ({
   searchTerm,
   setSearchTerm,
 }) => (
-  <GridToolbarContainer
-    sx={{  mb: 0, pr: 1, backgroundColor:"#f9fafb",}}
-  >
+  <GridToolbarContainer sx={{ mb: 0, pr: 1, backgroundColor: "#f9fafb" }}>
     <FilterModalComponent
       onApply={handleApplyFilters}
       customFilters={fieldsForFilter}
       appliedFilters={appliedFilters}
       setAppliedFilters={setAppliedFilters}
-    /> 
-     {/* <GridToolbarFilterButton /> */}
+    />
+    {/* <GridToolbarFilterButton /> */}
     <GridToolbarColumnsButton />
     <GridToolbarDensitySelector />
     <GridToolbarExport />
@@ -104,7 +102,8 @@ const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin-ext"],
 });
 const ServerSideGrid = (
-  {Rows=[],
+  {
+    Rows = [],
     fieldsForFilter = {},
     columns,
 
@@ -279,7 +278,7 @@ console.log('rows',rows)
     // }
 
     const timer = setTimeout(() => {
-    //   setAppliedFilters({});
+      //   setAppliedFilters({});
       setPaginationModel({
         page: 0,
         pageSize: 10,
@@ -290,12 +289,10 @@ console.log('rows',rows)
   }, [searchTerm]);
   const memoizedFieldsForFilter = useMemo(() => fieldsForFilter, []);
 
-
-
   return (
     <Box sx={{ width: "100%" }}>
       <DataGrid
-      checkboxSelection
+        checkboxSelection
         autoHeight
         disableColumnMenu
         rows={rows}
@@ -338,13 +335,21 @@ console.log('rows',rows)
           "& .MuiDataGrid-columnHeader": {
             backgroundColor: "#F9FAFB !important", // Header background
             color: "#000", // Header text color
+            // textAlign:"center",
             // borderBottom: "7px solid #e0e0e0",
             fontFamily: jakarta.style.fontFamily,
+            justifyContent: "center",
           },
           "& .MuiDataGrid-columnHeaderTitle": {
             fontWeight: "bolder", // Ensures bold applies to header text
             fontSize: "12px", // Ensure font size is 12px
+            // justifyContent:"center"
           },
+
+          "& .MuiDataGrid-columnHeaderTitleContainer": {
+            justifyContent: "center",
+          },
+
           "& .MuiDataGrid-footerContainer": {
             backgroundColor: "#F9FAFB", // Footer background
           },
