@@ -14,6 +14,7 @@ import FromToDatePicker from "@/Components/resuable components/fromToDatePicker"
 // import ServerSideGrid from "@/Components/ReUsable/gridfromscreenfacts";
 import { fetchQALList, fetchUserListNexora } from "@/pages/api/sampleapies";
 import ServerSideGrid from "@/Components/ReUsable/userpagegrid";
+import { ContentCopy } from "@mui/icons-material";
 import { MoreVert } from "@mui/icons-material";
 import UserDetailsModal from "../User/UserList/userDetails";
 // import FromToDatePicker from "./FromToDatePicker";
@@ -58,33 +59,33 @@ const SegmentList = () => {
     },
     {
       field: "nexora_id",
-      headerName: "Nexora ID",
+      headerName: "Audiences",
       flex: 2,
       minWidth: 100,
-      headerAlign: "center",
-      //       renderCell: (params) => {
-      //         const name = params.row.name ?? '—';
-      //         const nexoraId = params.row.nexora_id ?? "—";
+    //   headerAlign: "center",
+      renderCell: (params) => {
+        const name = params.row.name ?? '—';
+        const nexoraId = params.row.nexora_id ?? "—";
 
-      //         return (<Stack
-      //   spacing={0.5}
-      //   sx={{
-      //     alignItems: "flex-start",
-      //     fontSize: "0.2rem",
-      //     color: "text.primary",
-      //   }
-      //   }
-      // >
-      //   <Typography sx={{ fontSize: "0.7rem",}}>
-      //     <b>Name:</b> {name || "-"}
-      //   </Typography>
-      //   <Typography sx={{ fontSize: "0.7rem",}}>
-      //     <b>Nexora ID:</b> {nexoraId || "-"}
-      //   </Typography>
-      // </Stack>
+        return (<><Stack
+  spacing={0.5}
+  sx={{height:"100%",
+    alignItems: "flex-start",
+    fontSize: "0.2rem",
+    color: "text.primary",justifyContent:'center'
+  }
+  }
+>
+  <Typography sx={{ fontSize: "0.7rem",}}>
+    <b></b> {name || "-"}
+  </Typography>
+  <Typography sx={{ fontSize: "0.7rem",}}>
+  <ContentCopy sx={{fontSize:"14px",mb:-0.5}}/>  <b>ID:</b> {nexoraId || "-"}
+  </Typography>
+</Stack></>
 
-      //         );
-      //       },
+        );
+      },
 
       //  renderCell: (params) => {
       //         const rawDate = params.value;
@@ -101,14 +102,14 @@ const SegmentList = () => {
       //         });
       //       },
     },
-    {
-      field: "name",
-      headerName: "Name",
-      flex: 2,
-      minWidth: 100,
-      headerAlign: "center",
-      // valueGetter: (params) => renderValue(params.row.name),
-    },
+    //   {
+    //     field: 'name',
+    //     headerName: 'Name',
+    //        flex: 2,
+    //   minWidth: 100,
+    //   headerAlign: "center",
+    //     // valueGetter: (params) => renderValue(params.row.name),
+    //   },
     {
       field: "email",
       headerName: "Email",
@@ -331,8 +332,7 @@ const SegmentList = () => {
       /> */}
 
       <ServerSideGrid
-        columns={columns}
-        colHeight={34}
+        columns={columns}colHeight={45}
         // rowss={list}
         // fieldsForFilter={[
         //   "client_name",
