@@ -1,7 +1,7 @@
 import TableComponent from "@/Components/ReUsable/serversidegrid";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { Inbox } from "@novu/nextjs";
+// import { Inbox } from "@novu/nextjs";
 import FromToDatePicker from "@/Components/resuable components/fromToDatePicker";
 import ServerSideGrid from "@/Components/ReUsable/gridfromscreenfacts";
 import { fetchQALList } from "@/pages/api/sampleapies";
@@ -252,7 +252,18 @@ const SegmentList = () => {
           Create Segment
         </Button>
 
- 
+        {/* <S
+      applicationIdentifier="KxsvqMOiei9I"
+      subscriberId="685919ded80e094dc6b1edce"
+      appearance={{
+        variables: {
+          colorPrimary: "#7D52F4",
+          colorForeground: "#0E121B"
+        }
+      }}
+    /> */}
+
+        {/* <button           color={ActiveThemeColor} onClick={() => setSegmentModal(true)}></button> */}
       </Stack>
       {/* <Container className="py-4">
       <Card className="shadow-sm border-0">

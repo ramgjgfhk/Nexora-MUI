@@ -1,123 +1,133 @@
+import React from "react";
+import { useRouter } from "next/router";
 import {
-  DisabledByDefaultRounded,
-  FilterAlt,
-  FilterAltOff,
-} from "@mui/icons-material";
-import {
-  Autocomplete,
   Box,
   Button,
+  Chip,
+  Grid,
+  IconButton,
   TextField,
+  Tooltip,
   Typography,
 } from "@mui/material";
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import {
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import React, { useEffect, useMemo, useState } from "react";
+import { DataGrid } from "@mui/x-data-grid";
+import SearchIcon from "@mui/icons-material/Search";
+import AddIcon from "@mui/icons-material/Add";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
-import {
-  FiChevronDown,
-  FiChevronUp,
-  FiDownload,
-  FiFilter,
-  FiSearch,
-} from "react-icons/fi";
-// import axios from 'axios';
+const ActiveThemeColor = "primary";
 
-const TableComponent = ({
-  columns,
-  fetchData,
-  datas,
-  searchText,
-  customFilters,
-}) => {
-  const [filterPanelOpen, setFilterPanelOpen] = useState(false);
-  const [filterValues, setFilterValues] = useState({});
-  const [data, setData] = useState(datas);
-  const [pageIndex, setPageIndex] = useState(0);
-  const [pageSize, setPageSize] = useState(10);
-  const [totalCount, setTotalCount] = useState(0);
-  const [globalFilter, setGlobalFilter] = useState("");
-  const [columnFilters, setColumnFilters] = useState({});
-  const [sorting, setSorting] = useState([]);
-  const [showFilters, setShowFilters] = useState(true);
-  const [activeFilterColumn, setActiveFilterColumn] = useState();
+const UserList = () => {
+  const router = useRouter();
 
-  // useEffect(() => {
-  //   const loadData = async () => {
-  //     const response = await fetchData({
-  //       pageIndex,
-  //       pageSize,
-  //       globalFilter,
-  //       columnFilters,
-  //       sorting,
-  //     });
-  //     setData(response.data);
-  //     setTotalCount(response.totalCount);
-  //   };
-  //   loadData();
-  // }, [pageIndex, pageSize, globalFilter, columnFilters, sorting, fetchData]);
+  const [searchTerm, setSearchTerm] = React.useState("");
 
-  const table = useReactTable({
-    data,
-    columns,
-    pageCount: Math.ceil(totalCount / pageSize),
-    state: {
-      pagination: { pageIndex, pageSize },
-      globalFilter,
-      columnFilters: Object.entries(columnFilters).map(([id, value]) => ({
-        id,
-        value,
-      })),
-      sorting,
+  const users = [
+    {
+      id: 1,
+      name: "John Doe",
+      role: "Admin",
+      email: "john@example.com",
+      status: "Active",
+      lastAccessed: "Sep 01, 2022, 00:00 AM",
+      passcode: "Inactive",
     },
-    manualPagination: true,
-    manualFiltering: true,
-    manualSorting: true,
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    onPaginationChange: (updater) => {
-      const newState =
-        typeof updater === "function"
-          ? updater({ pageIndex, pageSize })
-          : updater;
-      setPageIndex(newState.pageIndex);
-      setPageSize(newState.pageSize);
+    {
+      id: 2,
+      name: "Jane Smith",
+      role: "Admin",
+      email: "jane@example.com",
+      status: "Active",
+      lastAccessed: "Aug 23, 2023, 03:28 PM",
+      passcode: "Inactive",
     },
-    onSortingChange: setSorting,
-  });
-  const options = ["Option 1", "Option 2", "Option 3"];
-  const handleExport = () => {
-    const csv = [
-      table
-        .getHeaderGroups()[0]
-        .headers.map((h) => h.column.columnDef.header)
-        .join(","),
-      ...data.map((row) =>
-        table
-          .getAllColumns()
-          .map((col) => row[col.id] || "")
-          .join(",")
+    {
+      id: 3,
+      name: "Alice Johnson",
+      role: "Admin",
+      email: "alice@example.com",
+      status: "Active",
+      lastAccessed: "Sep 01, 2022, 00:00 AM",
+      passcode: "Inactive",
+    },
+    {
+      id: 4,
+      name: "Bob Thomas",
+      role: "Admin",
+      email: "bob@example.com",
+      status: "Active",
+      lastAccessed: "Jun 28, 2023, 02:04 AM",
+      passcode: "Inactive",
+    },
+    {
+      id: 5,
+      name: "Charlie Brown",
+      role: "Admin",
+      email: "charlie@example.com",
+      status: "Invited",
+      lastAccessed: "Never Logged In",
+      passcode: "Inactive",
+    },
+    {
+      id: 6,
+      name: "Eve Watson",
+      role: "Admin",
+      email: "eve@example.com",
+      status: "Active",
+      lastAccessed: "Aug 24, 2023, 01:36 PM",
+      passcode: "Inactive",
+    },
+    {
+      id: 7,
+      name: "Mike Lee",
+      role: "Admin",
+      email: "mike@example.com",
+      status: "Active",
+      lastAccessed: "Sep 01, 2022, 00:00 AM",
+      passcode: "Inactive",
+    },
+  ];
+
+  const filteredUsers = users.filter(
+    (u) =>
+      u.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      u.id.toString().includes(searchTerm)
+  );
+
+  const columns = [
+    { field: "id", headerName: "ID", width: 70 },
+    { field: "name", headerName: "Name", flex: 1 },
+    { field: "role", headerName: "Role", flex: 1 },
+    { field: "email", headerName: "Email", flex: 1 },
+    {
+      field: "status",
+      headerName: "Status",
+      flex: 1,
+      renderCell: (params) => (
+        <Chip
+          label={params.value}
+          color={params.value === "Active" ? ActiveThemeColor : "default"}
+          size="small"
+        />
       ),
-    ].join("\n");
-    const blob = new Blob([csv], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "table_export.csv";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+    },
+    { field: "lastAccessed", headerName: "Last Accessed", flex: 1 },
+    { field: "passcode", headerName: "Passcode Status", flex: 1 },
+    {
+      field: "action",
+      headerName: "Action",
+      width: 100,
+      sortable: false,
+      renderCell: (params) => (
+        <Tooltip title="View" placement="bottom">
+          <IconButton onClick={() => router.push("/admin/customer-detail")}>
+            <VisibilityIcon />
+          </IconButton>
+        </Tooltip>
+      ),
+    },
+  ];
+
   return (
     <div
       style={{
@@ -675,65 +685,35 @@ const TableComponent = ({
               mt: 2,
               // alignSelf: "flex-end",
             }}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={2} sx={{ textAlign: "right", ml: "auto" }}>
+          <Button
+            variant="contained"
+            color={ActiveThemeColor}
+            startIcon={<AddIcon />}
           >
-            <Button
-              size="small"
-              onClick={() => {
-                setFilterValues({});
-                setColumnFilters({});
-              }}
-              // startIcon={<FilterAltOff />}
-              sx={{
-                flex: 1,
-                textTransform: "none",
-                borderRadius: "6px",
-                fontWeight: 500,
-                height: "30px",
-                // px: 2,
-                // py: 0.8,
-                backgroundColor: "#d32f2f",
-                color: "#fff",
-                transition: "all 0.2s ease-in-out",
-                "&:hover": {
-                  backgroundColor: "#b71c1c",
-                  boxShadow: "0 2px 8px rgba(211, 47, 47, 0.3)",
-                },
-              }}
-            >
-              Remove Filters
-            </Button>
+            User
+          </Button>
+        </Grid>
+      </Grid>
 
-            <Button
-              size="small"
-              onClick={() => {
-                setColumnFilters(filterValues);
-                setFilterPanelOpen(false);
-              }}
-              // startIcon={<FilterAlt />}
-              sx={{
-                flex: 1,
-                textTransform: "none",
-                borderRadius: "6px",
-                height: "30px",
-                fontWeight: 500,
-                // px: 2,
-                // py: 0.1,
-                backgroundColor: "#4CC713",
-                color: "#fff",
-                transition: "all 0.2s ease-in-out",
-                "&:hover": {
-                  backgroundColor: "#43b012",
-                  boxShadow: "0 2px 8px rgba(76, 199, 19, 0.3)",
-                },
-              }}
-            >
-              Apply Filters
-            </Button>
-          </Box>
-        </div>
-      )}
-    </div>
+      <Typography variant="h6" gutterBottom>
+        Showing {filteredUsers.length} of {users.length} Users
+      </Typography>
+
+      <Box sx={{ height: 500, width: "100%" }}>
+        <DataGrid
+          rows={filteredUsers}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5, 10]}
+          checkboxSelection
+          disableRowSelectionOnClick
+        />
+      </Box>
+    </Box>
   );
 };
 
-export default TableComponent;
+export default UserList;
