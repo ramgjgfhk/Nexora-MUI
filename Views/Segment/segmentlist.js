@@ -22,8 +22,7 @@ const SegmentList = () => {
   ]);
   const pickerRef = React.useRef(null);
   //   const navigate = useNavigate();
-  const columns1 = [  
-    
+  const columns1 = [
     {
       field: "id",
       headerName: "ID",
@@ -64,7 +63,7 @@ const SegmentList = () => {
         return `${row?.candidate_fname || ""} ${row?.candidate_lname || ""}`;
       },
     },
-   
+
     {
       field: "updated_at",
       headerName: "Updated At",
@@ -72,8 +71,7 @@ const SegmentList = () => {
       minWidth: 80,
       headerAlign: "center",
     },
-  //
- 
+    //
   ];
   const data = [
     {
@@ -376,21 +374,17 @@ const SegmentList = () => {
         }}
       /> */}
 
-
-
-
-
-       <ServerSideGrid
-          columns={columns1}
-          // rowss={list}
-          // fieldsForFilter={[
-          //   "client_name",
-          //   "batch_no",
-          //   "TAT",
-          //   "status",
-          //   "CV ID",
-          // ]}
-             fieldsForFilter={{
+      <ServerSideGrid
+        columns={columns1}
+        // rowss={list}
+        // fieldsForFilter={[
+        //   "client_name",
+        //   "batch_no",
+        //   "TAT",
+        //   "status",
+        //   "CV ID",
+        // ]}
+        fieldsForFilter={{
           text: [
             { label: "Name", name: "name" },
             { label: "City", name: "city" },
@@ -405,7 +399,7 @@ const SegmentList = () => {
             {
               label: "Statssus",
               name: "status",
-              options: ['Active', 'Inactive'],
+              options: ["Active", "Inactive"],
             },
             {
               label: "Type",
@@ -414,115 +408,110 @@ const SegmentList = () => {
             },
           ],
         }}
-          apiurl={fetchQALList}
-        Rows = {[
-  {
-    id: 1,
-    Segment_name: "Purchased",
-    created_by: "John Doe",
-    created_at: "2025-06-01",
-    candidate_fname: "Alice",
-    candidate_lname: "Johnson",
-    updated_by: "Verifier1",
-    updated_at: "2025-06-05",
-  },
-  {
-    id: 2,
-    Segment_name: "Trigger Web Login",
-    created_by: "Jane Smith",
-    created_at: "2025-06-02",
-    candidate_fname: "Bob",
-    candidate_lname: "Williams",
-    updated_by: "Verifier2",
-    updated_at: "2025-06-06",
-  },
-  {
-    id: 3,
-    Segment_name: "Email For Login",
-    created_by: "Raj Patel",
-    created_at: "2025-06-03",
-    candidate_fname: "Charlie",
-    candidate_lname: "Brown",
-    updated_by: "Verifier3",
-    updated_at: "2025-06-07",
-  },
-  {
-    id: 4,
-    Segment_name: "In App SMS",
-    created_by: "Li Wei",
-    created_at: "2025-06-04",
-    candidate_fname: "Daisy",
-    candidate_lname: "Miller",
-    updated_by: "Verifier4",
-    updated_at: "2025-06-08",
-  },
-  {
-    id: 5,
-    Segment_name: "Add To Cart",
-    created_by: "Maria Lopez",
-    created_at: "2025-06-05",
-    candidate_fname: "Ethan",
-    candidate_lname: "Davis",
-    updated_by: "Verifier5",
-    updated_at: "2025-06-09",
-  },
-  {
-    id: 6,
-    Segment_name: "Inactive User",
-    created_by: "Ahmed Khan",
-    created_at: "2025-06-06",
-    candidate_fname: "Fiona",
-    candidate_lname: "Clark",
-    updated_by: "Verifier6",
-    updated_at: "2025-06-10",
-  },
-  {
-    id: 7,
-    Segment_name: "Loyal User",
-    created_by: "Emily Johnson",
-    created_at: "2025-06-07",
-    candidate_fname: "George",
-    candidate_lname: "Martinez",
-    updated_by: "Verifier7",
-    updated_at: "2025-06-11",
-  },
-  {
-    id: 8,
-    Segment_name: "Valuable Customer",
-    created_by: "David Kim",
-    created_at: "2025-06-08",
-    candidate_fname: "Hannah",
-    candidate_lname: "Lewis",
-    updated_by: "Verifier8",
-    updated_at: "2025-06-12",
-  },
-  {
-    id: 9,
-    Segment_name: "Trigger SDK",
-    created_by: "Olivia Brown",
-    created_at: "2025-06-09",
-    candidate_fname: "Ian",
-    candidate_lname: "Walker",
-    updated_by: "Verifier9",
-    updated_at: "2025-06-13",
-  },
-  {
-    id: 10,
-    Segment_name: "Network Error",
-    created_by: "Michael Green",
-    created_at: "2025-06-10",
-    candidate_fname: "Julia",
-    candidate_lname: "Hall",
-    updated_by: "Verifier10",
-    updated_at: "2025-06-14",
-  },
-]}
-
-          
-     
-     
-        
-        />
+        apiurl={fetchQALList}
+        Rows={[
+          {
+            id: 1,
+            Segment_name: "Purchased",
+            created_by: "John Doe",
+            created_at: "2025-06-01",
+            candidate_fname: "Alice",
+            candidate_lname: "Johnson",
+            updated_by: "Verifier1",
+            updated_at: "2025-06-05",
+          },
+          {
+            id: 2,
+            Segment_name: "Trigger Web Login",
+            created_by: "Jane Smith",
+            created_at: "2025-06-02",
+            candidate_fname: "Bob",
+            candidate_lname: "Williams",
+            updated_by: "Verifier2",
+            updated_at: "2025-06-06",
+          },
+          {
+            id: 3,
+            Segment_name: "Email For Login",
+            created_by: "Raj Patel",
+            created_at: "2025-06-03",
+            candidate_fname: "Charlie",
+            candidate_lname: "Brown",
+            updated_by: "Verifier3",
+            updated_at: "2025-06-07",
+          },
+          {
+            id: 4,
+            Segment_name: "In App SMS",
+            created_by: "Li Wei",
+            created_at: "2025-06-04",
+            candidate_fname: "Daisy",
+            candidate_lname: "Miller",
+            updated_by: "Verifier4",
+            updated_at: "2025-06-08",
+          },
+          {
+            id: 5,
+            Segment_name: "Add To Cart",
+            created_by: "Maria Lopez",
+            created_at: "2025-06-05",
+            candidate_fname: "Ethan",
+            candidate_lname: "Davis",
+            updated_by: "Verifier5",
+            updated_at: "2025-06-09",
+          },
+          {
+            id: 6,
+            Segment_name: "Inactive User",
+            created_by: "Ahmed Khan",
+            created_at: "2025-06-06",
+            candidate_fname: "Fiona",
+            candidate_lname: "Clark",
+            updated_by: "Verifier6",
+            updated_at: "2025-06-10",
+          },
+          {
+            id: 7,
+            Segment_name: "Loyal User",
+            created_by: "Emily Johnson",
+            created_at: "2025-06-07",
+            candidate_fname: "George",
+            candidate_lname: "Martinez",
+            updated_by: "Verifier7",
+            updated_at: "2025-06-11",
+          },
+          {
+            id: 8,
+            Segment_name: "Valuable Customer",
+            created_by: "David Kim",
+            created_at: "2025-06-08",
+            candidate_fname: "Hannah",
+            candidate_lname: "Lewis",
+            updated_by: "Verifier8",
+            updated_at: "2025-06-12",
+          },
+          {
+            id: 9,
+            Segment_name: "Trigger SDK",
+            created_by: "Olivia Brown",
+            created_at: "2025-06-09",
+            candidate_fname: "Ian",
+            candidate_lname: "Walker",
+            updated_by: "Verifier9",
+            updated_at: "2025-06-13",
+          },
+          {
+            id: 10,
+            Segment_name: "Network Error",
+            created_by: "Michael Green",
+            created_at: "2025-06-10",
+            candidate_fname: "Julia",
+            candidate_lname: "Hall",
+            updated_by: "Verifier10",
+            updated_at: "2025-06-14",
+          },
+        ]}
+      />
       {/* <SegmentTypeModal /> */}
     </Box>
   );

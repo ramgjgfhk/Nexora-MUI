@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 export default function MenuContent(props) {
 
   const {openItems,setOpenItems,handleNavigation,handleToggle,selectedPath} = props
+  console.log('op',openItems)
   const router = useRouter();
 
 

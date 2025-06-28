@@ -1,3 +1,6 @@
+import { Tooltip } from "@mui/material";
+import { FaEye } from "react-icons/fa";
+
 const usersList = [
   {
     name: "John Doe",
@@ -57,15 +60,41 @@ const usersList = [
   },
 ];
 
-
 export const userColumns = [
-  { field: "id", headerName: "ID", flex: 1 },
-  { field: "name", headerName: "Name", flex: 3 },
-  { field: "role", headerName: "Role", flex: 2 },
-  { field: "email", headerName: "Email", flex: 3 },
-  { field: "status", headerName: "Status", flex: 2 },
-  { field: "lastAccessed", headerName: "Last Accessed", flex: 4 },
-  { field: "passcodeStatus", headerName: "Passcode Status", flex: 2 },
+  { field: "id", headerName: "ID", flex: 1, headerAlign: "center" },
+  { field: "name", headerName: "Name", flex: 3, headerAlign: "center" },
+  { field: "role", headerName: "Role", flex: 2, headerAlign: "center" },
+  { field: "email", headerName: "Email", flex: 3, headerAlign: "center" },
+  { field: "status", headerName: "Status", flex: 2, headerAlign: "center" },
+  {
+    field: "lastAccessed",
+    headerName: "Last Accessed",
+    flex: 4,
+    headerAlign: "center",
+  },
+  {
+    field: "passcodeStatus",
+    headerName: "Passcode Status",
+    flex: 2,
+    headerAlign: "center",
+  },
+  {
+    field: "action",
+    headerName: "Action",
+    flex: 2,
+    headerAlign: "center",
+    textAlign: "start",
+    cellClassName: "sticky-action-column",
+    headerClassName: "sticky-action-header",
+    renderCell: (params) => {
+      const row = params.row;
+      return (
+        <Tooltip title="View">
+          <FaEye size={20}/>
+        </Tooltip>
+      );
+    },
+  },
 ];
 
 export const userRows = usersList.map((user, index) => ({

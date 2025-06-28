@@ -33,7 +33,6 @@ export default function MainLayout({ children, props }) {
 
   const [openItems, setOpenItems] = React.useState({});
   const [selectedPath, setSelectedPath] = React.useState("");
-  console.log("selectPath", selectedPath);
 
   const handleToggle = (itemId) => {
     setOpenItems((prev) => ({

@@ -114,6 +114,7 @@ const ServerSideGrid = (
   },
   ref
 ) => {
+  console.log('rr',Rows)
   const router = useRouter();
   const { query } = router;
   const offset = parseInt(query.offset || "0", 10);
@@ -186,7 +187,7 @@ const ServerSideGrid = (
     }
     setLoading(false);
   };
-
+console.log('rows',rows)
   const [isInitialRender, setIsInitialRender] = useState(true);
   const handlePaginationChange = (newModel) => {
     if (newModel.pageSize !== paginationModel.pageSize) {

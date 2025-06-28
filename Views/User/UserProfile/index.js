@@ -1,13 +1,11 @@
 import React from "react";
-import { Button, ButtonGroup } from "reactstrap";
+import { Button, ButtonGroup, Box } from "@mui/material";
 import UserDetails from "./userDetails";
 import UserActivity from "./userActivity";
 import UserEngagement from "./userEngagement";
-import { useActiveColor } from "context/activeColor";
-import UserProfile from "./userProfile";
+import UserProfiles from "./userProfile";
 
-const CustomerProfile = () => {
-  const { ActiveThemeColor } = useActiveColor();
+const UserProfile = () => {
   const [activeTab, setActiveTab] = React.useState("profile");
 
   const handleTabClick = (tab) => {
@@ -15,19 +13,24 @@ const CustomerProfile = () => {
   };
 
   return (
-    <div className="content" style={{fontFamily:'Roboto,san-serif'}}>
-      <ButtonGroup className="d-flex mb-4" size="md">
+    <Box className="content" sx={{ fontFamily: "Roboto, sans-serif",mt:{xs:10,md:1,lg:0} }}>
+      <ButtonGroup variant="outlined" fullWidth sx={{ mb: 3 }}>
         {["profile", "activity", "engagement"].map((tab) => (
           <Button
             key={tab}
-            color={tab === activeTab ? ActiveThemeColor : "default"}
+            variant={tab === activeTab ? "contained" : "outlined"}
+            color={tab === activeTab ? "primary" : "inherit"}
             onClick={() => handleTabClick(tab)}
+            sx={{
+              textTransform: "capitalize",
+            }}
           >
-            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+            {tab}
           </Button>
         ))}
       </ButtonGroup>
-      <UserProfile activeTab={activeTab} />
+
+      <UserProfiles activeTab={activeTab} />
 
       {activeTab === "profile" ? (
         <UserDetails />
@@ -36,8 +39,8 @@ const CustomerProfile = () => {
       ) : activeTab === "engagement" ? (
         <UserEngagement />
       ) : null}
-    </div>
+    </Box>
   );
 };
 
-export default CustomerProfile;
+export default UserProfile;

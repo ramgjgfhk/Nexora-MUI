@@ -1,5 +1,18 @@
 import React from "react";
-import { Card, CardBody, Row, Table } from "reactstrap";
+import {
+  Card,
+  CardContent,
+  Typography,
+  Box,
+  FormControl,
+  Select,
+  MenuItem,
+  Divider,
+  Table,
+  TableBody,
+  TableRow,
+  TableCell,
+} from "@mui/material";
 
 const ActivityFilter = () => {
   const events = [
@@ -28,36 +41,55 @@ const ActivityFilter = () => {
       count: 228,
     },
   ];
+
+  const [filter, setFilter] = React.useState("system");
+
   return (
-    <Card>
-      <CardBody>
-        <Row className="d-flex justify-content-end px-3">
-          <select id="custom-select">
-            <option value="system">Filter By Events</option>
-            <option value="manual">Filter By Past Behavior</option>
-          </select>
-        </Row>
-        <hr id="hrLine" />
-        <Table borderless>
-          <tbody>
+    <Card sx={{ width: "100%",bgcolor:'white' }}>
+      <CardContent>
+        <Box display="flex" justifyContent="flex-end" mb={2}>
+          <FormControl variant="outlined" size="small" sx={{ minWidth: 200 }}>
+            <Select
+              id="custom-select"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+            >
+              <MenuItem value="system">Filter By Events</MenuItem>
+              <MenuItem value="manual">Filter By Past Behavior</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+
+        <Divider sx={{ mb: 2 }} />
+
+        <Table size="small">
+          <TableBody>
             {events.map((event, index) => (
-              <tr key={index} style={{ borderBottom: "1px solid #eee" }}>
-                <td className="align-middle" width="5%"></td>
-                <td className="align-middle" width="60%">
-                  <div>{event.name}</div>
-                  <small>
-                    <div>First On : {event.firstOn}</div>
-                    <div>Last On : {event.lastOn}</div>
-                  </small>
-                </td>
-                <td className="align-middle text-end">
-                  <strong>{event.count} times</strong>
-                </td>
-              </tr>
+              <TableRow
+                key={index}
+                sx={{
+                  borderBottom: "1px solid #eee",
+                }}
+              >
+                {/* <TableCell width="5%"></TableCell> */}
+                <TableCell >
+                  <Typography variant="body1">{event.name}</Typography>
+                  <Typography variant="caption" color="text.secondary">
+                    First On: {event.firstOn}
+                    <br />
+                    Last On: {event.lastOn}
+                  </Typography>
+                </TableCell>
+                <TableCell align="right">
+                  <Typography variant="subtitle1" fontWeight="bold">
+                    {event.count} times
+                  </Typography>
+                </TableCell>
+              </TableRow>
             ))}
-          </tbody>
+          </TableBody>
         </Table>
-      </CardBody>
+      </CardContent>
     </Card>
   );
 };

@@ -26,8 +26,7 @@ const BreadcrumbNav = (props) => {
   //   const location = useLocation();
 
   const breadcrumbs = generateBreadcrumbTrail(selectedPath);
-  console.log("bre", breadcrumbs);
-
+  
   return (
     <Stack direction="row" alignItems="center" spacing={1}>
       <Breadcrumbs aria-label="breadcrumb" separator="›">
