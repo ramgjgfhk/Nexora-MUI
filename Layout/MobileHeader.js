@@ -29,12 +29,23 @@ const Toolbar = styled(MuiToolbar)({
   },
 });
 
-export default function MobileHeader() {
+export default function MobileHeader(props) {
+  const {
+    openItems,
+    setOpenItems,
+    handleToggle,
+    handleNavigation,
+    selectedPath,
+  } = props;
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
+
+  React.useEffect(() => {
+    setOpen(false);
+  }, [selectedPath]);
 
   return (
     <AppBar
@@ -75,7 +86,15 @@ export default function MobileHeader() {
           <MenuButton aria-label="menu" onClick={toggleDrawer(true)}>
             <MenuRoundedIcon />
           </MenuButton>
-          <SideMenuMobile open={open} toggleDrawer={toggleDrawer} />
+          <SideMenuMobile
+            open={open}
+            toggleDrawer={toggleDrawer}
+            openItems={openItems}
+            setOpenItems={setOpenItems}
+            handleToggle={handleToggle}
+            handleNavigation={handleNavigation}
+            selectedPath={selectedPath}
+          />
         </Stack>
       </Toolbar>
     </AppBar>

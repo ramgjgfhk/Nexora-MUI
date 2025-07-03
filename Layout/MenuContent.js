@@ -7,14 +7,11 @@ import Stack from "@mui/material/Stack";
 import { menuItems } from "@/Components/Variables/sideMenus";
 import { ChevronRight, ExpandLess, ExpandMore } from "@mui/icons-material";
 import { Collapse, Typography } from "@mui/material";
-import { getCookie, setCookie } from "cookies-next";
-import { useRouter } from "next/router";
 
 export default function MenuContent(props) {
 
-  const {openItems,setOpenItems,handleNavigation,handleToggle,selectedPath} = props
-  console.log('op',openItems)
-  const router = useRouter();
+  const {openItems,handleNavigation,handleToggle,selectedPath} = props
+
 
 
   const renderMenuItem = (item, level = 0) => {

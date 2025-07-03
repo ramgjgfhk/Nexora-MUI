@@ -62,7 +62,7 @@ const FilterModalComponent = ({
   return (
     <>
       <Button
-        style={{ fontFamily: "inter" }}
+        style={{ fontFamily: "inherit" }}
         startIcon={<FilterList sx={{ fontSize: "22.5px !important" }} />}
         sx={{
           textTransform: "none",

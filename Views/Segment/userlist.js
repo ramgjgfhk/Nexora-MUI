@@ -62,28 +62,34 @@ const SegmentList = () => {
       headerName: "Audiences",
       flex: 2,
       minWidth: 100,
-    //   headerAlign: "center",
+      //   headerAlign: "center",
       renderCell: (params) => {
-        const name = params.row.name ?? '—';
+        const name = params.row.name ?? "—";
         const nexoraId = params.row.nexora_id ?? "—";
 
-        return (<><Stack
-  spacing={0.5}
-  sx={{height:"100%",
-    alignItems: "flex-start",
-    fontSize: "0.2rem",
-    color: "text.primary",justifyContent:'center'
-  }
-  }
->
-  <Typography sx={{ fontSize: "0.7rem",}}>
-    <b></b> {name || "-"}
-  </Typography>
-  <Typography sx={{ fontSize: "0.7rem",}}>
-  <ContentCopy sx={{fontSize:"14px",mb:-0.5}}/>  <b>ID:</b> {nexoraId || "-"}
-  </Typography>
-</Stack></>
-
+        return (
+          <>
+            <Stack
+              spacing={0.5}
+              sx={{
+                height: "100%",
+                alignItems: "flex-start",
+                fontSize: "0.2rem",
+                color: "text.primary",
+                justifyContent: "center",
+              }}
+            >
+              <Typography sx={{ fontSize: "0.7rem" }}>
+                <b></b> {name || "-"}
+              </Typography>
+              <Typography sx={{ fontSize: "0.7rem" }}>
+                <ContentCopy
+                  sx={{ fontSize: "14px", mb: -0.5, color: "gray" }}
+                />{" "}
+                <b>ID:</b> {nexoraId || "-"}
+              </Typography>
+            </Stack>
+          </>
         );
       },
 
@@ -332,7 +338,8 @@ const SegmentList = () => {
       /> */}
 
       <ServerSideGrid
-        columns={columns}colHeight={45}
+        columns={columns}
+        colHeight={45}
         // rowss={list}
         // fieldsForFilter={[
         //   "client_name",

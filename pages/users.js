@@ -1,13 +1,14 @@
 
-import UserList from "@/Views/User/UserList";
 import React from "react";
+import UserList from "../Views/User/UserList";
+import SegmentList from "@/Views/Segment/userlist";
 
-const User = () => {
+const AllUserpage = () => {
   return (
-    <div>
-      <UserList />
-    </div>
+    
+      <SegmentList />
+
   );
 };
 
-export default User;
+export default AllUserpage;
