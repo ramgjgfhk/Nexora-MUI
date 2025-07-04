@@ -1,4 +1,3 @@
-
 import {
   AccountBox,
   AdminPanelSettings,
@@ -8,6 +7,7 @@ import {
   Campaign,
   Dashboard,
   Group,
+  Hub,
   Notifications,
   People,
   PersonAdd,
@@ -18,6 +18,7 @@ import {
   Segment,
   Settings,
   Timeline,
+  TimerOutlined,
 } from "@mui/icons-material";
 export const menuItems = [
   {
@@ -28,15 +29,47 @@ export const menuItems = [
     name: "Dashboard",
   },
   {
+    id: "campaigns",
+    title: "Campaigns",
+    icon: <Campaign />,
+    path: "/campaign",
+    name: "Campaigns",
+  },
+  {
+    id: "flowboard",
+    title: "Flowboard",
+    icon: <Cable />,
+    path: "/flowboard",
+    name: "Flowboard",
+  },
+  {
     id: "analytics",
     title: "Analytics",
     icon: <Analytics />,
     children: [
       {
-        id: "event",
-        title: "Event",
+        id: "interactions",
+        title: "Interaction",
         icon: <BarChart />,
-        name: "Analytics / Event",
+        name: "Analytics / Interaction",
+      },
+      {
+        id: "outcomes",
+        title: "Outcomes",
+        icon: <BarChart />,
+        name: "Analytics / Outcomes",
+      },
+      {
+        id: "pathways",
+        title: "Pathways",
+        icon: <BarChart />,
+        name: "Analytics / Pathways",
+      },
+      {
+        id: "rfm",
+        title: "RFM",
+        icon: <BarChart />,
+        name: "Analytics / RFM",
       },
     ],
   },
@@ -46,45 +79,55 @@ export const menuItems = [
     icon: <Segment />,
     children: [
       {
-        id: "segments",
-        title: "Segment",
-        icon: <BarChart />,
-        path: "/segment",
-        name: "Segment",
-      }, {
         id: "user-list",
         title: "Explorer",
         icon: <Group />,
         path: "/user",
         name: "Audience / Explorer",
       },
-      // {
-      //   id: "rfm",
-      //   title: "RFM",
-      //   icon: <BarChart />,
-      //   name: "Segment / RFM",
-      // },
-      // {
-      //   id: "find_people",
-      //   title: "Find People",
-      //   icon: <BarChart />,
-      //   name: "Segment / Find People",
-      // },
+      {
+        id: "segments",
+        title: "Segment",
+        icon: <BarChart />,
+        path: "/segment",
+        name: "Segment",
+      },
     ],
   },
   {
-    id: "campaigns",
-    title: "Campaigns",
-    icon: <Campaign />,
-    path: "/campaign",
-    name: "Campaigns",
+    id: "contentHub",
+    title: "Content Hub",
+    icon: <Hub />,
+    children: [
+      {
+        id: "library",
+        title: "Library",
+        icon: <Group />,
+        path: "/user",
+        name: "Content Hub / Library",
+      },
+      {
+        id: "inAppLayouts",
+        title: "Inapp Layouts",
+        icon: <BarChart />,
+        path: "/app-layout",
+        name: "Content Hub / Inapp Layouts",
+      },
+      {
+        id: "emaillayouts",
+        title: "Email Layouts",
+        icon: <BarChart />,
+        path: "/email-layout",
+        name: "Content Hub / Email Layouts",
+      },
+    ],
   },
   {
-    id: "journeys",
-    title: "Journeys",
-    icon: <Cable />,
-    path: "/journey",
-    name: "Journey",
+    id: "timeline",
+    title: "Timeline",
+    icon: <TimerOutlined />,
+    path: "/timeline",
+    name: "Timeline",
   },
   {
     id: "schema",
@@ -96,7 +139,7 @@ export const menuItems = [
         title: "Events",
         icon: <BarChart />,
         name: "Schema / Event",
-        path:"/schema",
+        path: "/schema",
       },
       {
         id: "user_properties",

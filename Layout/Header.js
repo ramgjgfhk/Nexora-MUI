@@ -106,13 +106,6 @@ export default function Header(props) {
                       />
                     </Box>
                   </Box>
-                  <IconButton sx={{ border: "none" }}>
-                    <Badge variant="dot" color="primary">
-                      <NotificationsIcon fontSize="small" />
-                    </Badge>
-                  </IconButton>
-
-                  {/* Avatar with Menu */}
                   <IconButton
                     onClick={handleAvatarClick}
                     size="small"
@@ -120,8 +113,8 @@ export default function Header(props) {
                   >
                     <Avatar
                       alt="Riley Carter"
-                      src="/placeholder.svg"
-                      sx={{ width: 24, height: 24 }} // Adjust the size here
+                      src="/user1.jpg"
+                      sx={{ width: 30, height: 30 }} // Adjust the size here
                     />
                   </IconButton>
 

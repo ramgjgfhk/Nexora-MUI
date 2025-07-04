@@ -47,6 +47,7 @@ export const customerData = {
   totalSpent: 12450,
   avgOrderValue: 276.67,
   status: "Active",
+  nexoraId:'33add-fsdf90-fff'
 };
 export const deviceData = [
   {

@@ -71,8 +71,8 @@ const UserHeader = () => {
               >
                 <Avatar
                   sx={{
-                    width: 70,
-                    height: 70,
+                    width:100,
+                    height:100,
                     bgcolor: "primary.main",
                     fontSize: "2rem",
                     fontWeight: "bold",
@@ -103,6 +103,18 @@ const UserHeader = () => {
                 </Typography>
 
                 <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    fontSize: "0.75rem",
+                  }}
+                >
+                  Nexora ID: {customerData.nexoraId}
+                </Typography>
+                 <Typography
                   variant="body2"
                   color="text.secondary"
                   sx={{
