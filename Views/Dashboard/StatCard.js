@@ -10,7 +10,13 @@
 // import { SparkLineChart } from "@mui/x-charts/SparkLineChart";
 // import { areaElementClasses } from "@mui/x-charts/LineChart";
 
-import { CheckCircle, Group, PersonAdd, Send, TrendingUpOutlined } from "@mui/icons-material";
+import {
+  CheckCircle,
+  Group,
+  PersonAdd,
+  Send,
+  TrendingUpOutlined,
+} from "@mui/icons-material";
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
 import { GlassCard } from "../User/UserProfile/UserProfileComponents/ProfileCard";
 
@@ -193,6 +199,7 @@ export default function TodayStatCard() {
               border: "1px solid #e0e0e0",
               transition: "all 0.3s ease-in-out",
               backgroundColor: "white",
+              cursor:'pointer',
               "&:hover": {
                 transform: "translateY(-4px)",
                 boxShadow: `0 8px 25px ${stat.color}25`,
