@@ -375,6 +375,10 @@ const ServerSideGrid = (
           ".MuiDataGrid-cell:focus": { outline: "none" }, // Removes focus border
           ".MuiDataGrid-cell:focus-within": { outline: "none" },
         }}
+
+
+
+
       />
 
       {/* Error Snackbar */}

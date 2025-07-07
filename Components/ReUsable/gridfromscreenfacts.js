@@ -311,8 +311,17 @@ const ServerSideGrid = (
             fieldsForFilter: memoizedFieldsForFilter,
             searchTerm,
             setSearchTerm,
-          },
+          }, loadingOverlay: {
+      variant: 'skeleton',
+      noRowsVariant: 'skeleton',
+    },
         }}
+  //       slotProps={{
+  //   loadingOverlay: {
+  //     variant: 'linear-progress',
+  //     noRowsVariant: 'skeleton',
+  //   },
+  // }}
         rowHeight={32}
         paginationModel={paginationModel}
         onPaginationModelChange={handlePaginationChange}
