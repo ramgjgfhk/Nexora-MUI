@@ -1,4 +1,3 @@
-
 import {
   AccountBox,
   AdminPanelSettings,
@@ -8,6 +7,7 @@ import {
   Campaign,
   Dashboard,
   Group,
+  Hub,
   Notifications,
   People,
   PersonAdd,
@@ -18,6 +18,7 @@ import {
   Segment,
   Settings,
   Timeline,
+  TimerOutlined,
 } from "@mui/icons-material";
 export const menuItems = [
   {
@@ -28,45 +29,6 @@ export const menuItems = [
     name: "Dashboard",
   },
   {
-    id: "analytics",
-    title: "Analytics",
-    icon: <Analytics />,
-    children: [
-      {
-        id: "event",
-        title: "Event",
-        icon: <BarChart />,
-        name: "Analytics / Event",
-      },
-    ],
-  },
-  {
-    id: "segments",
-    title: "Segments",
-    icon: <Segment />,
-    children: [
-      {
-        id: "segment",
-        title: "Segment",
-        icon: <BarChart />,
-        path: "/segment",
-        name: "Segment",
-      },
-      {
-        id: "rfm",
-        title: "RFM",
-        icon: <BarChart />,
-        name: "Segment / RFM",
-      },
-      {
-        id: "find_people",
-        title: "Find People",
-        icon: <BarChart />,
-        name: "Segment / Find People",
-      },
-    ],
-  },
-  {
     id: "campaigns",
     title: "Campaigns",
     icon: <Campaign />,
@@ -74,11 +36,98 @@ export const menuItems = [
     name: "Campaigns",
   },
   {
-    id: "journeys",
-    title: "Journeys",
+    id: "flowboard",
+    title: "Flowboard",
     icon: <Cable />,
-    path: "/journey",
-    name: "Journey",
+    path: "/flowboard",
+    name: "Flowboard",
+  },
+  {
+    id: "analytics",
+    title: "Analytics",
+    icon: <Analytics />,
+    children: [
+      {
+        id: "interactions",
+        title: "Interaction",
+        icon: <BarChart />,
+        name: "Analytics / Interaction",
+      },
+      {
+        id: "outcomes",
+        title: "Outcomes",
+        icon: <BarChart />,
+        name: "Analytics / Outcomes",
+      },
+      {
+        id: "pathways",
+        title: "Pathways",
+        icon: <BarChart />,
+        name: "Analytics / Pathways",
+      },
+      {
+        id: "rfm",
+        title: "RFM",
+        icon: <BarChart />,
+        name: "Analytics / RFM",
+      },
+    ],
+  },
+  {
+    id: "audience",
+    title: "Audiences",
+    icon: <Segment />,
+    children: [
+      {
+        id: "user-list",
+        title: "Explorer",
+        icon: <Group />,
+        path: "/user",
+        name: "Audience / Explorer",
+      },
+      {
+        id: "segments",
+        title: "Segment",
+        icon: <BarChart />,
+        path: "/segment",
+        name: "Segment",
+      },
+    ],
+  },
+  {
+    id: "contentHub",
+    title: "Content Hub",
+    icon: <Hub />,
+    children: [
+      {
+        id: "library",
+        title: "Library",
+        icon: <Group />,
+        path: "/user",
+        name: "Content Hub / Library",
+      },
+      {
+        id: "inAppLayouts",
+        title: "Inapp Layouts",
+        icon: <BarChart />,
+        path: "/app-layout",
+        name: "Content Hub / Inapp Layouts",
+      },
+      {
+        id: "emaillayouts",
+        title: "Email Layouts",
+        icon: <BarChart />,
+        path: "/email-layout",
+        name: "Content Hub / Email Layouts",
+      },
+    ],
+  },
+  {
+    id: "timeline",
+    title: "Timeline",
+    icon: <TimerOutlined />,
+    path: "/timeline",
+    name: "Timeline",
   },
   {
     id: "schema",
@@ -90,7 +139,7 @@ export const menuItems = [
         title: "Events",
         icon: <BarChart />,
         name: "Schema / Event",
-        path:"/schema",
+        path: "/schema",
       },
       {
         id: "user_properties",
@@ -100,52 +149,52 @@ export const menuItems = [
       },
     ],
   },
-  {
-    id: "users",
-    title: "User Management",
-    icon: <People />,
-    children: [
-      {
-        id: "user-list",
-        title: "Users",
-        icon: <Group />,
-        path: "/users",
-        name: "User Management / Users",
-      },
-      // {
-      //   id: "user-roles",
-      //   title: "Roles & Permissions",
-      //   icon: <AdminPanelSettings />,
-      //   children: [
-      //     {
-      //       id: "roles",
-      //       title: "Roles",
-      //       path: "/users/roles/list",
-      //       name: "User Management / Role & Permission / Roles",
-      //     },
-      //     {
-      //       id: "permissions",
-      //       title: "Permissions",
-      //       path: "/users/roles/permissions",
-      //       name: "User Management / Role & Permission / Permissions",
-      //     },
-      //     {
-      //       id: "assignments",
-      //       title: "Assignments",
-      //       path: "/users/roles/assignments",
-      //       name: "User Management / Role & Permission / Assignments",
-      //     },
-      //   ],
-      // },
-      // {
-      //   id: "add-user",
-      //   title: "Add User",
-      //   icon: <PersonAdd />,
-      //   path: "/users/add",
-      //   name: "User Management / Add user",
-      // },
-    ],
-  },
+  // {
+  //   id: "users",
+  //   title: "User Management",
+  //   icon: <People />,
+  //   children: [
+  //     {
+  //       id: "user-list",
+  //       title: "Users",
+  //       icon: <Group />,
+  //       path: "/users",
+  //       name: "User Management / Users",
+  //     },
+  //     // {
+  //     //   id: "user-roles",
+  //     //   title: "Roles & Permissions",
+  //     //   icon: <AdminPanelSettings />,
+  //     //   children: [
+  //     //     {
+  //     //       id: "roles",
+  //     //       title: "Roles",
+  //     //       path: "/users/roles/list",
+  //     //       name: "User Management / Role & Permission / Roles",
+  //     //     },
+  //     //     {
+  //     //       id: "permissions",
+  //     //       title: "Permissions",
+  //     //       path: "/users/roles/permissions",
+  //     //       name: "User Management / Role & Permission / Permissions",
+  //     //     },
+  //     //     {
+  //     //       id: "assignments",
+  //     //       title: "Assignments",
+  //     //       path: "/users/roles/assignments",
+  //     //       name: "User Management / Role & Permission / Assignments",
+  //     //     },
+  //     //   ],
+  //     // },
+  //     // {
+  //     //   id: "add-user",
+  //     //   title: "Add User",
+  //     //   icon: <PersonAdd />,
+  //     //   path: "/users/add",
+  //     //   name: "User Management / Add user",
+  //     // },
+  //   ],
+  // },
   {
     id: "settings",
     title: "Settings",

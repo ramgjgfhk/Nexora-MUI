@@ -42,30 +42,39 @@ export default function UiPalette() {
         Buttons
       </Typography>
       <Stack direction="row" spacing={1} mb={2}>
-        <Button size="small" variant="contained" color="primary"sx={{height:"27px",borderRadius:"6px"}}>
+        <Button
+          size="small"
+          variant="contained"
+          color="primary"
+          sx={{ height: "27px", borderRadius: "6px" }}
+        >
           Save
         </Button>
-        <Button size="small" variant="outlined" color="secondary"sx={{height:"27px",borderRadius:"6px"}}>
+        <Button
+          size="small"
+          variant="outlined"
+          color="secondary"
+          sx={{ height: "27px", borderRadius: "6px" }}
+        >
           Cancel
         </Button>
-   <Button
-//   variant="contained"
-  sx={{
-    height: "27px",
-    borderRadius: "6px",
-    backgroundColor: "#f44336 !important",     // Red 500
-    color: "#fff",
-    fontSize: "0.75rem",
-    textTransform: "none",
-    px: 2,
-    "&:hover": {
-      backgroundColor: "#d32f2f !important",   // Red 700
-    },
-  }}
->
-  Delete
-</Button>
-
+        <Button
+          //   variant="contained"
+          sx={{
+            height: "27px",
+            borderRadius: "6px",
+            backgroundColor: "#f44336 !important", // Red 500
+            color: "#fff",
+            fontSize: "0.75rem",
+            textTransform: "none",
+            px: 2,
+            "&:hover": {
+              backgroundColor: "#d32f2f !important", // Red 700
+            },
+          }}
+        >
+          Delete
+        </Button>
       </Stack>
 
       {/* Inputs */}

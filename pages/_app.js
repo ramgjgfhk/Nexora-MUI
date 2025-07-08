@@ -54,7 +54,6 @@ export default function App({ Component, pageProps }) {
 
       {/* <MainLayout> */}
       <Component {...pageProps} />
-      {/* </MainLayout> */}
     </>
   );
 }

@@ -5,7 +5,7 @@ import {
   useIsFetching,
 } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
-import Loader from '../components/Loader';
+import Loader from '../Components/Loader';
 
 const queryClient = new QueryClient({
   defaultOptions: {

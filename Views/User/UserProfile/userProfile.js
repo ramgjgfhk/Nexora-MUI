@@ -1,88 +1,95 @@
-import { useActiveColor } from "context/activeColor";
 import React from "react";
 import { FaSmile } from "react-icons/fa";
-import { Card, CardBody, CardHeader, Col, Row } from "reactstrap";
+import {
+  Avatar,
+  Box,
+  Card,
+  CardContent,
+  CardHeader,
+  Divider,
+  Grid,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import UserProperties from "./userProperties";
 import ActivityFilter from "./activityFilter";
+import EngagementCard from "./engagementCard";
 
-const UserProfile = (props) => {
-  const { activeTab } = props;
-  const { ActiveThemeColor } = useActiveColor();
+const UserProfile = ({ activeTab }) => {
+  const theme = useTheme();
+
   return (
-    <Row className="mb-0">
-      <Col md="7" className="d-flex">
-        <Card>
-          <CardHeader>
-            <div className="d-flex align-items-center">
-              <div
-                style={{
-                  height: "70px",
-                  width: "70px",
-                  borderRadius: "50%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "#fff",
-                  fontSize: "30px",
+    <Grid container spacing={2} className="mb-0" alignItems="stretch">
+      <Grid size={{ lg: 7 }} sx={{width:'100%'}}>
+        <Card sx={{ bgcolor: "white", height: "100%" }}>
+          <CardHeader
+            sx={{ py: 2 }}
+            avatar={
+              <Avatar
+                sx={{
+                  bgcolor: "primary",
+                  width: 50,
+                  height: 50,
+                  fontSize: 30,
                 }}
-                className={`bg-${ActiveThemeColor}`}
               >
                 <FaSmile />
-              </div>
-              <div className="ml-3">
-                <h2 className="mb-0">Jhon Turner</h2>
-                <p>Email: jhon@gmail.com</p>
-              </div>
-            </div>
-          </CardHeader>
-          <hr />
-          <CardBody>
-            <Row className="text-left align-items-stretch">
-              <Col
-                md={12}
-                lg
-                className="d-flex flex-column border-end border-secondary-subtle mb-3 mb-lg-0"
-              >
-                <div className="flex-grow-1">
-                  <p className="mb-4">ID: 856595688888</p>
-                  <p className="mb-4">Phone: 8565856958</p>
-                  <p className="mb-4">
+              </Avatar>
+            }
+            title={
+              <Typography variant="h5" component="div">
+                Jhon Turner
+              </Typography>
+            }
+            subheader="Email: jhon@gmail.com"
+          />
+          <Divider />
+          <CardContent sx={{ mt: 3 }}>
+            <Grid container spacing={2} alignItems="stretch">
+              <Grid size={{ xs: 12, md: 4 }}>
+                <Box sx={{ height: "100%" }}>
+                  <Typography sx={{ mb: 2 }}>ID: 856595688888</Typography>
+                  <Typography sx={{ mb: 2 }}>Phone: 8565856958</Typography>
+                  <Typography sx={{ mb: 2 }}>
                     Location: Chicago, Illinois, United States
-                  </p>
-                </div>
-              </Col>
+                  </Typography>
+                </Box>
+              </Grid>
 
-              <Col
-                md={12}
-                lg
-                className="d-flex flex-column border-end border-secondary-subtle mb-3 mb-lg-0"
-              >
-                <div className="flex-grow-1">
-                  <p className="mb-4">Gender : Male</p>
-                  <p className="mb-4">Lat: 47.256336</p>
-                  <p className="mb-4">Long: 487.8565555</p>
-                </div>
-              </Col>
+              <Grid size={{ xs: 12, md: 4 }}>
+                <Box sx={{ height: "100%" }}>
+                  <Typography sx={{ mb: 2 }}>Gender: Male</Typography>
+                  <Typography sx={{ mb: 2 }}>Lat: 47.256336</Typography>
+                  <Typography sx={{ mb: 2 }}>Long: 487.8565555</Typography>
+                </Box>
+              </Grid>
 
-              <Col md={12} lg className="d-flex flex-column">
-                <div className="flex-grow-1">
-                  <p className="mb-4">Telephone: 9656585658</p>
-                  <p className="mb-4">First Seen: Thu, Feb 22, 2024</p>
-                  <p className="mb-4">Last seen: Fri, May 16, 2025</p>
-                </div>
-              </Col>
-            </Row>
-          </CardBody>
+              <Grid size={{ xs: 12, md: 4 }}>
+                <Box sx={{ height: "100%" }}>
+                  <Typography sx={{ mb: 2 }}>Telephone: 9656585658</Typography>
+                  <Typography sx={{ mb: 2 }}>
+                    First Seen: Thu, Feb 22, 2024
+                  </Typography>
+                  <Typography sx={{ mb: 2 }}>
+                    Last Seen: Fri, May 16, 2025
+                  </Typography>
+                </Box>
+              </Grid>
+            </Grid>
+          </CardContent>
         </Card>
-      </Col>
-      <Col md="5">
+      </Grid>
+
+      <Grid size={{ lg: 5 }} sx={{width:'100%'}}>
         {activeTab === "profile" ? (
           <UserProperties />
         ) : activeTab === "activity" ? (
           <ActivityFilter />
+        ) : activeTab === "engagement" ? (
+          <EngagementCard />
         ) : null}
-      </Col>
-    </Row>
+      </Grid>
+    </Grid>
   );
 };
 

@@ -1,94 +1,128 @@
 import React from "react";
-import { Card, CardBody, Col, Row } from "reactstrap";
+import {
+  Box,
+  Card,
+  CardContent,
+  Grid,
+  Typography,
+  Divider,
+} from "@mui/material";
 
 const TimelineEvent = ({ time, title, description }) => (
-  <Row className="mb-3 align-items-start">
-    <Col xs="2" className="text-end text-muted small">
-      {time}
-    </Col>
-    <Col xs="10">
-      <div>
-        <h6>{title}</h6>
-      </div>
-      {description && <div className="text-muted small">{description}</div>}
-    </Col>
-  </Row>
+  <Grid container spacing={2} alignItems="flex-start" sx={{ mb: 2 }}>
+    <Grid item xs={2}>
+      <Typography variant="body2" color="text.secondary" align="right">
+        {time}
+      </Typography>
+    </Grid>
+    <Grid item xs={10}>
+      <Typography variant="subtitle1" fontWeight="bold">
+        {title}
+      </Typography>
+      {description && (
+        <Typography variant="body2" color="text.secondary">
+          {description}
+        </Typography>
+      )}
+    </Grid>
+  </Grid>
 );
 
 const UserActivity = () => {
   return (
-    <React.Fragment>
-      <h3 className="mb-2">User activity details</h3>
-      <Row>
-        <Col className="col-12 col-md-4">
-          <Card className="p-5">
-            <Card className="p-3 d-flex flex-column align-items-center justify-content-center" style={{border:'1px solid #ccc'}}>
-              <p>Avg. visit duration is</p>
-              <h2>9 minutes</h2>
+    <Box>
+      <Typography variant="h5" gutterBottom>
+        User activity details
+      </Typography>
+      <Grid container spacing={3}>
+        {/* Left Panel */}
+        <Grid item xs={12} md={4}>
+          <Card sx={{ p: 3 }}>
+            <Card
+              sx={{
+                p: 2,
+                mb: 2,
+                border: "1px solid #ccc",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Typography>Avg. visit duration is</Typography>
+              <Typography variant="h4" fontWeight="bold">
+                9 minutes
+              </Typography>
             </Card>
-            <Card className="p-3 d-flex flex-column align-items-center justify-content-center" style={{border:'1px solid #ccc'}}>
-              <p>Avg. time between visit is</p>
-              <h2>2 days</h2>
+            <Card
+              sx={{
+                p: 2,
+                border: "1px solid #ccc",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Typography>Avg. time between visit is</Typography>
+              <Typography variant="h4" fontWeight="bold">
+                2 days
+              </Typography>
             </Card>
           </Card>
-        </Col>
-        <Col className="col-12 col-lg-8">
+        </Grid>
+
+        {/* Right Panel */}
+        <Grid item xs={12} lg={8}>
           <Card>
-            <CardBody>
-              <div className="p-3">
-                <h3 className="mb-4">Fri, April 21, 2023</h3>
+            <CardContent>
+              <Box sx={{ p: 2 }}>
+                <Typography variant="h6" gutterBottom>
+                  Fri, April 21, 2023
+                </Typography>
 
                 <TimelineEvent
                   time="06:15:02 pm"
-                  icon="icon-email-85"
                   title="Reachable By"
                   description="Push | YNsR2..."
                 />
                 <TimelineEvent
                   time="06:15:02 pm"
-                  icon="icon-email-85"
                   title="Reachable By"
                   description="Email | akimggg2221@gmail.com"
                 />
 
-                <hr />
+                <Divider sx={{ my: 2 }} />
 
                 <TimelineEvent
                   time="06:45:51 am"
-                  icon="icon-compass-05"
                   title="UTM Visited"
                   description="Google | gSrc | gMed | gcCamp"
                 />
                 <TimelineEvent
                   time="06:45:51 am"
-                  icon="icon-credit-card"
                   title="Charged"
                   description="Card | 39001 | 8.11 | 2.0 | Mobile | ... | USD | 06/07/2022 05:30:40 am"
                 />
                 <TimelineEvent
                   time="06:45:02 am"
-                  icon="icon-single-02"
                   title="Identity Set"
                   description="akimggg2221@gmail.com | New User | SDK |"
                 />
                 <TimelineEvent
                   time="06:44:58 am"
-                  icon="icon-compass-05"
                   title="UTM Visited"
                   description="Google | gSrc | gMed | gcCamp"
                 />
                 <TimelineEvent
                   time="06:44:58 am"
-                  icon="icon-credit-card"
                   title="Charged"
                   description="Card | 39001 | 8.11 | 2.0 | Mobile | ... | USD | 06/07/2022 05:30:40 am"
                 />
-              </div>
-            </CardBody>
+              </Box>
+            </CardContent>
           </Card>
-        </Col>
-      </Row>
-    </React.Fragment>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 

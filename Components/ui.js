@@ -58,7 +58,6 @@ export const textfield = {
   },
 };
 
-
 export const buttonBox = {
   display: "flex",
   justifyContent: "flex-end",
@@ -107,10 +106,8 @@ export const tableBodyRowStyle = {
 
 export const lableSize = {
   fontSize: 12,
-  fontWeight: 'bolder',    whiteSpace: 'normal',     // allow line breaks
-  
- 
-
+  fontWeight: "bolder",
+  whiteSpace: "normal", // allow line breaks
 };
 
 export const textFieldStyle = {

@@ -105,7 +105,7 @@ export default function SchemaEvents() {
                 <b></b> {name || "-"}
               </Typography>
               <Typography sx={{ fontSize: "0.7rem" }}>
-                <ContentCopy sx={{ fontSize: "14px", mb: -0.5 }} /> <b>ID:</b>{" "}
+                <ContentCopy sx={{ fontSize: "14px", mb: -0.5,color:'gray' }} /> <b>ID:</b>{" "}
                 {nexoraId || "-"}
               </Typography>
             </Stack>
@@ -164,6 +164,20 @@ export default function SchemaEvents() {
       flex: 1,
       minWidth: 100,
       headerAlign: "center",
+      renderCell: (params) => {
+        const rawDate = params.value;
+        const date = rawDate ? new Date(rawDate) : null;
+
+        if (!date || isNaN(date.getTime())) {
+          return "Invalid Date"; // Or return '-' or leave it empty
+        }
+
+        return date.toLocaleDateString("en-GB", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        });
+      },
     },
     // {
     //   field: "properties",

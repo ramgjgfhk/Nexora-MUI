@@ -11,7 +11,17 @@ import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
 import MenuButton from "./MenuButton";
 import MenuContent from "./MenuContent";
 
-function SideMenuMobile({ open, toggleDrawer }) {
+function SideMenuMobile(props) {
+  const {
+    open,
+    toggleDrawer,
+    openItems,
+    setOpenItems,
+    handleNavigation,
+    handleToggle,
+    selectedPath,
+  } = props;
+  
   return (
     <Drawer
       anchor="left"
@@ -21,7 +31,7 @@ function SideMenuMobile({ open, toggleDrawer }) {
         zIndex: (theme) => theme.zIndex.drawer + 1,
         [`& .${drawerClasses.paper}`]: {
           backgroundImage: "none",
-          backgroundColor: "#1E1E2F",
+          backgroundColor: "white",
         },
       }}
     >
@@ -53,7 +63,13 @@ function SideMenuMobile({ open, toggleDrawer }) {
         </Stack>
         <Divider />
         <Stack sx={{ flexGrow: 1 }}>
-          <MenuContent />
+          <MenuContent
+            openItems={openItems}
+            setOpenItems={setOpenItems}
+            handleToggle={handleToggle}
+            handleNavigation={handleNavigation}
+            selectedPath={selectedPath}
+          />
           {/* <Divider /> */}
         </Stack>
         <Stack sx={{ p: 2 }}>

@@ -15,7 +15,7 @@ export default function SideMenu(props) {
         display: { xs: "none", md: "block" },
       }}
     >
-      <Divider />
+      {/* <Divider /> */}
       <Box
         sx={{
           overflow: "auto",

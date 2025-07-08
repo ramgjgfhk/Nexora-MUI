@@ -1,51 +1,63 @@
 import React from "react";
 import { FaBell, FaGlobe, FaTag } from "react-icons/fa";
-import { Table } from "reactstrap";
+import {
+  Typography,
+  TableContainer,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Paper,
+  Box,
+  Card,
+} from "@mui/material";
 
 const UserDetails = () => {
   return (
-    <>
-      <h4>Devices used</h4>
-      <Table responsive>
-        <thead>
-          <tr>
-            <th>Platform</th>
-            <th>Push Notifications</th>
-            <th>Type</th>
-            <th>OS Version</th>
-            <th>Application version</th>
-            <th>Nexora SDK verison</th>
-            <th>Device make</th>
-            <th>Device Model</th>
-            <th>Browser</th>
-            <th>Operation System</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <FaGlobe size={20} />
-            </td>
-            <td>
-              <div>
-                <FaTag /> Firefox
-              </div>
-              <div>
-                <FaBell /> Firefox
-              </div>
-            </td>
-            <td>Desktop</td>
-            <td>13.0</td>
-            <td>2.4.1</td>
-            <td>1.0.5</td>
-            <td>Samsung</td>
-            <td>Galaxy S21</td>
-            <td>Chrome 120</td>
-            <td>Android</td>
-          </tr>
-        </tbody>
-      </Table>
-    </>
+    <Box sx={{mt:2}}>
+      <Typography variant="h6" gutterBottom>
+        Devices used
+      </Typography>
+      <TableContainer component={Card}>
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>Platform</TableCell>
+              <TableCell>Push Notifications</TableCell>
+              <TableCell>Type</TableCell>
+              <TableCell>OS Version</TableCell>
+              <TableCell>Application Version</TableCell>
+              <TableCell>Nexora SDK Version</TableCell>
+              <TableCell>Device Make</TableCell>
+              <TableCell>Device Model</TableCell>
+              <TableCell>Browser</TableCell>
+              <TableCell>Operating System</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <FaGlobe size={20} />
+              </TableCell>
+              <TableCell>
+                  <Box display="flex" alignItems="center" gap={1}>
+                    <FaTag /> Firefox
+                  </Box>
+              </TableCell>
+              <TableCell>Desktop</TableCell>
+              <TableCell>13.0</TableCell>
+              <TableCell>2.4.1</TableCell>
+              <TableCell>1.0.5</TableCell>
+              <TableCell>Samsung</TableCell>
+              <TableCell>Galaxy S21</TableCell>
+              <TableCell>Chrome 120</TableCell>
+              <TableCell>Android</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
   );
 };
 

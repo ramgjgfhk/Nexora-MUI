@@ -102,7 +102,8 @@ const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin-ext"],
 });
 const ServerSideGrid = (
-  {colHeight=32,
+  {
+    colHeight = 32,
     // Rows = [],
     fieldsForFilter = {},
     columns,
@@ -292,7 +293,8 @@ const ServerSideGrid = (
     <Box sx={{ width: "100%" }}>
       <DataGrid
         checkboxSelection
-        autoHeight
+        // autoHeight
+        // height={200px}
         disableColumnMenu
         rows={rows}
         columns={columns}
@@ -312,12 +314,17 @@ const ServerSideGrid = (
             searchTerm,
             setSearchTerm,
           },
+          loadingOverlay: {
+            variant: "skeleton",
+            noRowsVariant: "skeleton",
+          },
         }}
         rowHeight={colHeight}
         paginationModel={paginationModel}
         onPaginationModelChange={handlePaginationChange}
         pageSizeOptions={[5, 10, 25, 50]}
         sx={{
+          height: "auto",
           border: "2px solid #E7E9EF",
           borderRadius: "8px",
           '& .MuiDataGrid-container--top [role="row"], & .MuiDataGrid-container--bottom [role="row"]':
@@ -345,9 +352,9 @@ const ServerSideGrid = (
             // justifyContent:"center"
           },
 
-        //   "& .MuiDataGrid-columnHeaderTitleContainer": {
-        //     justifyContent: "center",
-        //   },
+          //   "& .MuiDataGrid-columnHeaderTitleContainer": {
+          //     justifyContent: "center",
+          //   },
 
           "& .MuiDataGrid-footerContainer": {
             backgroundColor: "#F9FAFB", // Footer background
@@ -371,14 +378,11 @@ const ServerSideGrid = (
           },
           "& .MuiTablePagination-displayedRows": {
             fontSize: "12px", // Adjusts the displayed rows font size
-          },
+          },"& .MuiDataGrid-cellSkeleton":{justifyContent:"center"},
+          // "& .MuiDataGrid-skeletonLoadingOverlay": { height: "200px" },
           ".MuiDataGrid-cell:focus": { outline: "none" }, // Removes focus border
           ".MuiDataGrid-cell:focus-within": { outline: "none" },
         }}
-
-
-
-
       />
 
       {/* Error Snackbar */}

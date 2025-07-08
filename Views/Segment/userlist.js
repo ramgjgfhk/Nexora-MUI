@@ -1,5 +1,13 @@
 // import TableComponent from "@/Components/ReUsable/serversidegrid";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Menu,
+  MenuItem,
+  Stack,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 // import { Inbox } from "@novu/nextjs";
 import FromToDatePicker from "@/Components/resuable components/fromToDatePicker";
@@ -7,11 +15,31 @@ import FromToDatePicker from "@/Components/resuable components/fromToDatePicker"
 import { fetchQALList, fetchUserListNexora } from "@/pages/api/sampleapies";
 import ServerSideGrid from "@/Components/ReUsable/userpagegrid";
 import { ContentCopy } from "@mui/icons-material";
+import { MoreVert } from "@mui/icons-material";
+import UserDetailsModal from "../User/UserList/userDetails";
 // import FromToDatePicker from "./FromToDatePicker";
 // import dayjs from "dayjs";
 
 const SegmentList = () => {
   const renderValue = (value) => value ?? "—";
+  const [open, setOpen] = useState(false);
+  const [menuAnchorEl, setMenuAnchorEl] = useState(null);
+  const [selectedRow, setSelectedRow] = useState(null);
+
+  const handleActionClick = (event, row) => {
+    setMenuAnchorEl(event.currentTarget);
+    setSelectedRow(row);
+  };
+
+  const handleCloseMenu = () => {
+    setMenuAnchorEl(null);
+  };
+  const handleCloseModal = () => {
+    setOpen(false);
+    setSelectedRow(null);
+  };
+
+  const isMenuOpen = Boolean(menuAnchorEl);
 
   const formatDate = (value) => {
     try {
@@ -34,28 +62,34 @@ const SegmentList = () => {
       headerName: "Audiences",
       flex: 2,
       minWidth: 100,
-    //   headerAlign: "center",
+      //   headerAlign: "center",
       renderCell: (params) => {
-        const name = params.row.name ?? '—';
+        const name = params.row.name ?? "—";
         const nexoraId = params.row.nexora_id ?? "—";
 
-        return (<><Stack
-  spacing={0.5}
-  sx={{height:"100%",
-    alignItems: "flex-start",
-    fontSize: "0.2rem",
-    color: "text.primary",justifyContent:'center'
-  }
-  }
->
-  <Typography sx={{ fontSize: "0.7rem",}}>
-    <b></b> {name || "-"}
-  </Typography>
-  <Typography sx={{ fontSize: "0.7rem",}}>
-  <ContentCopy sx={{fontSize:"14px",mb:-0.5}}/>  <b>ID:</b> {nexoraId || "-"}
-  </Typography>
-</Stack></>
-
+        return (
+          <>
+            <Stack
+              spacing={0.5}
+              sx={{
+                height: "100%",
+                alignItems: "flex-start",
+                fontSize: "0.2rem",
+                color: "text.primary",
+                justifyContent: "center",
+              }}
+            >
+              <Typography sx={{ fontSize: "0.7rem" }}>
+                <b></b> {name || "-"}
+              </Typography>
+              <Typography sx={{ fontSize: "0.7rem" }}>
+                <ContentCopy
+                  sx={{ fontSize: "14px", mb: -0.5, color: "gray" }}
+                />{" "}
+                <b>ID:</b> {nexoraId || "-"}
+              </Typography>
+            </Stack>
+          </>
         );
       },
 
@@ -158,6 +192,34 @@ const SegmentList = () => {
         });
       },
     },
+    {
+      field: "action",
+      headerName: "Action",
+      sortable: false,
+      filterable: false,
+      minWidth: 80,
+      flex: 1,
+      headerAlign: "center",
+      renderCell: (params) => (
+        <>
+          <IconButton
+            onClick={(event) => {
+              event.stopPropagation(); // ✅ Prevent row selection
+              handleActionClick(event, params.row);
+            }}
+            disableFocusRipple
+            sx={{
+              cursor: "pointer",
+              border: "none",
+              "&:hover": { backgroundColor: "transparent" },
+              "&.Mui-focusVisible": { backgroundColor: "transparent" },
+            }}
+          >
+            <MoreVert sx={{ fontSize: 18 }} />
+          </IconButton>
+        </>
+      ),
+    },
   ];
   return (
     <Box
@@ -240,7 +302,7 @@ const SegmentList = () => {
         searchText="Search by ID/Name"
         pageCount={Math.ceil(totalRows / state.pagination.pageSize)}
         totalRows={totalRows}
-        // fetchData={fetchData}
+        // fetchData={fetchData} 
         state={state}
         setState={{
           setPagination: (val) => setPartialState({ pagination: val }),
@@ -276,7 +338,8 @@ const SegmentList = () => {
       /> */}
 
       <ServerSideGrid
-        columns={columns}colHeight={45}
+        columns={columns}
+        colHeight={45}
         // rowss={list}
         // fieldsForFilter={[
         //   "client_name",
@@ -311,7 +374,51 @@ const SegmentList = () => {
         }}
         apiurl={fetchUserListNexora}
       />
+      <Menu
+        anchorEl={menuAnchorEl}
+        open={isMenuOpen}
+        onClose={handleCloseMenu}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+      >
+        <MenuItem
+          onClick={() => {
+            handleCloseMenu();
+            console.log("Edit", selectedRow);
+          }}
+        >
+          Edit
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            handleCloseMenu();
+            console.log("Delete", selectedRow);
+          }}
+        >
+          Delete
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            handleCloseMenu();
+            setOpen(true);
+          }}
+        >
+          View Details
+        </MenuItem>
+      </Menu>
+
       {/* <SegmentTypeModal /> */}
+      <UserDetailsModal
+        open={Boolean(open)}
+        onClose={handleCloseModal}
+        selectedRow={selectedRow}
+      />
     </Box>
   );
 };

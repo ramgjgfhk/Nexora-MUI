@@ -1,47 +1,62 @@
-import { useActiveColor } from "context/activeColor";
 import React from "react";
-import { Badge, Card, CardBody, Table } from "reactstrap";
+import {
+  Card,
+  CardContent,
+  Chip,
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+  Box,
+} from "@mui/material";
 
 const UserProperties = () => {
-  const { ActiveThemeColor } = useActiveColor();
   return (
-    <Card>
-      <CardBody>
-        <div className="d-flex align-items-center justify-content-between mb-3">
-          <p className="mb-0">Communication Preference</p>
-          <Badge className="ms-3" color={ActiveThemeColor}>
-            User Properties
-          </Badge>
-        </div>
-        <Table>
-          <tbody>
-            <tr>
-              <td>Age</td>
-              <td>32 years 4 months</td>
-            </tr>
-            <tr>
-              <td>Birthday</td>
-              <td>May 03, 2003</td>
-            </tr>
-            <tr>
-              <td>Customer Type</td>
-              <td>Silver</td>
-            </tr>
-            <tr>
-              <td>Customer ID</td>
-              <td>85659865855</td>
-            </tr>
-            <tr>
-              <td>Language</td>
-              <td>English</td>
-            </tr>
-            <tr>
-              <td>Timezone</td>
-              <td>Central standard time</td>
-            </tr>
-          </tbody>
+    <Card sx={{bgcolor:'white'}}>
+      <CardContent>
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          mb={3}
+        >
+          <Typography variant="body1">Communication Preference</Typography>
+          <Chip
+            label="User Properties"
+            style={{ backgroundColor: "primary", color: "#fff" }}
+          />
+        </Box>
+
+        <Table size="small">
+          <TableBody>
+            <TableRow>
+              <TableCell>Age</TableCell>
+              <TableCell>32 years 4 months</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Birthday</TableCell>
+              <TableCell>May 03, 2003</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Customer Type</TableCell>
+              <TableCell>Silver</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Customer ID</TableCell>
+              <TableCell>85659865855</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Language</TableCell>
+              <TableCell>English</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Timezone</TableCell>
+              <TableCell>Central standard time</TableCell>
+            </TableRow>
+          </TableBody>
         </Table>
-      </CardBody>
+      </CardContent>
     </Card>
   );
 };

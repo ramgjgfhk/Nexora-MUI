@@ -34,7 +34,6 @@ export default function MainLayout({ children, props }) {
 
   const [openItems, setOpenItems] = React.useState({});
   const [selectedPath, setSelectedPath] = React.useState("");
-  console.log("selectPath", selectedPath);
 
   const handleToggle = (itemId) => {
     setOpenItems((prev) => ({
@@ -78,59 +77,70 @@ export default function MainLayout({ children, props }) {
     <AppTheme {...props} themeComponents={xThemeComponents}>
       <CssBaseline enableColorScheme />
       <ReactQueryProvider>
-      {/* Main Wrapper */}
-      <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
-        {/* Navbar Always on Top */}
-        <Box sx={{ zIndex: 2 }}>
-          {isMdUp ? <Header selectedPath={selectedPath} /> : <MobileHeader />}
-        </Box>
-
-        {/* Below Navbar - Sidebar + Main Content */}
-        <Box sx={{ display: "flex", flexGrow: 1, minHeight: 0 }}>
-          {/* Sidebar */}
-          <Box
-            sx={{
-              height: "100%",
-              p: 1,
-              zIndex: 1,
-            }}
-          >
-            <Box
-              sx={{
-                bgcolor: "#fff",
-                height: "100%",
-                borderRadius: "8px",
-                boxShadow: "10px 0 20px rgba(0,0,0,0.1)",
-                overflow: "hidden",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <SideMenu
+        {/* Main Wrapper */}
+        <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+          {/* Navbar Always on Top */}
+          <Box sx={{ zIndex: 2 }}>
+            {isMdUp ? (
+              <Header selectedPath={selectedPath} />
+            ) : (
+              <MobileHeader
                 openItems={openItems}
                 setOpenItems={setOpenItems}
-                handleNavigation={handleNavigation}
                 handleToggle={handleToggle}
-                selectedPath={selectedPath}
+                handleNavigation={handleNavigation}
+                selectedPath={router.pathname}
               />
-            </Box>
+            )}
           </Box>
 
-          <Box
-            component="main"
-            sx={(theme) => ({
-              flexGrow: 1,
-              overflow: "auto",
-              backgroundColor: theme.vars
-                ? `rgba(${theme.vars.palette.background.defaultChannel} / 1)`
-                : alpha(theme.palette.background.default, 1),
-              p: 2,
-            })}
-          >
-            {children}
+          {/* Below Navbar - Sidebar + Main Content */}
+          <Box sx={{ display: "flex", flexGrow: 1, minHeight: 0 }}>
+            {/* Sidebar */}
+            <Box
+              sx={{
+                height: "100%",
+                p: 1,
+                zIndex: 1,
+              }}
+            >
+              <Box
+                sx={{
+                  bgcolor: "#fff",
+                  height: "100%",
+                  borderRadius: "8px",
+                  boxShadow: "10px 0 20px rgba(0,0,0,0.1)",
+                  overflow: "hidden",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <SideMenu
+                  openItems={openItems}
+                  setOpenItems={setOpenItems}
+                  handleNavigation={handleNavigation}
+                  handleToggle={handleToggle}
+                  selectedPath={selectedPath}
+                />
+              </Box>
+            </Box>
+
+            <Box
+              component="main"
+              sx={(theme) => ({
+                flexGrow: 1,
+                overflow: "auto",
+                backgroundColor: theme.vars
+                  ? `rgba(${theme.vars.palette.background.defaultChannel} / 1)`
+                  : alpha(theme.palette.background.default, 1),
+                p: 2,
+              })}
+            >
+              {children}
+            </Box>
           </Box>
         </Box>
-      </Box></ReactQueryProvider>
+      </ReactQueryProvider>
     </AppTheme>
   );
 }
