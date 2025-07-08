@@ -1,10 +1,20 @@
 // import TableComponent from "@/Components/ReUsable/serversidegrid";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Link,
+  Stack,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 // import { Inbox } from "@novu/nextjs";
 import FromToDatePicker from "@/Components/resuable components/fromToDatePicker";
 import ServerSideGrid from "@/Components/ReUsable/gridfromscreenfacts";
 import { fetchQALList } from "@/pages/api/sampleapies";
+import { Delete, Edit } from "@mui/icons-material";
+// import Link from "next/link";
 // import FromToDatePicker from "./FromToDatePicker";
 // import dayjs from "dayjs";
 
@@ -236,13 +246,10 @@ const SegmentList = () => {
     <Box
       sx={{ display: "flex", gap: 2, flexDirection: "column", width: "100%" }}
     >
- 
       <Stack
         direction="row"
         sx={{ justifyContent: "end", mt: 0, alignItems: "end" }}
       >
- 
-
         <Button
           variant="contained"
           sx={{ height: "26px", fontSize: "12px", borderRadius: "6px" }}
@@ -350,8 +357,7 @@ const SegmentList = () => {
           ],
         }}
       /> */}
-
-      <ServerSideGrid
+      {/* <ServerSideGrid
         columns={columns1}
         // rowss={list}
         // fieldsForFilter={[
@@ -486,6 +492,210 @@ const SegmentList = () => {
             candidate_lname: "Hall",
             updated_by: "Verifier10",
             updated_at: "2025-06-14",
+          },
+        ]}
+      />{" "} */}
+      <ServerSideGrid
+        apiurl={fetchQALList}
+        fieldsForFilter={{
+          text: [
+            { label: "Name", name: "name" },
+            { label: "City", name: "city" },
+          ],
+          date: [
+            { label: "From", name: "startDate" },
+            { label: "To", name: "endDate" },
+            { label: "Created At", name: "created_at" },
+            { label: "Updated At", name: "updated_at" },
+          ],
+          autocomplete: [
+            {
+              label: "Statssus",
+              name: "status",
+              options: ["Active", "Inactive"],
+            },
+            {
+              label: "Type",
+              name: "status",
+              options: ["Past Behaviour", "Live Action"],
+            },
+          ],
+        }}
+        Rows={[
+          {
+            id: 1,
+            eventName: "Page Viewed",
+            type: "Defined",
+            status: "Inactive",
+            drp: "1 year",
+            thisMonth: 0,
+            lastMonth: 1,
+            created: "1 year",
+            properties: 3,
+          },
+          {
+            id: 2,
+            eventName: "webpopup email submit",
+            type: "Undefined",
+            status: "Active",
+            drp: "1 year",
+            thisMonth: 2,
+            lastMonth: 0,
+            created: "1 year",
+            properties: 4,
+          },
+          {
+            id: 3,
+            eventName: "EmailUnsubscribed",
+            type: "Undefined",
+            status: "Active",
+            drp: "1 year",
+            thisMonth: 0,
+            lastMonth: 4,
+            created: "1 year",
+            properties: 4,
+          },
+          {
+            id: 4,
+            eventName: "NativeDisplayDeven",
+            type: "Undefined",
+            status: "Active",
+            drp: "1 year",
+            thisMonth: 0,
+            lastMonth: 0,
+            created: "1 year",
+            properties: 3,
+          },
+          {
+            id: 5,
+            eventName: "UserSignedUp",
+            type: "Defined",
+            status: "Active",
+            drp: "1 year",
+            thisMonth: 5,
+            lastMonth: 3,
+            created: "1 year",
+            properties: 2,
+          },
+          {
+            id: 6,
+            eventName: "PushNotificationClicked",
+            type: "Defined",
+            status: "Inactive",
+            drp: "1 year",
+            thisMonth: 1,
+            lastMonth: 0,
+            created: "1 year",
+            properties: 3,
+          },
+          {
+            id: 7,
+            eventName: "InAppMessageViewed",
+            type: "Undefined",
+            status: "Active",
+            drp: "1 year",
+            thisMonth: 3,
+            lastMonth: 2,
+            created: "1 year",
+            properties: 5,
+          },
+          {
+            id: 8,
+            eventName: "SessionStarted",
+            type: "Defined",
+            status: "Active",
+            drp: "1 year",
+            thisMonth: 4,
+            lastMonth: 5,
+            created: "1 year",
+            properties: 2,
+          },
+          {
+            id: 9,
+            eventName: "PurchaseCompleted",
+            type: "Defined",
+            status: "Inactive",
+            drp: "1 year",
+            thisMonth: 0,
+            lastMonth: 0,
+            created: "1 year",
+            properties: 4,
+          },
+          {
+            id: 10,
+            eventName: "AppOpened",
+            type: "Undefined",
+            status: "Active",
+            drp: "1 year",
+            thisMonth: 6,
+            lastMonth: 7,
+            created: "1 year",
+            properties: 3,
+          },
+        ]}
+        columns={[
+          {
+            field: "id",
+            headerName: "SL NO",
+            width: 60,
+            sortable: false,
+            hideable: false,
+          },
+          {
+            field: "eventName",
+            headerName: "Event name",
+            flex: 1,
+            minWidth: 180,
+          },
+          { field: "type", headerName: "Type", width: 120 },
+          { field: "status", headerName: "Status", width: 120 },
+          { field: "drp", headerName: "DRP", width: 100 },
+          { field: "thisMonth", headerName: "This month", width: 100 },
+          { field: "lastMonth", headerName: "Last month", width: 100 },
+          { field: "created", headerName: "Created", width: 100 },
+          {
+            field: "properties",
+            headerName: "Properties",
+            width: 150,
+            renderCell: (params) => (
+              // <Button variant="outlined" size="small">
+              //   {params.value} properties
+              // </Button>
+              <Link
+                sx={{ fontSize: "11px", fontWeight: 550 }}
+                component="button"
+                variant="subtitle2"
+                onClick={() => {
+                  console.info("I'm a button.");
+                }}
+              >
+                {params.value} properties
+              </Link>
+            ),
+          },
+          {
+            field: "actions",
+            headerName: "Actions",
+            width: 100,
+            sortable: false,
+            renderCell: (params) => (
+              <Box display="flex" gap={1} sx={{justifyContent:"center",height:"100%",alignItems:"center",}}>
+                <Tooltip title="Edit">
+                  <Edit
+                    // fontSize="25px"
+                    sx={{ color: "primary.main", cursor: "pointer" ,   fontSize:"17px"}}
+                    onClick={() => handleEdit(params.row)}
+                  />
+                </Tooltip>
+                <Tooltip title="Delete">
+                  <Delete
+                //  fontSize="25px"
+                    sx={{ color: "error.main", cursor: "pointer" ,      fontSize:"17px"}}
+                    onClick={() => handleDelete(params.row)}
+                  />
+                </Tooltip>
+              </Box>
+            ),
           },
         ]}
       />
