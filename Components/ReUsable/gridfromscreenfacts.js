@@ -288,19 +288,24 @@ console.log('rows',rows)
     return () => clearTimeout(timer);
   }, [searchTerm]);
   const memoizedFieldsForFilter = useMemo(() => fieldsForFilter, []);
-
+  const onFilterChange = React.useCallback((filterModel) => {
+    // Here you save the data you need from the filter model
+    console.log("filter",filterModel)
+  }, []);
   return (
     <Box sx={{ width: "100%" }}>
       <DataGrid
         checkboxSelection
         autoHeight
-        disableColumnMenu
+        // disableColumnMenu
         rows={rows}
         columns={columns}
         loading={loading}
         paginationMode="server"
         rowCount={rowCount}
         getRowId={(row) => row.id} // 👈 use slNo as unique ID
+            filterMode="server"
+        onFilterModelChange={onFilterChange}
         slots={{
           toolbar: CustomToolbar, // Pass memoized component directly
         }}
