@@ -4,8 +4,9 @@ import { Box, Typography, Stack, ButtonGroup, Button } from "@mui/material";
 import { GlassCard } from "../User/UserProfile/UserProfileComponents/ProfileCard";
 
 const buttonStyles = {
-  bgcolor: "#5cadff",
+  bgcolor: "#03045e",
   color: "white",
+  fontSize: "10px",
   "&:hover": {
     color: "black",
     bgcolor: "white",
@@ -54,7 +55,7 @@ export default function CampaignPerformanceECharts() {
             name: "Sent",
             type: "line",
             smooth: true,
-            data: [120, 332, 501, 934, 350, 832, 101],
+            data: [720, 632, 632, 934, 350, 832, 501],
             lineStyle: { color: "rgba(87, 181, 231, 1)" },
             itemStyle: { color: "rgba(87, 181, 231, 1)" },
             symbol: "circle",
@@ -77,7 +78,7 @@ export default function CampaignPerformanceECharts() {
             name: "Viewed",
             type: "line",
             smooth: true,
-            data: [220, 182, 191, 234, 240, 132, 201],
+            data: [520, 382, 491, 434, 290, 732, 499],
             lineStyle: { color: "rgba(141, 211, 199, 1)" },
             itemStyle: { color: "rgba(141, 211, 199, 1)" },
             symbol: "circle",
@@ -100,7 +101,7 @@ export default function CampaignPerformanceECharts() {
             name: "Converted",
             type: "line",
             smooth: true,
-            data: [150, 232, 201, 154, 190, 309, 140],
+            data: [450, 102, 301, 154, 209, 19, 400],
             lineStyle: { color: "rgba(251, 191, 114, 1)" },
             itemStyle: { color: "rgba(251, 191, 114, 1)" },
             symbol: "circle",
@@ -135,7 +136,7 @@ export default function CampaignPerformanceECharts() {
   }, []);
 
   return (
-    <GlassCard sx={{width:'100%'}}>
+    <GlassCard sx={{ width: "100%" }}>
       <Box sx={{ borderRadius: 2, mb: 4 }}>
         <Box
           sx={{
@@ -145,7 +146,7 @@ export default function CampaignPerformanceECharts() {
             alignItems: "center",
           }}
         >
-          <Typography variant="h6" sx={{ fontWeight: 600, color: "#1f2937" }}>
+          <Typography variant="h6" sx={{ color: "#1f2937" }}>
             Campaign Performance
           </Typography>
           <ButtonGroup size="small">

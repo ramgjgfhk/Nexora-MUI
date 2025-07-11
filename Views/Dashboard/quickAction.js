@@ -38,7 +38,7 @@ const actions = [
 export default function QuickActionsCard() {
   return (
     <GlassCard sx={{ width: "100%" }}>
-      <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 2 }}>
+      <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
         Quick Actions
       </Typography>
 

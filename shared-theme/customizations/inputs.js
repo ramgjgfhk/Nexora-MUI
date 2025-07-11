@@ -39,7 +39,7 @@ export const inputsCustomizations = {
               size: 'small',
             },
             style: {
-              height: '2.25rem',
+              height: '1.90rem',
               padding: '8px 12px',
             },
           },

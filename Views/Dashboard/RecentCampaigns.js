@@ -28,11 +28,13 @@ export default function RecentCampaigns() {
       statusColor: "#FEF9C3",
       icon: <MailIcon sx={{ color: "#3B82F6" }} />,
       subText: "Scheduled for June 15",
+      color: "#57b5e7",
     },
     {
       title: "Influencer Partnership",
       type: "Social",
       status: "Active",
+      color: "#21FF51",
       statusColor: "#D1FAE5",
       icon: <InstagramIcon sx={{ color: "#10B981" }} />,
       subText: "Running",
@@ -42,13 +44,33 @@ export default function RecentCampaigns() {
       type: "Push",
       status: "Draft",
       statusColor: "#E5E7EB",
-      icon: <NotificationsActiveIcon sx={{ color: "#D946EF" }} />,
+      icon: <NotificationsActiveIcon sx={{ color: "#2BB6AA" }} />,
       subText: "Draft",
+      color: "#fbbf24",
     },
     {
       title: "Abandoned Cart Recovery",
       type: "Email",
       status: "Active",
+      color: "#21FF51",
+      statusColor: "#D1FAE5",
+      icon: <MailIcon sx={{ color: "#F87171" }} />,
+      subText: "Running",
+    },
+    {
+      title: "Flash Sale Notification",
+      type: "Push",
+      status: "Draft",
+      statusColor: "#E5E7EB",
+      icon: <NotificationsActiveIcon sx={{ color: "#2BB6AA" }} />,
+      subText: "Draft",
+      color: "#fbbf24",
+    },
+    {
+      title: "Abandoned Cart Recovery",
+      type: "Email",
+      status: "Active",
+      color: "#21FF51",
       statusColor: "#D1FAE5",
       icon: <MailIcon sx={{ color: "#F87171" }} />,
       subText: "Running",
@@ -71,10 +93,8 @@ export default function RecentCampaigns() {
   return (
     <GlassCard sx={{ width: "100%" }}>
       <CardContent>
-        <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
-          <Typography variant="h6" sx={{ fontWeight: 600 }}>
-            Recent Campaigns
-          </Typography>
+        <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
+          <Typography variant="h6">Recent Campaigns</Typography>
           <Typography
             variant="body2"
             sx={{ color: "#3B82F6", cursor: "pointer", fontWeight: 500 }}
@@ -83,12 +103,13 @@ export default function RecentCampaigns() {
           </Typography>
         </Box>
 
-        <Stack spacing={2}>
+        <Stack>
           {campaigns.map((item, index) => (
             <Box
               key={index}
               sx={{
-                p: 2,
+                py: 1,
+                px: 2,
                 borderRadius: 2,
                 display: "flex",
                 alignItems: "center",
@@ -110,13 +131,15 @@ export default function RecentCampaigns() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    mr: 2,
+                    mr: 1,
                   }}
                 >
                   {item.icon}
                 </Box>
                 <Box>
-                  <Typography sx={{ fontWeight: 600 }}>{item.title}</Typography>
+                  <Typography variant="subtitle2" sx={{ color: "#000" }}>
+                    {item.title}
+                  </Typography>
                   <Typography
                     variant="caption"
                     sx={{ color: "text.secondary" }}
@@ -132,22 +155,32 @@ export default function RecentCampaigns() {
                   size="medium"
                   sx={{
                     border: "none",
-                    bgcolor: item.statusColor,
-                    color: "#111827",
-                    fontWeight: 500,
-                    mr: 1,
+                    backgroundColor: `${item.color}29`, // 3% opacity
+                    color: item.color,
                     borderRadius: "8px", // Rectangle with slight rounding
                     height: 24, // Optional: control height for rectangle
-                    p: 2, // Optional: padding for better text fit
+                    p: 1, // Optional: padding for better text fit
                   }}
                 />
 
                 <IconButton
                   onClick={(e) => handleMenuOpen(e, index)}
-                  sx={{ border: "none" }}
                   size="small"
+                  disableRipple // optional: removes ripple effect too
+                  sx={{
+                    border: "none",
+                    backgroundColor: "transparent",
+                    "&:hover": {
+                      backgroundColor: "transparent", // ✨ important line
+                    },
+                  }}
                 >
-                  <MoreVertIcon />
+                  <MoreVertIcon
+                    sx={{
+                      fontSize: 16, // fontSize 9 is very small
+                      color: "inherit",
+                    }}
+                  />
                 </IconButton>
               </Box>
             </Box>

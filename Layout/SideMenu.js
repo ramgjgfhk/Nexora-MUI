@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import MenuContent from "./MenuContent";
-const drawerWidth = 300;
+const drawerWidth = 250;
 
 export default function SideMenu(props) {
   return (

@@ -326,7 +326,7 @@ export const typography = {
     letterSpacing: -0.5,
   },
   h2: {
-    fontSize: defaultTheme.typography.pxToRem(36),
+    fontSize: defaultTheme.typography.pxToRem(10),
     fontWeight: 600,
     lineHeight: 1.2,
   },
@@ -344,25 +344,25 @@ export const typography = {
     fontWeight: 600,
   },
   h6: {
-    fontSize: defaultTheme.typography.pxToRem(18),
+    fontSize: defaultTheme.typography.pxToRem(14),
     fontWeight: 600,
   },
   subtitle1: {
     fontSize: defaultTheme.typography.pxToRem(18),
   },
   subtitle2: {
-    fontSize: defaultTheme.typography.pxToRem(14),
+    fontSize: defaultTheme.typography.pxToRem(12),
     fontWeight: 500,
   },
   body1: {
-    fontSize: defaultTheme.typography.pxToRem(14),
+    fontSize: defaultTheme.typography.pxToRem(12),
   },
   body2: {
-    fontSize: defaultTheme.typography.pxToRem(14),
+    fontSize: defaultTheme.typography.pxToRem(12),
     fontWeight: 400,
   },
   caption: {
-    fontSize: defaultTheme.typography.pxToRem(12),
+    fontSize: defaultTheme.typography.pxToRem(10),
     fontWeight: 400,
   },
 };

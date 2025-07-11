@@ -16,7 +16,7 @@ import { GlassCard } from "../User/UserProfile/UserProfileComponents/ProfileCard
 import { Campaign } from "@mui/icons-material";
 import RecentCampaigns from "./RecentCampaigns";
 import AudienceSegmentsCard from "./AudienceCard";
-import QuickActionsCard from "./quiceAction";
+import QuickActionsCard from "./quickAction";
 
 const data = [
   {
@@ -64,17 +64,17 @@ export default function MainGrid() {
         spacing={1}
         columns={12}
         sx={{ mb: (theme) => theme.spacing(2) }}
-      >
+       >
         {/* <Grid container> */}
         <Grid size={{ xs: 12, lg: 6 }}>
-          <Typography component="h2" variant="subtitle2" gutterBottom>
+          <Typography  variant="subtitle2" gutterBottom>
             Today
           </Typography>
           <StatCard />
         </Grid>
 
         <Grid size={{ xs: 12, lg: 6 }}>
-          <Typography component="h2" variant="subtitle2" gutterBottom>
+          <Typography  variant="subtitle2" gutterBottom>
             This Month
           </Typography>
           <StatCard />
