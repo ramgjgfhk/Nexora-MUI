@@ -38,9 +38,9 @@ export const inputsCustomizations = {
             props: {
               size: 'small',
             },
-            style: {
-              height: '1.90rem',
-              padding: '8px 12px',
+            style: {fontSize:"0.7rem",
+              height: '1.7rem',
+              alignItems:"center",
             },
           },
           {
@@ -256,8 +256,8 @@ export const inputsCustomizations = {
               size: 'small',
             },
             style: {
-              width: '2.25rem',
-              height: '2.25rem',
+              width: '2.rem',
+              height: '2.rem',
               padding: '0.25rem',
               [`& .${svgIconClasses.root}`]: { fontSize: '1rem' },
             },
@@ -364,7 +364,7 @@ export const inputsCustomizations = {
   },
   MuiInputBase: {
     styleOverrides: {
-      root: {
+      root: {fontSize:"0.7rem",
         border: 'none',
       },
       input: {
@@ -405,7 +405,7 @@ export const inputsCustomizations = {
               size: 'small',
             },
             style: {
-              height: '2.25rem',
+              height: '1.7rem',
             },
           },
           {

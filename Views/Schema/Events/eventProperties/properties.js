@@ -14,12 +14,12 @@ import FromToDatePicker from "@/Components/resuable components/fromToDatePicker"
 import ServerSideGrid from "@/Components/ReUsable/gridfromscreenfacts";
 import { fetchQALList } from "@/pages/api/sampleapies";
 import { Delete, Edit } from "@mui/icons-material";
-import { useRouter } from "next/router";
+import PropertiesHeader from "./PropertiesHeader";
 // import Link from "next/link";
 // import FromToDatePicker from "./FromToDatePicker";
 // import dayjs from "dayjs";
 
-const SegmentList = () => {
+const EventProperties = () => {
   //   const { ActiveThemeColor } = useActiveColor();
   //   const { setSegmentModal } = useSegmentContext();
   const [fromDate, setFromDate] = useState(null);
@@ -31,7 +31,6 @@ const SegmentList = () => {
       key: "selection",
     },
   ]);
-  const router = useRouter();
   const pickerRef = React.useRef(null);
   //   const navigate = useNavigate();
   const columns1 = [
@@ -247,31 +246,8 @@ const SegmentList = () => {
   return (
     <Box
       sx={{ display: "flex", gap: 2, flexDirection: "column", width: "100%" }}
-    >
-      <Stack
-        direction="row"
-        sx={{ justifyContent: "end", mt: 0, alignItems: "end" }}
-      >
-        <Button
-          variant="contained"
-          sx={{ height: "26px", fontSize: "12px", borderRadius: "6px" }}
-        >
-          Create Segment
-        </Button>
-
-        {/* <S
-      applicationIdentifier="KxsvqMOiei9I"
-      subscriberId="685919ded80e094dc6b1edce"
-      appearance={{
-        variables: {
-          colorPrimary: "#7D52F4",
-          colorForeground: "#0E121B"
-        }
-      }}
-    /> */}
-
-        {/* <button           color={ActiveThemeColor} onClick={() => setSegmentModal(true)}></button> */}
-      </Stack>
+    ><PropertiesHeader masterName="Page Viewed"/>
+ 
       {/* <Container className="py-4">
       <Card className="shadow-sm border-0">
         <CardBody>
@@ -524,117 +500,117 @@ const SegmentList = () => {
           ],
         }}
         Rows={[
-          {
-            id: 1,
-            eventName: "Page Viewed",
-            type: "Defined",
-            status: "Inactive",
-            drp: "1 year",
-            thisMonth: 0,
-            lastMonth: 1,
-            created: "1 year",
-            properties: 3,
-          },
-          {
-            id: 2,
-            eventName: "webpopup email submit",
-            type: "Undefined",
-            status: "Active",
-            drp: "1 year",
-            thisMonth: 2,
-            lastMonth: 0,
-            created: "1 year",
-            properties: 4,
-          },
-          {
-            id: 3,
-            eventName: "EmailUnsubscribed",
-            type: "Undefined",
-            status: "Active",
-            drp: "1 year",
-            thisMonth: 0,
-            lastMonth: 4,
-            created: "1 year",
-            properties: 4,
-          },
-          {
-            id: 4,
-            eventName: "NativeDisplayDeven",
-            type: "Undefined",
-            status: "Active",
-            drp: "1 year",
-            thisMonth: 0,
-            lastMonth: 0,
-            created: "1 year",
-            properties: 3,
-          },
-          {
-            id: 5,
-            eventName: "UserSignedUp",
-            type: "Defined",
-            status: "Active",
-            drp: "1 year",
-            thisMonth: 5,
-            lastMonth: 3,
-            created: "1 year",
-            properties: 2,
-          },
-          {
-            id: 6,
-            eventName: "PushNotificationClicked",
-            type: "Defined",
-            status: "Inactive",
-            drp: "1 year",
-            thisMonth: 1,
-            lastMonth: 0,
-            created: "1 year",
-            properties: 3,
-          },
-          {
-            id: 7,
-            eventName: "InAppMessageViewed",
-            type: "Undefined",
-            status: "Active",
-            drp: "1 year",
-            thisMonth: 3,
-            lastMonth: 2,
-            created: "1 year",
-            properties: 5,
-          },
-          {
-            id: 8,
-            eventName: "SessionStarted",
-            type: "Defined",
-            status: "Active",
-            drp: "1 year",
-            thisMonth: 4,
-            lastMonth: 5,
-            created: "1 year",
-            properties: 2,
-          },
-          {
-            id: 9,
-            eventName: "PurchaseCompleted",
-            type: "Defined",
-            status: "Inactive",
-            drp: "1 year",
-            thisMonth: 0,
-            lastMonth: 0,
-            created: "1 year",
-            properties: 4,
-          },
-          {
-            id: 10,
-            eventName: "AppOpened",
-            type: "Undefined",
-            status: "Active",
-            drp: "1 year",
-            thisMonth: 6,
-            lastMonth: 7,
-            created: "1 year",
-            properties: 3,
-          },
-        ]}
+  {
+    id: 1,
+    property_name: "Property A",
+    type: "String",
+    status: "Active",
+    required: "Yes",
+    data_type: "Text",
+    data_type_fallback: "None",
+    created_on: "2025-06-01",
+    description: "Main address field",
+  },
+  {
+    id: 2,
+    property_name: "Property B",
+    type: "Number",
+    status: "Inactive",
+    required: "No",
+    data_type: "Integer",
+    data_type_fallback: "0",
+    created_on: "2025-06-02",
+    description: "Age of user",
+  },
+  {
+    id: 3,
+    property_name: "Property C",
+    type: "Boolean",
+    status: "Active",
+    required: "Yes",
+    data_type: "Checkbox",
+    data_type_fallback: "False",
+    created_on: "2025-06-03",
+    description: "Subscription status",
+  },
+  {
+    id: 4,
+    property_name: "Property D",
+    type: "String",
+    status: "Active",
+    required: "No",
+    data_type: "Text",
+    data_type_fallback: "N/A",
+    created_on: "2025-06-04",
+    description: "Secondary email",
+  },
+  {
+    id: 5,
+    property_name: "Property E",
+    type: "Date",
+    status: "Inactive",
+    required: "Yes",
+    data_type: "Date",
+    data_type_fallback: "1970-01-01",
+    created_on: "2025-06-05",
+    description: "Date of birth",
+  },
+  {
+    id: 6,
+    property_name: "Property F",
+    type: "String",
+    status: "Active",
+    required: "No",
+    data_type: "Text",
+    data_type_fallback: "Unknown",
+    created_on: "2025-06-06",
+    description: "Country",
+  },
+  {
+    id: 7,
+    property_name: "Property G",
+    type: "Number",
+    status: "Active",
+    required: "Yes",
+    data_type: "Float",
+    data_type_fallback: "0.0",
+    created_on: "2025-06-07",
+    description: "Account balance",
+  },
+  {
+    id: 8,
+    property_name: "Property H",
+    type: "String",
+    status: "Inactive",
+    required: "No",
+    data_type: "Text",
+    data_type_fallback: "None",
+    created_on: "2025-06-08",
+    description: "Referral code",
+  },
+  {
+    id: 9,
+    property_name: "Property I",
+    type: "Boolean",
+    status: "Active",
+    required: "Yes",
+    data_type: "Checkbox",
+    data_type_fallback: "False",
+    created_on: "2025-06-09",
+    description: "Marketing consent",
+  },
+  {
+    id: 10,
+    property_name: "Property J",
+    type: "String",
+    status: "Active",
+    required: "No",
+    data_type: "Text",
+    data_type_fallback: "N/A",
+    created_on: "2025-06-10",
+    description: "Profile bio",
+  },
+]}
         columns={[
           {
             field: "id",
@@ -644,69 +620,36 @@ const SegmentList = () => {
             hideable: false,
           },
           {
-            field: "eventName",
-            headerName: "Event name",
+            field: "property_name",
+            headerName: "Property Name",
             flex: 1,
             minWidth: 180,
           },
           { field: "type", headerName: "Type", width: 120 },
           { field: "status", headerName: "Status", width: 120 },
-          { field: "drp", headerName: "DRP", width: 100 },
-          { field: "thisMonth", headerName: "This month", width: 100 },
-          { field: "lastMonth", headerName: "Last month", width: 100 },
-          { field: "created", headerName: "Created", width: 100 },
-          {
-            field: "properties",
-            headerName: "Properties",
-            width: 150,
-            renderCell: (params) => (
-              // <Button variant="outlined" size="small">
-              //   {params.value} properties
-              // </Button>
-              <Link
-                sx={{ fontSize: "11px", fontWeight: 550 }}
-                component="button"
-                variant="subtitle2"
-                onClick={() => router.push("/Schema/Events/property")}
-              >
-                {params.value} properties
-              </Link>
-            ),
-          },
+          { field: "required", headerName: "Required", width: 100 },
+          { field: "data_type", headerName: "Data Type", width: 100 },
+          { field: "data_type_fallback", headerName: "Data Type Fallback", width: 100 },
+          { field: "created_on", headerName: "Created On", width: 100 },
+        { field: "description", headerName: "Description", width: 100 },
           {
             field: "actions",
             headerName: "Actions",
             width: 100,
             sortable: false,
             renderCell: (params) => (
-              <Box
-                display="flex"
-                gap={1}
-                sx={{
-                  justifyContent: "center",
-                  height: "100%",
-                  alignItems: "center",
-                }}
-              >
+              <Box display="flex" gap={1} sx={{justifyContent:"center",height:"100%",alignItems:"center",}}>
                 <Tooltip title="Edit">
                   <Edit
                     // fontSize="25px"
-                    sx={{
-                      color: "primary.main",
-                      cursor: "pointer",
-                      fontSize: "17px",
-                    }}
+                    sx={{ color: "primary.main", cursor: "pointer" ,   fontSize:"17px"}}
                     onClick={() => handleEdit(params.row)}
                   />
                 </Tooltip>
                 <Tooltip title="Delete">
                   <Delete
-                    //  fontSize="25px"
-                    sx={{
-                      color: "error.main",
-                      cursor: "pointer",
-                      fontSize: "17px",
-                    }}
+                //  fontSize="25px"
+                    sx={{ color: "error.main", cursor: "pointer" ,      fontSize:"17px"}}
                     onClick={() => handleDelete(params.row)}
                   />
                 </Tooltip>
@@ -720,4 +663,4 @@ const SegmentList = () => {
   );
 };
 
-export default SegmentList;
+export default EventProperties;

@@ -318,57 +318,73 @@ export const colorSchemes = {
 };
 
 export const typography = {
-  fontFamily: 'Inter, sans-serif',
+  fontFamily: '"Plus Jakarta Sans", system-ui, sans-serif',
+
   h1: {
-    fontSize: defaultTheme.typography.pxToRem(48),
+    fontSize: '1.5rem', // 24px
     fontWeight: 600,
-    lineHeight: 1.2,
-    letterSpacing: -0.5,
+    lineHeight: 1.3,
   },
   h2: {
-    fontSize: defaultTheme.typography.pxToRem(10),
+    fontSize: '1.25rem', // 20px
     fontWeight: 600,
-    lineHeight: 1.2,
+    lineHeight: 1.35,
   },
   h3: {
-    fontSize: defaultTheme.typography.pxToRem(30),
-    lineHeight: 1.2,
+    fontSize: '1.125rem', // 18px
+    fontWeight: 600,
+    lineHeight: 1.4,
   },
   h4: {
-    fontSize: defaultTheme.typography.pxToRem(24),
+    fontSize: '1rem', // 16px
     fontWeight: 600,
-    lineHeight: 1.5,
+    lineHeight: 1.4,
   },
   h5: {
-    fontSize: defaultTheme.typography.pxToRem(20),
+    fontSize: '0.9375rem', // 15px
     fontWeight: 600,
+    lineHeight: 1.4,
   },
   h6: {
-    fontSize: defaultTheme.typography.pxToRem(14),
+    fontSize: '0.875rem', // 14px
     fontWeight: 600,
+    lineHeight: 1.4,
   },
   subtitle1: {
-    fontSize: defaultTheme.typography.pxToRem(18),
+    fontSize: '0.8125rem', // 13px
+    fontWeight: 500,
+    lineHeight: 1.5,
   },
   subtitle2: {
-    fontSize: defaultTheme.typography.pxToRem(12),
+    fontSize: '0.75rem', // 12px
     fontWeight: 500,
+    lineHeight: 1.5,
   },
   body1: {
-    fontSize: defaultTheme.typography.pxToRem(12),
+    fontSize: '0.8125rem', // 13px
+    fontWeight: 400,
+    lineHeight: 1.6,
   },
   body2: {
-    fontSize: defaultTheme.typography.pxToRem(12),
+    fontSize: '0.75rem', // 12px
     fontWeight: 400,
+    lineHeight: 1.6,
   },
   caption: {
-    fontSize: defaultTheme.typography.pxToRem(10),
+    fontSize: '0.6875rem', // 11px
     fontWeight: 400,
+    lineHeight: 1.4,
+  },
+  button: {
+    textTransform: 'none',
+    fontWeight: 500,
+    fontSize: '0.75rem', // 12px
   },
 };
 
+
 export const shape = {
-  borderRadius: 8,
+  borderRadius: 5,
 };
 
 const defaultShadows = [
