@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { alpha } from '@mui/material/styles';
+import { alpha, responsiveFontSizes } from '@mui/material/styles';
 
 import { buttonBaseClasses } from '@mui/material/ButtonBase';
 import { dividerClasses } from '@mui/material/Divider';
@@ -57,18 +57,19 @@ export const navigationCustomizations = {
     },
   },
   MuiSelect: {
-    defaultProps: {
-      IconComponent: React.forwardRef((props, ref) => (
-        <UnfoldMoreRoundedIcon fontSize="small" {...props} ref={ref} />
-      )),
-    },
+    // defaultProps: {
+    //   IconComponent: React.forwardRef((props, ref) => (
+    //     // <UnfoldMoreRoundedIcon fontSize="small" {...props} ref={ref} />
+    //   )),
+    // },
     styleOverrides: {
-      root: ({ theme }) => ({
+      root: ({ theme }) => ({"&. MuiButtonBase-root":{fontSize:"10px"},
+        fontSize:"10.5px",
         borderRadius: (theme.vars || theme).shape.borderRadius,
-        border: '1px solid',
+        border: '1px solid',height:"28px",
         borderColor: gray[200],
         backgroundColor: (theme.vars || theme).palette.background.paper,
-        boxShadow: `inset 0 1px 0 1px hsla(220, 0%, 100%, 0.6), inset 0 -1px 0 1px hsla(220, 35%, 90%, 0.5)`,
+        // boxShadow: `inset 0 1px 0 1px hsla(220, 0%, 100%, 0.6), inset 0 -1px 0 1px hsla(220, 35%, 90%, 0.5)`,
         '&:hover': {
           borderColor: gray[300],
           backgroundColor: (theme.vars || theme).palette.background.paper,
@@ -101,7 +102,7 @@ export const navigationCustomizations = {
         }),
       }),
       select: ({ theme }) => ({
-        display: 'flex',
+        display: 'flex', 
         alignItems: 'center',
         ...theme.applyStyles('dark', {
           display: 'flex',
