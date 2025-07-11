@@ -80,7 +80,7 @@ export default function AdvancedFilterButton({
         onClick={handleOpen}
         size="small"
         variant="outlined"
-        startIcon={<Tune />}sx={{height:"25px"}}
+        startIcon={<Tune />}
       >
     <Typography variant='subtitle2'>Filters</Typography> 
       </Button>
@@ -95,7 +95,7 @@ export default function AdvancedFilterButton({
         <Typography variant="subtitle2" mb={1}>Advanced Filters</Typography>
 
         <Box display="flex" alignItems="center" gap={1} mb={1}>
-          <Typography fontSize={12}>Match</Typography>
+          {/* <Typography variant='subtitle1'>Match</Typography> */}
           <FormControl size="small" sx={{ minWidth: 100 }}>
             <Select
               size="small"
@@ -137,8 +137,14 @@ export default function AdvancedFilterButton({
                 </Select>
               </FormControl>
               {renderValueInput(rule, idx)}
-              <IconButton size="small" onClick={() => handleRemove(idx)}>
-                <Delete fontSize="small" />
+              <IconButton size="small" onClick={() => handleRemove(idx)}  sx={{
+    backgroundColor: "rgba(211, 47, 47, 0.15)", // light red background
+    "&:hover": {
+      backgroundColor: "rgba(211, 47, 47, 0.25)", // darker red on hover
+    },
+    color: "#d32f2f", // error color explicitly for icon
+  }}>
+                <Delete fontSize="small" color="error"/>
               </IconButton>
             </Box>
           );

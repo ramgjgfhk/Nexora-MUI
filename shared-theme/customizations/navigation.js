@@ -13,7 +13,7 @@ import { gray, brand } from '../themePrimitives';
 export const navigationCustomizations = {
   MuiMenuItem: {
     styleOverrides: {
-      root: ({ theme }) => ({
+      root: ({ theme }) => ({fontSize:"9.8px",
         borderRadius: (theme.vars || theme).shape.borderRadius,
         padding: '6px 8px',
         [`&.${menuItemClasses.focusVisible}`]: {
@@ -63,10 +63,10 @@ export const navigationCustomizations = {
     //   )),
     // },
     styleOverrides: {
-      root: ({ theme }) => ({"&. MuiButtonBase-root":{fontSize:"10px"},
+      root: ({ theme }) => ({
         fontSize:"10.5px",
         borderRadius: (theme.vars || theme).shape.borderRadius,
-        border: '1px solid',height:"28px",
+        border: '1px solid',height:"1.7rem",
         borderColor: gray[200],
         backgroundColor: (theme.vars || theme).palette.background.paper,
         // boxShadow: `inset 0 1px 0 1px hsla(220, 0%, 100%, 0.6), inset 0 -1px 0 1px hsla(220, 35%, 90%, 0.5)`,

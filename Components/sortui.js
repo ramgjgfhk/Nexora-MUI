@@ -44,7 +44,7 @@ const SortPopupButton = ({ sortableColumns, sortModel, setSortModel }) => {
           size="small"
        variant="outlined" onClick={handleOpen}
           color="primary"
-          sx={{ height: "27px", borderRadius: "6px" }}
+          // sx={{ height: "27px", borderRadius: "6px" }}
         ><Sort size="20px"sx={{fontSize:"17px",mr:0.6}}/>
      <Typography variant='caption' sx={{fontSize:"12px",fontWeight:500}}>Sort</Typography>
         </Button>
