@@ -61,7 +61,7 @@ export default function MainGrid() {
       {/* <TodayStatCard /> */}
       <Grid
         container
-        spacing={2}
+        spacing={1}
         columns={12}
         sx={{ mb: (theme) => theme.spacing(2) }}
       >
