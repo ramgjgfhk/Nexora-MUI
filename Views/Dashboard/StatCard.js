@@ -188,7 +188,7 @@ const stats = [
 
 export default function TodayStatCard() {
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={1}>
       {stats.map((stat, index) => (
         <Grid size={{ xs: 6, xl: 3 }} key={index}>
           <GlassCard
@@ -239,7 +239,7 @@ export default function TodayStatCard() {
                 variant="h4"
                 sx={{
                   fontWeight: 600,
-                  fontSize: { xs: "20px", sm: "20px" },
+                  fontSize: { xs: "20px", sm: "16px" },
                   lineHeight: 1,
                   color: stat.color,
                   mb: 1,
@@ -252,7 +252,7 @@ export default function TodayStatCard() {
                 variant="body1"
                 sx={{
                   color: "text.primary",
-                  fontSize: { xs: "13px", sm: "12px" },
+                  fontSize: { xs: "13px", sm: "10px" },
                   // fontWeight: 600,
                   letterSpacing: "0.5px",
                 }}

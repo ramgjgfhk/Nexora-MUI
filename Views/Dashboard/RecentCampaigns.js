@@ -69,7 +69,7 @@ export default function RecentCampaigns() {
   };
 
   return (
-    <GlassCard sx={{width:'100%'}}>
+    <GlassCard sx={{ width: "100%" }}>
       <CardContent>
         <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
           <Typography variant="h6" sx={{ fontWeight: 600 }}>
@@ -93,9 +93,10 @@ export default function RecentCampaigns() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                transition: "box-shadow 0.3s ease",
+                border: "1px solid transparent", // Keep fixed space for border
+                transition: "border-color 0.3s ease",
                 "&:hover": {
-                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)", // Soft shadow on hover
+                  borderColor: "#ccc", // Only color changes, no layout shift
                 },
               }}
             >
@@ -130,7 +131,7 @@ export default function RecentCampaigns() {
                   label={item.status}
                   size="medium"
                   sx={{
-                    border:'none',
+                    border: "none",
                     bgcolor: item.statusColor,
                     color: "#111827",
                     fontWeight: 500,
@@ -141,7 +142,11 @@ export default function RecentCampaigns() {
                   }}
                 />
 
-                <IconButton onClick={(e) => handleMenuOpen(e, index)} sx={{border:'none'}} size="small">
+                <IconButton
+                  onClick={(e) => handleMenuOpen(e, index)}
+                  sx={{ border: "none" }}
+                  size="small"
+                >
                   <MoreVertIcon />
                 </IconButton>
               </Box>
