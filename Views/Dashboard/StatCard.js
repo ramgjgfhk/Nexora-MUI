@@ -190,7 +190,7 @@ export default function TodayStatCard() {
   return (
     <Grid container spacing={1}>
       {stats.map((stat, index) => (
-        <Grid size={{ xs: 6, xl: 3 }} key={index}>
+        <Grid size={{ xs: 6, md: 3 }} key={index}>
           <GlassCard
             sx={{
               // height: { xs: 100, sm: 110, md: 70 },

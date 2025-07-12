@@ -82,7 +82,7 @@ export const menuItems = [
         id: "user-list",
         title: "Explorer",
         icon: <Group />,
-        path: "/user",
+        path: "/users",
         name: "Audience / Explorer",
       },
       {

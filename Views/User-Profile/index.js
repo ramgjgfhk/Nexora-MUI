@@ -7,6 +7,8 @@ import { tabItems } from "../User/UserProfile/UserProfileComponents/userProfileV
 import DeviceTab from "./DeviceTab";
 import EngagementTab from "./EngagementTab";
 import AnalyticsTab from "./Analytics";
+import { useRouter } from "next/router";
+import { fetchUserDetails } from "@/pages/api/UserProfilePageApi";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -24,18 +26,42 @@ function TabPanel(props) {
   );
 }
 const UserProfile = () => {
+  const router = useRouter();
   const [activeTab, setActiveTab] = React.useState(0);
-  console.log("activeTab", activeTab);
+  const [userDetails, setUserDetails] = React.useState({});
 
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
   };
+
+  React.useEffect(() => {
+    if (!router.isReady) return;
+
+    const fetchData = async () => {
+      try {
+        const { id } = router.query;
+        if (!id) return;
+
+        const decodeId = atob(id);
+        console.log("Decoded ID:", decodeId);
+
+        const data = await fetchUserDetails(decodeId);
+        console.log("Fetched user data:", data);
+        setUserDetails(data);
+        // setState(data); // If you want to display it
+      } catch (error) {
+        console.error("Error in user profile effect:", error);
+      }
+    };
+
+    fetchData();
+  }, [router.isReady, router.query]);
   return (
     <Box>
-      <UserHeader />
+      <UserHeader data={userDetails}/>
       <Grid spacing={2} container sx={{ width: "100%" }}>
         <Grid size={{ xs: 12, lg: 4 }}>
-          <CustomerInformation />
+          <CustomerInformation data={userDetails}/>
         </Grid>
         <Grid size={{ xs: 12, lg: 8 }}>
           {" "}

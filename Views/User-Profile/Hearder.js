@@ -16,7 +16,8 @@ import { customerData } from "../User/UserProfile/UserProfileComponents/userProf
 import { GlassCard } from "../User/UserProfile/UserProfileComponents/ProfileCard";
 import Image from "next/image";
 
-const UserHeader = () => {
+const UserHeader = ({data}) => {
+  console.log(data)
   const [activeAction, setActiveAction] = React.useState("");
 
   const handleAction = (action) => {
@@ -99,7 +100,7 @@ const UserHeader = () => {
                     // mb: 0.5,
                   }}
                 >
-                  {customerData.name}
+                  {data.name}
                 </Typography>
 
                 <Typography
@@ -112,7 +113,7 @@ const UserHeader = () => {
                     fontSize: "0.75rem",
                   }}
                 >
-                  Nexora ID: {customerData.nexoraId}
+                  Nexora ID: {data.nexora_id}
                 </Typography>
                  <Typography
                   variant="body2"
@@ -124,7 +125,7 @@ const UserHeader = () => {
                     fontSize: "0.75rem",
                   }}
                 >
-                  Customer ID: {customerData.customerId}
+                  Customer ID: {data.user_id}
                 </Typography>
 
                 <Box sx={{ display: "flex", gap: 1, mt: 0.5 }}>

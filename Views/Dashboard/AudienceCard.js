@@ -64,7 +64,7 @@ export default function AudienceSegmentsCard() {
   return (
     <GlassCard sx={{ p: 3, width: "100%" }}>
       <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
-        <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+        <Typography variant="h6" sx={{ fontWeight: 600 }}>
           Top Audience Segments - RFM
         </Typography>
         <Typography

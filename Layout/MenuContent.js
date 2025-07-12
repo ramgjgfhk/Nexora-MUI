@@ -9,10 +9,7 @@ import { ChevronRight, ExpandLess, ExpandMore } from "@mui/icons-material";
 import { Collapse, Typography } from "@mui/material";
 
 export default function MenuContent(props) {
-
-  const {openItems,handleNavigation,handleToggle,selectedPath} = props
-
-
+  const { openItems, handleNavigation, handleToggle, selectedPath } = props;
 
   const renderMenuItem = (item, level = 0) => {
     const hasChildren = item.children && item.children.length > 0;
@@ -50,12 +47,12 @@ export default function MenuContent(props) {
             },
           }}
         >
-          <ListItemIcon sx={{ minWidth: 30 }}>
+          <ListItemIcon sx={{ minWidth: 25 }}>
             {level === 0 ? (
               React.cloneElement(item.icon, {
                 sx: {
                   color: "black",
-                  fontSize: 18,
+                  fontSize: 15,
                 },
               })
             ) : (
@@ -69,26 +66,14 @@ export default function MenuContent(props) {
           </ListItemIcon>
 
           <ListItemText
-            primary={
-              <Typography
-                variant="body1"
-                sx={{
-                  fontSize:  "0.9rem",
-                  // fontWeight: level === 0 ? 800 : 600,
-                  fontFamily: "inherit", // ✅ your custom font
-                  color: "black",
-                }}
-              >
-                {item.title}
-              </Typography>
-            }
+            primary={<Typography variant="subtitle2">{item.title}</Typography>}
           />
 
           {hasChildren &&
             (isOpen ? (
-              <ExpandLess sx={{ color: "#A3A3A3", fontSize:20, }} />
+              <ExpandLess sx={{ color: "#A3A3A3", fontSize: 15 }} />
             ) : (
-              <ExpandMore sx={{ color: "#A3A3A3", fontSize:20, }} />
+              <ExpandMore sx={{ color: "#A3A3A3", fontSize: 15 }} />
             ))}
         </ListItemButton>
 
@@ -102,7 +87,6 @@ export default function MenuContent(props) {
       </React.Fragment>
     );
   };
-
 
   return (
     <Stack>

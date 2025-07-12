@@ -18,16 +18,23 @@ import FromToDatePicker from "@/Components/resuable components/fromToDatePicker"
 // import ServerSideGrid from "@/Components/ReUsable/gridfromscreenfacts";
 import { fetchQALList, fetchUserListNexora } from "@/pages/api/sampleapies";
 import ServerSideGrid from "@/Components/ReUsable/userpagegrid";
-import { ContentCopy, LocationOn, PersonOutline, Phone } from "@mui/icons-material";
+import {
+  ContentCopy,
+  LocationOn,
+  PersonOutline,
+  Phone,
+} from "@mui/icons-material";
 import { MoreVert } from "@mui/icons-material";
 import UserDetailsModal from "../User/UserList/userDetails";
 import { FaEdit, FaEye, FaTrashAlt } from "react-icons/fa";
 import { useRouter } from "next/router";
+import { maskEmail, maskMobile } from "@/utils/MaskFunction";
 // import FromToDatePicker from "./FromToDatePicker";
 // import dayjs from "dayjs";
 
-const SegmentList = () => {  const [anchorEl, setAnchorEl] = React.useState(null);
-const router=useRouter()
+const SegmentList = () => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const router = useRouter();
   const renderValue = (value) => value ?? "—";
   const [open, setOpen] = useState(false);
   const [menuAnchorEl, setMenuAnchorEl] = useState(null);
@@ -55,38 +62,37 @@ const router=useRouter()
       return "—";
     }
   };
-const renderAudienceCell = (params) => {
-  
-  const name = params.row.name ?? "—";
-  const email = params.row.email ?? "—";
+  const renderAudienceCell = (params) => {
+    const name = params.row.name ?? "—";
+    const email = params.row.email ?? "—";
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [hover, setHover] = React.useState(false);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [hover, setHover] = React.useState(false);
 
-  const open = Boolean(anchorEl);
+    const open = Boolean(anchorEl);
 
-  const handleMenuClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+    const handleMenuClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
+    const handleMenuClose = () => {
+      setAnchorEl(null);
+    };
 
-  return (
-    <Box
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        width: "100%",
-        height: "100%",
-        pr: 1,
-      }}
-    >
-      <Box sx={{ display: "flex", alignItems: "center", gap: 1.2 }}>
+    return (
+      <Box
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          width: "100%",
+          height: "100%",
+          pr: 1,
+        }}
+      >
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1.2 }}>
           <Avatar
             sx={{
               bgcolor: "#E3F2FD",
@@ -97,18 +103,21 @@ const renderAudienceCell = (params) => {
           >
             <PersonOutline sx={{ fontSize: 14 }} />
           </Avatar>
-        <Stack spacing={0} sx={{ justifyContent: "center",alignItems:"start" }}>
-          <Typography sx={{ fontSize: "0.75rem", fontWeight: 600 }}>
-            {name}
-          </Typography>
-          <Typography sx={{ fontSize: "0.7rem", color: "text.secondary" }}>
-            {email}
-          </Typography>
-        </Stack>
+          <Stack
+            spacing={0}
+            sx={{ justifyContent: "center", alignItems: "start" }}
+          >
+            <Typography sx={{ fontSize: "0.75rem", fontWeight: 600 }}>
+              {name}
+            </Typography>
+            <Typography sx={{ fontSize: "0.7rem", color: "text.secondary" }}>
+              {maskEmail(email)}
+            </Typography>
+          </Stack>
+        </Box>
       </Box>
-    </Box>
-  );
-};
+    );
+  };
   const columns = [
     // {
     //   field: "slNo",
@@ -116,8 +125,8 @@ const renderAudienceCell = (params) => {
     //   flex: 0.3,
     //   minWidth: 80,
     //   headerAlign: "center",
-    // },   
-     {  
+    // },
+    {
       field: "name",
       headerName: "Audiences",
       flex: 2,
@@ -160,20 +169,20 @@ const renderAudienceCell = (params) => {
     //     );
     //   },
 
-      //  renderCell: (params) => {
-      //         const rawDate = params.value;
-      //         const date = rawDate ? new Date(rawDate) : null;
+    //  renderCell: (params) => {
+    //         const rawDate = params.value;
+    //         const date = rawDate ? new Date(rawDate) : null;
 
-      //         if (!date || isNaN(date.getTime())) {
-      //           return "Invalid Date"; // Or return '-' or leave it empty
-      //         }
+    //         if (!date || isNaN(date.getTime())) {
+    //           return "Invalid Date"; // Or return '-' or leave it empty
+    //         }
 
-      //         return date.toLocaleDateString("en-GB", {
-      //           day: "2-digit",
-      //           month: "short",
-      //           year: "numeric",
-      //         });
-      //       },
+    //         return date.toLocaleDateString("en-GB", {
+    //           day: "2-digit",
+    //           month: "short",
+    //           year: "numeric",
+    //         });
+    //       },
     // },
     //   {
     //     field: 'name',
@@ -191,53 +200,53 @@ const renderAudienceCell = (params) => {
     //   headerAlign: "center",
     //   // valueGetter: (params) => renderValue(params.row.email),
     // },
-       {
-          field: "nexora_id",
-          headerName: "Nexora ID",
-          flex: 1,
-          minWidth: 80,
-          renderCell: (params) => {
-            const [hover, setHover] = React.useState(false);
-            const [tooltipTitle, setTooltipTitle] =
-              React.useState("Copy to clipboard");
-    
-            const value = params.value ?? "—";
-    
-            const handleCopy = async () => {
-              try {
-                await navigator.clipboard.writeText(value);
-                setTooltipTitle("Copied!");
-    
-                setTimeout(() => {
-                  setTooltipTitle("Copy to clipboard");
-                }, 1500);
-              } catch (err) {
-                console.error("Failed to copy:", err);
-              }
-            };
-    
-            return (
-              <div
-                onMouseEnter={() => setHover(true)}
-                onMouseLeave={() => {
-                  setHover(false);
-                  setTooltipTitle("Copy to clipboard"); // Reset if hover out early
-                }}
-                style={{ display: "flex", alignItems: "center", gap: 6 }}
-              >
-                <span>{value}</span>
-                {hover && (
-                  <Tooltip title={tooltipTitle} arrow>
-                    <ContentCopy
-                      sx={{ fontSize: 14, color: "gray", cursor: "pointer" }}
-                      onClick={handleCopy}
-                    />
-                  </Tooltip>
-                )}
-              </div>
-            );
-          },
-        },
+    {
+      field: "nexora_id",
+      headerName: "Nexora ID",
+      flex: 1,
+      minWidth: 80,
+      renderCell: (params) => {
+        const [hover, setHover] = React.useState(false);
+        const [tooltipTitle, setTooltipTitle] =
+          React.useState("Copy to clipboard");
+
+        const value = params.value ?? "—";
+
+        const handleCopy = async () => {
+          try {
+            await navigator.clipboard.writeText(value);
+            setTooltipTitle("Copied!");
+
+            setTimeout(() => {
+              setTooltipTitle("Copy to clipboard");
+            }, 1500);
+          } catch (err) {
+            console.error("Failed to copy:", err);
+          }
+        };
+
+        return (
+          <div
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => {
+              setHover(false);
+              setTooltipTitle("Copy to clipboard"); // Reset if hover out early
+            }}
+            style={{ display: "flex", alignItems: "center", gap: 6 }}
+          >
+            <span>{value}</span>
+            {hover && (
+              <Tooltip title={tooltipTitle} arrow>
+                <ContentCopy
+                  sx={{ fontSize: 14, color: "gray", cursor: "pointer" }}
+                  onClick={handleCopy}
+                />
+              </Tooltip>
+            )}
+          </div>
+        );
+      },
+    },
     // {
     //   field: "mobile",
     //   headerName: "Mobile",
@@ -246,39 +255,39 @@ const renderAudienceCell = (params) => {
     //   headerAlign: "center",
     //   // valueGetter: (params) => renderValue(params.row.mobile),
     // },
-       {
-          field: "mobile",
-          headerName: "Contact",
-          flex: 1.5,
-          minWidth: 160,
-          renderCell: (params) => {
-            const mobile = params.row.mobile ?? "—";
-            const location = params.row.location ?? "Not Found";
-    
-            return (
-              <Box
-                sx={{
-                  height: "100%", // important for vertical alignment
-                  display: "flex",
-                  alignItems: "center", // vertical centering
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    gap: 0.5,
-                    whiteSpace: "normal",
-                  }}
-                >
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-                    <Phone sx={{ fontSize: 12, color: "#2E7D32" }} />
-                    <Typography variant="body2" sx={{ fontSize: "12px" }}>
-                      {mobile}
-                    </Typography>
-                  </Box>
-                  {/* <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+    {
+      field: "mobile",
+      headerName: "Mobile",
+      flex: 1.5,
+      minWidth: 160,
+      renderCell: (params) => {
+        const mobile = params.row.mobile ?? "—";
+        const location = params.row.location ?? "Not Found";
+
+        return (
+          <Box
+            sx={{
+              height: "100%", // important for vertical alignment
+              display: "flex",
+              alignItems: "center", // vertical centering
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                gap: 0.5,
+                whiteSpace: "normal",
+              }}
+            >
+              <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+                <Phone sx={{ fontSize: 12, color: "#2E7D32" }} />
+                <Typography variant="body2" sx={{ fontSize: "12px" }}>
+                  {maskMobile(mobile)}
+                </Typography>
+              </Box>
+              {/* <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
                     <LocationOn sx={{ fontSize: 12, color: "red" }} />
                     <Typography
                       sx={{ fontSize: "0.7rem", color: "text.secondary" }}
@@ -286,11 +295,11 @@ const renderAudienceCell = (params) => {
                       {location}
                     </Typography>
                   </Box> */}
-                </Box>
-              </Box>
-            );
-          },
-        },
+            </Box>
+          </Box>
+        );
+      },
+    },
     //   {
     //     field: 'user_identifier',
     //     headerName: 'User Identifier',
@@ -378,7 +387,7 @@ const renderAudienceCell = (params) => {
           </IconButton>
         </>
       ),
-    },  
+    },
     //  {
     //       field: "Action",
     //       headerName: "Action",
@@ -426,14 +435,14 @@ const renderAudienceCell = (params) => {
     //                 </ListItemIcon>
     //                 <ListItemText primary="View" />
     //               </MenuItem>
-    
+
     //               <MenuItem onClick={() => console.log("Edit")}>
     //                 <ListItemIcon>
     //                   <FaEdit style={{ color: "#0288D1", fontSize: 16 }} />
     //                 </ListItemIcon>
     //                 <ListItemText primary="Edit" />
     //               </MenuItem>
-    
+
     //               <MenuItem onClick={() => console.log("Delete")}>
     //                 <ListItemIcon>
     //                   <FaTrashAlt style={{ color: "#D32F2F", fontSize: 16 }} />
@@ -445,12 +454,22 @@ const renderAudienceCell = (params) => {
     //         );
     //       },
     //     },
-  ];  const handleMenuClick = (event) => {
+  ];
+  const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleNavigateUserPage = () => {
+    const encodedId = btoa(selectedRow?.nexora_id);
+    router.push({
+      pathname: "/user-profile",
+      query: { id: encodedId },
+    });
+    console.log(selectedRow?.nexora_id);
   };
   return (
     <Box
@@ -634,9 +653,7 @@ const renderAudienceCell = (params) => {
         >
           Delete
         </MenuItem>
-        <MenuItem
-      onClick={() => router.push("/user-profile")}
-        >
+        <MenuItem onClick={() => handleNavigateUserPage()}>
           View Details
         </MenuItem>
       </Menu>
