@@ -79,7 +79,7 @@ export default function AdvancedFilterButton({
       <Button
         onClick={handleOpen}
         size="small"
-        variant="outlined"
+        // variant="outlined"
         startIcon={<Tune />}
       >
     <Typography variant='subtitle2'>Filters</Typography> 

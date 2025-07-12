@@ -7,9 +7,9 @@ import React, { useState } from "react";
 
 const SegmentPage = () => {
   const columns = [
-    { field: "name", headerName: "Name", flex: 1, type: "string" },
+    { field: "name", headerName: "Name", flex: 1, type: "boolean" },
     { field: "age", headerName: "Age", flex: 1, type: "number" },
-    { field: "city", headerName: "City", flex: 1, type: "string" },
+    { field: "city", headerName: "City", flex: 1, type: "date" },
   ];
 
   const [filterModel, setFilterModel] = useState({ logic: "AND", rules: [] });

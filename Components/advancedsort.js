@@ -135,7 +135,7 @@ export default function AdvancedSortButton({
       <Button
         size="small"
         onClick={handleOpen}
-        variant="outlined"
+        // variant=""
         startIcon={<FilterList sx={{ mr: -0.8 }} />}
       >
         <Typography variant="subtitle2">Sort</Typography>
