@@ -1,6 +1,6 @@
 export const maskMobile = (mobile) => {
   return mobile?.length > 1
-    ? mobile.slice(0, 2) + "*".repeat(mobile.length - 2)
+    ? mobile.slice(0, 3) + "*".repeat(mobile.length - 2)
     : "*".repeat(mobile?.length || 0);
 };
 
