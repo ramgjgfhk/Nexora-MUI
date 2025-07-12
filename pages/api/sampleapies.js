@@ -9,7 +9,7 @@ const nexora_url = process.env.NEXT_PUBLIC_NEXORA_URL;
 
 // verifierPage apies
 const uat_role_create = "api/master/role/create";
-const uat_qa_list = "api/data_entry/list";const uat_user_list = "api/users/list";const uat_system_list = "api/events/system_events";
+const uat_qa_list = "api/data_entry/list";const uat_user_list = "api/customer/profile/list";const uat_system_list = "api/events/system_events";
 const uat_case_details = "api/qa/get";const uat_custom_list = "api/events/custom_events";
 const uat_case_save = "api/qa/save";
 const uat_case_submit = "api/qa/submit";

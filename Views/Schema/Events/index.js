@@ -502,8 +502,13 @@ export default function SchemaEvents() {
           // />
 
           <ServerSideGrid
+              sortableColumns = {[
+      { headerName: "Name", colId: "name" },
+      { headerName: "Age", colId: "age" },
+      { headerName: "City", colId: "city"  },  
+    ]}
             columns={columns}
-            colHeight={45}
+            colHeight={45}urlKey="system_events"
             // rowss={list}
             // fieldsForFilter={[
             //   "client_name",
@@ -540,7 +545,11 @@ export default function SchemaEvents() {
           />
         )}
         {tabIndex === 1 && (
-          <ServerSideGrid
+          <ServerSideGrid urlKey="custom_events"             sortableColumns = {[
+      { headerName: "Name", colId: "name" },
+      { headerName: "Age", colId: "age" },
+      { headerName: "City", colId: "city"  },  
+    ]}
             colHeight={45}
             columns={columns}
             // rowss={list}

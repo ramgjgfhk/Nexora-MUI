@@ -15,6 +15,7 @@ import {
   GridToolbarDensitySelector,
   GridToolbarExport,
   GridToolbarFilterButton,
+  GridToolbarQuickFilter,
 } from "@mui/x-data-grid";
 import {
   Box,
@@ -38,6 +39,7 @@ import FilterModalComponent from "./customFilter";
 import Router, { useRouter } from "next/router";
 import { textfield } from "../ui";
 import NoRows from "./norows";
+import AdvancedSortButton from "../advancedsort";
 
 const CustomToolbar = ({
   handleApplyFilters,
@@ -46,8 +48,16 @@ const CustomToolbar = ({
   setAppliedFilters,
   searchTerm,
   setSearchTerm,
+  sortModel,
+  setSortModel,
+  sortableColumns,
 }) => (
   <GridToolbarContainer sx={{ mb: 0, pr: 1, backgroundColor: "#f9fafb" }}>
+    <AdvancedSortButton
+      sortModel={sortModel}
+      setSortModel={setSortModel}
+      sortableColumns={sortableColumns}
+    />
     <FilterModalComponent
       onApply={handleApplyFilters}
       customFilters={fieldsForFilter}
@@ -63,10 +73,10 @@ const CustomToolbar = ({
       variant="outlined"
     >
       <TextField
-        size="medium"
+        size="small"
         id="search"
         placeholder="Search…"
-        sx={{ ...textfield, height: "2rem" }}
+        // sx={{}}
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         InputProps={{
@@ -105,33 +115,40 @@ const jakarta = Plus_Jakarta_Sans({
 });
 const ServerSideGrid = (
   {
+    sortableColumns = [],
     colHeight = 32,
-    // Rows = [],
+    urlKey = "default",
     fieldsForFilter = {},
     columns,
-
     apiurl,
-
     client = {},
   },
   ref
 ) => {
   const router = useRouter();
   const { query } = router;
-  const offset = parseInt(query.offset || "0", 10);
-  const limitPerPage = parseInt(query.limit || 10);
+  const [sortModel, setSortModel] = useState(
+    query[`${urlKey}_sortModel`] || []
+  );
+
+  const offset = parseInt(query[`${urlKey}_offset`] || "0", 10);
+  const limitPerPage = parseInt(query[`${urlKey}_limit`] || 10);
   const currentPage = Math.floor(offset / limitPerPage);
 
   let parsedFilters = {};
   try {
-    parsedFilters = query.filters ? JSON.parse(query.filters) : {};
+    parsedFilters = query[`${urlKey}_filters`]
+      ? JSON.parse(query[`${urlKey}_filters`])
+      : {};
   } catch (e) {
     console.warn("Invalid filters in query string");
   }
 
   const [rowCount, setRowCount] = useState(0);
   const [appliedFilters, setAppliedFilters] = useState(parsedFilters);
-  const [searchTerm, setSearchTerm] = useState(query.searchTerm || "");
+  const [searchTerm, setSearchTerm] = useState(
+    query[`${urlKey}_searchTerm`] || ""
+  );
   const [paginationModel, setPaginationModel] = useState({
     page: currentPage,
     pageSize: limitPerPage,
@@ -167,16 +184,34 @@ const ServerSideGrid = (
       setRowCount(total_count);
       setPreviousPaginationModel(paginationModel);
       const clientIsNotEmpty = client && Object.keys(client).length > 0;
+      // router.replace(
+      //   {
+      //     pathname: router.pathname,
+      //     query: {
+      //       ...router.query,
+      //       offset,
+      //       limit: paginationModel.pageSize,
+      //       searchTerm,
+      //       filters: JSON.stringify(appliedFilters),
+      //       ...(clientIsNotEmpty && { client: JSON.stringify(client) }),
+      //     },
+      //   },
+      //   undefined,
+      //   { shallow: true }
+      // );
       router.replace(
         {
           pathname: router.pathname,
           query: {
             ...router.query,
-            offset,
-            limit: paginationModel.pageSize,
-            searchTerm,
-            filters: JSON.stringify(appliedFilters),
-            ...(clientIsNotEmpty && { client: JSON.stringify(client) }),
+            [`${urlKey}_offset`]: offset,
+            [`${urlKey}_limit`]: paginationModel.pageSize,
+            [`${urlKey}_searchTerm`]: searchTerm,
+            [`${urlKey}_sortModel`]: sortModel,
+            [`${urlKey}_filters`]: JSON.stringify(appliedFilters),
+            ...(clientIsNotEmpty && {
+              [`${urlKey}_client`]: JSON.stringify(client),
+            }),
           },
         },
         undefined,
@@ -288,60 +323,60 @@ const ServerSideGrid = (
     }, 400);
 
     return () => clearTimeout(timer);
-  }, [searchTerm]);
+  }, [searchTerm,sortModel]);
   const memoizedFieldsForFilter = useMemo(() => fieldsForFilter, []);
-const StyledGridOverlay = styled('div')(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  height: '100%',
-  '& .no-rows-primary': {
-    fill: '#3D4751',
-    ...theme.applyStyles('light', {
-      fill: '#AEB8C2',
-    }),
-  },
-  '& .no-rows-secondary': {
-    fill: '#1D2126',
-    ...theme.applyStyles('light', {
-      fill: '#E8EAED',
-    }),
-  },
-}));
+  const StyledGridOverlay = styled("div")(({ theme }) => ({
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%",
+    "& .no-rows-primary": {
+      fill: "#3D4751",
+      ...theme.applyStyles("light", {
+        fill: "#AEB8C2",
+      }),
+    },
+    "& .no-rows-secondary": {
+      fill: "#1D2126",
+      ...theme.applyStyles("light", {
+        fill: "#E8EAED",
+      }),
+    },
+  }));
 
-function CustomNoRowsOverlay() {
-  return (
-    <StyledGridOverlay>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        width={96}
-        viewBox="0 0 452 257"
-        aria-hidden
-        focusable="false"
-      >
-        <path
-          className="no-rows-primary"
-          d="M348 69c-46.392 0-84 37.608-84 84s37.608 84 84 84 84-37.608 84-84-37.608-84-84-84Zm-104 84c0-57.438 46.562-104 104-104s104 46.562 104 104-46.562 104-104 104-104-46.562-104-104Z"
-        />
-        <path
-          className="no-rows-primary"
-          d="M308.929 113.929c3.905-3.905 10.237-3.905 14.142 0l63.64 63.64c3.905 3.905 3.905 10.236 0 14.142-3.906 3.905-10.237 3.905-14.142 0l-63.64-63.64c-3.905-3.905-3.905-10.237 0-14.142Z"
-        />
-        <path
-          className="no-rows-primary"
-          d="M308.929 191.711c-3.905-3.906-3.905-10.237 0-14.142l63.64-63.64c3.905-3.905 10.236-3.905 14.142 0 3.905 3.905 3.905 10.237 0 14.142l-63.64 63.64c-3.905 3.905-10.237 3.905-14.142 0Z"
-        />
-        <path
-          className="no-rows-secondary"
-          d="M0 10C0 4.477 4.477 0 10 0h380c5.523 0 10 4.477 10 10s-4.477 10-10 10H10C4.477 20 0 15.523 0 10ZM0 59c0-5.523 4.477-10 10-10h231c5.523 0 10 4.477 10 10s-4.477 10-10 10H10C4.477 69 0 64.523 0 59ZM0 106c0-5.523 4.477-10 10-10h203c5.523 0 10 4.477 10 10s-4.477 10-10 10H10c-5.523 0-10-4.477-10-10ZM0 153c0-5.523 4.477-10 10-10h195.5c5.523 0 10 4.477 10 10s-4.477 10-10 10H10c-5.523 0-10-4.477-10-10ZM0 200c0-5.523 4.477-10 10-10h203c5.523 0 10 4.477 10 10s-4.477 10-10 10H10c-5.523 0-10-4.477-10-10ZM0 247c0-5.523 4.477-10 10-10h231c5.523 0 10 4.477 10 10s-4.477 10-10 10H10c-5.523 0-10-4.477-10-10Z"
-        />
-      </svg>
-      <Box sx={{ mt: 2 }}>No rows</Box>
-    </StyledGridOverlay>
-  );
-}
+  function CustomNoRowsOverlay() {
+    return (
+      <StyledGridOverlay>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          width={96}
+          viewBox="0 0 452 257"
+          aria-hidden
+          focusable="false"
+        >
+          <path
+            className="no-rows-primary"
+            d="M348 69c-46.392 0-84 37.608-84 84s37.608 84 84 84 84-37.608 84-84-37.608-84-84-84Zm-104 84c0-57.438 46.562-104 104-104s104 46.562 104 104-46.562 104-104 104-104-46.562-104-104Z"
+          />
+          <path
+            className="no-rows-primary"
+            d="M308.929 113.929c3.905-3.905 10.237-3.905 14.142 0l63.64 63.64c3.905 3.905 3.905 10.236 0 14.142-3.906 3.905-10.237 3.905-14.142 0l-63.64-63.64c-3.905-3.905-3.905-10.237 0-14.142Z"
+          />
+          <path
+            className="no-rows-primary"
+            d="M308.929 191.711c-3.905-3.906-3.905-10.237 0-14.142l63.64-63.64c3.905-3.905 10.236-3.905 14.142 0 3.905 3.905 3.905 10.237 0 14.142l-63.64 63.64c-3.905 3.905-10.237 3.905-14.142 0Z"
+          />
+          <path
+            className="no-rows-secondary"
+            d="M0 10C0 4.477 4.477 0 10 0h380c5.523 0 10 4.477 10 10s-4.477 10-10 10H10C4.477 20 0 15.523 0 10ZM0 59c0-5.523 4.477-10 10-10h231c5.523 0 10 4.477 10 10s-4.477 10-10 10H10C4.477 69 0 64.523 0 59ZM0 106c0-5.523 4.477-10 10-10h203c5.523 0 10 4.477 10 10s-4.477 10-10 10H10c-5.523 0-10-4.477-10-10ZM0 153c0-5.523 4.477-10 10-10h195.5c5.523 0 10 4.477 10 10s-4.477 10-10 10H10c-5.523 0-10-4.477-10-10ZM0 200c0-5.523 4.477-10 10-10h203c5.523 0 10 4.477 10 10s-4.477 10-10 10H10c-5.523 0-10-4.477-10-10ZM0 247c0-5.523 4.477-10 10-10h231c5.523 0 10 4.477 10 10s-4.477 10-10 10H10c-5.523 0-10-4.477-10-10Z"
+          />
+        </svg>
+        <Box sx={{ mt: 2 }}>No rows</Box>
+      </StyledGridOverlay>
+    );
+  }
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -358,9 +393,8 @@ function CustomNoRowsOverlay() {
         getRowId={(row) => row.id} // 👈 use slNo as unique ID
         slots={{
           toolbar: CustomToolbar, // Pass memoized component directly
-           
           noRowsOverlay: CustomNoRowsOverlay,
-        // }}
+          // }}
         }}
         slotProps={{
           toolbar: {
@@ -369,6 +403,9 @@ function CustomNoRowsOverlay() {
             setAppliedFilters,
             fieldsForFilter: memoizedFieldsForFilter,
             searchTerm,
+            sortModel,
+            setSortModel,
+            sortableColumns,
             setSearchTerm,
           },
           loadingOverlay: {
@@ -435,7 +472,8 @@ function CustomNoRowsOverlay() {
           },
           "& .MuiTablePagination-displayedRows": {
             fontSize: "12px", // Adjusts the displayed rows font size
-          },"& .MuiDataGrid-cellSkeleton":{justifyContent:"center"},
+          },
+          "& .MuiDataGrid-cellSkeleton": { justifyContent: "center" },
           // "& .MuiDataGrid-skeletonLoadingOverlay": { height: "200px" },
           ".MuiDataGrid-cell:focus": { outline: "none" }, // Removes focus border
           ".MuiDataGrid-cell:focus-within": { outline: "none" },

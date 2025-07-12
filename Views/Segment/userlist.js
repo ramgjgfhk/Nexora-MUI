@@ -1,11 +1,15 @@
 // import TableComponent from "@/Components/ReUsable/serversidegrid";
 import {
+  Avatar,
   Box,
   Button,
   IconButton,
+  ListItemIcon,
+  ListItemText,
   Menu,
   MenuItem,
   Stack,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
@@ -14,13 +18,16 @@ import FromToDatePicker from "@/Components/resuable components/fromToDatePicker"
 // import ServerSideGrid from "@/Components/ReUsable/gridfromscreenfacts";
 import { fetchQALList, fetchUserListNexora } from "@/pages/api/sampleapies";
 import ServerSideGrid from "@/Components/ReUsable/userpagegrid";
-import { ContentCopy } from "@mui/icons-material";
+import { ContentCopy, LocationOn, PersonOutline, Phone } from "@mui/icons-material";
 import { MoreVert } from "@mui/icons-material";
 import UserDetailsModal from "../User/UserList/userDetails";
+import { FaEdit, FaEye, FaTrashAlt } from "react-icons/fa";
+import { useRouter } from "next/router";
 // import FromToDatePicker from "./FromToDatePicker";
 // import dayjs from "dayjs";
 
-const SegmentList = () => {
+const SegmentList = () => {  const [anchorEl, setAnchorEl] = React.useState(null);
+const router=useRouter()
   const renderValue = (value) => value ?? "—";
   const [open, setOpen] = useState(false);
   const [menuAnchorEl, setMenuAnchorEl] = useState(null);
@@ -48,50 +55,110 @@ const SegmentList = () => {
       return "—";
     }
   };
+const renderAudienceCell = (params) => {
+  
+  const name = params.row.name ?? "—";
+  const email = params.row.email ?? "—";
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [hover, setHover] = React.useState(false);
+
+  const open = Boolean(anchorEl);
+
+  const handleMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <Box
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        width: "100%",
+        height: "100%",
+        pr: 1,
+      }}
+    >
+      <Box sx={{ display: "flex", alignItems: "center", gap: 1.2 }}>
+          <Avatar
+            sx={{
+              bgcolor: "#E3F2FD",
+              color: "#1565C0",
+              width: 25,
+              height: 25,
+            }}
+          >
+            <PersonOutline sx={{ fontSize: 14 }} />
+          </Avatar>
+        <Stack spacing={0} sx={{ justifyContent: "center",alignItems:"start" }}>
+          <Typography sx={{ fontSize: "0.75rem", fontWeight: 600 }}>
+            {name}
+          </Typography>
+          <Typography sx={{ fontSize: "0.7rem", color: "text.secondary" }}>
+            {email}
+          </Typography>
+        </Stack>
+      </Box>
+    </Box>
+  );
+};
   const columns = [
-    {
-      field: "slNo",
-      headerName: "#",
-      flex: 0.3,
-      minWidth: 80,
-      headerAlign: "center",
-    },
-    {
-      field: "nexora_id",
+    // {
+    //   field: "slNo",
+    //   headerName: "#",
+    //   flex: 0.3,
+    //   minWidth: 80,
+    //   headerAlign: "center",
+    // },   
+     {  
+      field: "name",
       headerName: "Audiences",
       flex: 2,
       minWidth: 100,
-      //   headerAlign: "center",
-      renderCell: (params) => {
-        const name = params.row.name ?? "—";
-        const nexoraId = params.row.nexora_id ?? "—";
+      renderCell: renderAudienceCell,
+    },
+    // {
+    //   field: "nexora_id",
+    //   headerName: "Audiences",
+    //   flex: 2,
+    //   minWidth: 100,
+    //   //   headerAlign: "center",
+    //   renderCell: (params) => {
+    //     const name = params.row.name ?? "—";
+    //     const nexoraId = params.row.nexora_id ?? "—";
 
-        return (
-          <>
-            <Stack
-              spacing={0.5}
-              sx={{
-                height: "100%",
-                alignItems: "flex-start",
-                fontSize: "0.2rem",
-                color: "text.primary",
-                justifyContent: "center",
-              }}
-            >
-              <Typography sx={{ fontSize: "0.7rem" }}>
-                <b></b> {name || "-"}
-              </Typography>
-              <Typography sx={{ fontSize: "0.7rem" }}>
-                <ContentCopy
-                  sx={{ fontSize: "14px", mb: -0.5, color: "gray" }}
-                />{" "}
-                <b>ID:</b> {nexoraId || "-"}
-              </Typography>
-            </Stack>
-          </>
-        );
-      },
+    //     return (
+    //       <>
+    //         <Stack
+    //           spacing={0.5}
+    //           sx={{
+    //             height: "100%",
+    //             alignItems: "flex-start",
+    //             fontSize: "0.2rem",
+    //             color: "text.primary",
+    //             justifyContent: "center",
+    //           }}
+    //         >
+    //           <Typography sx={{ fontSize: "0.7rem" }}>
+    //             <b></b> {name || "-"}
+    //           </Typography>
+    //           <Typography sx={{ fontSize: "0.7rem" }}>
+    //             <ContentCopy
+    //               sx={{ fontSize: "14px", mb: -0.5, color: "gray" }}
+    //             />{" "}
+    //             <b>ID:</b> {nexoraId || "-"}
+    //           </Typography>
+    //         </Stack>
+    //       </>
+    //     );
+    //   },
 
       //  renderCell: (params) => {
       //         const rawDate = params.value;
@@ -107,7 +174,7 @@ const SegmentList = () => {
       //           year: "numeric",
       //         });
       //       },
-    },
+    // },
     //   {
     //     field: 'name',
     //     headerName: 'Name',
@@ -116,22 +183,114 @@ const SegmentList = () => {
     //   headerAlign: "center",
     //     // valueGetter: (params) => renderValue(params.row.name),
     //   },
-    {
-      field: "email",
-      headerName: "Email",
-      flex: 1.5,
-      minWidth: 130,
-      headerAlign: "center",
-      // valueGetter: (params) => renderValue(params.row.email),
-    },
-    {
-      field: "mobile",
-      headerName: "Mobile",
-      flex: 1.5,
-      minWidth: 130,
-      headerAlign: "center",
-      // valueGetter: (params) => renderValue(params.row.mobile),
-    },
+    // {
+    //   field: "email",
+    //   headerName: "Email",
+    //   flex: 1.5,
+    //   minWidth: 130,
+    //   headerAlign: "center",
+    //   // valueGetter: (params) => renderValue(params.row.email),
+    // },
+       {
+          field: "nexora_id",
+          headerName: "Nexora ID",
+          flex: 1,
+          minWidth: 80,
+          renderCell: (params) => {
+            const [hover, setHover] = React.useState(false);
+            const [tooltipTitle, setTooltipTitle] =
+              React.useState("Copy to clipboard");
+    
+            const value = params.value ?? "—";
+    
+            const handleCopy = async () => {
+              try {
+                await navigator.clipboard.writeText(value);
+                setTooltipTitle("Copied!");
+    
+                setTimeout(() => {
+                  setTooltipTitle("Copy to clipboard");
+                }, 1500);
+              } catch (err) {
+                console.error("Failed to copy:", err);
+              }
+            };
+    
+            return (
+              <div
+                onMouseEnter={() => setHover(true)}
+                onMouseLeave={() => {
+                  setHover(false);
+                  setTooltipTitle("Copy to clipboard"); // Reset if hover out early
+                }}
+                style={{ display: "flex", alignItems: "center", gap: 6 }}
+              >
+                <span>{value}</span>
+                {hover && (
+                  <Tooltip title={tooltipTitle} arrow>
+                    <ContentCopy
+                      sx={{ fontSize: 14, color: "gray", cursor: "pointer" }}
+                      onClick={handleCopy}
+                    />
+                  </Tooltip>
+                )}
+              </div>
+            );
+          },
+        },
+    // {
+    //   field: "mobile",
+    //   headerName: "Mobile",
+    //   flex: 1.5,
+    //   minWidth: 130,
+    //   headerAlign: "center",
+    //   // valueGetter: (params) => renderValue(params.row.mobile),
+    // },
+       {
+          field: "mobile",
+          headerName: "Contact",
+          flex: 1.5,
+          minWidth: 160,
+          renderCell: (params) => {
+            const mobile = params.row.mobile ?? "—";
+            const location = params.row.location ?? "Not Found";
+    
+            return (
+              <Box
+                sx={{
+                  height: "100%", // important for vertical alignment
+                  display: "flex",
+                  alignItems: "center", // vertical centering
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    gap: 0.5,
+                    whiteSpace: "normal",
+                  }}
+                >
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+                    <Phone sx={{ fontSize: 12, color: "#2E7D32" }} />
+                    <Typography variant="body2" sx={{ fontSize: "12px" }}>
+                      {mobile}
+                    </Typography>
+                  </Box>
+                  {/* <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+                    <LocationOn sx={{ fontSize: 12, color: "red" }} />
+                    <Typography
+                      sx={{ fontSize: "0.7rem", color: "text.secondary" }}
+                    >
+                      {location}
+                    </Typography>
+                  </Box> */}
+                </Box>
+              </Box>
+            );
+          },
+        },
     //   {
     //     field: 'user_identifier',
     //     headerName: 'User Identifier',
@@ -219,8 +378,80 @@ const SegmentList = () => {
           </IconButton>
         </>
       ),
-    },
-  ];
+    },  
+    //  {
+    //       field: "Action",
+    //       headerName: "Action",
+    //       flex: 1,
+    //       minWidth: 80,
+    //       renderCell: (params) => {
+    //         const rowData = params.value;
+    //         return (
+    //           <>
+    //             <Tooltip title="Actions">
+    //               <IconButton
+    //                 size="small"
+    //                  onClick={(event) => {
+    //           event.stopPropagation(); // ✅ Prevent row selection
+    //          handleMenuClick(event)
+    //         }}
+    //                 sx={{
+    //                   p: 0.5,
+    //                   ml: 1,
+    //                   border: "none",
+    //                   borderRadius: "50%",
+    //                   "&:hover": { backgroundColor: "#F4F6F3" },
+    //                   "&.Mui-focusVisible": { backgroundColor: "transparent" },
+    //                 }}
+    //               >
+    //                 <MoreVert sx={{ fontSize: 18 }} />
+    //               </IconButton>
+    //             </Tooltip>
+    //             <Menu
+    //               anchorEl={anchorEl}
+    //               open={open}
+    //               onClose={handleMenuClose}
+    //               anchorOrigin={{
+    //                 vertical: "bottom",
+    //                 horizontal: "right",
+    //               }}
+    //               transformOrigin={{
+    //                 vertical: "top",
+    //                 horizontal: "right",
+    //               }}
+    //             >
+    //               <MenuItem onClick={() => router.push("/user-profile")}>
+    //                 <ListItemIcon>
+    //                   <FaEye style={{ color: "#1976D2", fontSize: 16 }} />
+    //                 </ListItemIcon>
+    //                 <ListItemText primary="View" />
+    //               </MenuItem>
+    
+    //               <MenuItem onClick={() => console.log("Edit")}>
+    //                 <ListItemIcon>
+    //                   <FaEdit style={{ color: "#0288D1", fontSize: 16 }} />
+    //                 </ListItemIcon>
+    //                 <ListItemText primary="Edit" />
+    //               </MenuItem>
+    
+    //               <MenuItem onClick={() => console.log("Delete")}>
+    //                 <ListItemIcon>
+    //                   <FaTrashAlt style={{ color: "#D32F2F", fontSize: 16 }} />
+    //                 </ListItemIcon>
+    //                 <ListItemText primary="Delete" />
+    //               </MenuItem>
+    //             </Menu>
+    //           </>
+    //         );
+    //       },
+    //     },
+  ];  const handleMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <Box
       sx={{ display: "flex", gap: 2, flexDirection: "column", width: "100%" }}
@@ -404,10 +635,7 @@ const SegmentList = () => {
           Delete
         </MenuItem>
         <MenuItem
-          onClick={() => {
-            handleCloseMenu();
-            setOpen(true);
-          }}
+      onClick={() => router.push("/user-profile")}
         >
           View Details
         </MenuItem>
