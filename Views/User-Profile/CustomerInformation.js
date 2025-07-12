@@ -22,8 +22,9 @@ import {
 import React from "react";
 import { customerData } from "../User/UserProfile/UserProfileComponents/userProfileVariable";
 import { GlassCard } from "../User/UserProfile/UserProfileComponents/ProfileCard";
+import { dateFormate } from "@/utils/DateFormat";
 
-const CustomerInformation = () => {
+const CustomerInformation = ({ data }) => {
   return (
     <GlassCard>
       <CardContent sx={{ p: 1 }}>
@@ -56,10 +57,7 @@ const CustomerInformation = () => {
                       fontSize="small"
                     />
                   </ListItemIcon>
-                  <ListItemText
-                    primary={customerData.email}
-                    secondary="Email"
-                  />
+                  <ListItemText primary={data.email} secondary="Email" />
                 </ListItem>
                 <ListItem sx={{ px: 0 }}>
                   <ListItemIcon sx={{ minWidth: 36 }}>
@@ -68,10 +66,7 @@ const CustomerInformation = () => {
                       fontSize="small"
                     />
                   </ListItemIcon>
-                  <ListItemText
-                    primary={customerData.phone}
-                    secondary="Phone"
-                  />
+                  <ListItemText primary={data.mobile} secondary="Phone" />
                 </ListItem>
                 <ListItem sx={{ px: 0 }}>
                   <ListItemIcon sx={{ minWidth: 36 }}>
@@ -152,7 +147,7 @@ const CustomerInformation = () => {
                 <Schedule color="info" fontSize="small" />
               </ListItemIcon>
               <ListItemText
-                primary={customerData.firstSeen}
+                primary={dateFormate(data.created_at)}
                 secondary="First Seen"
               />
             </ListItem>
@@ -161,7 +156,7 @@ const CustomerInformation = () => {
                 <Schedule color="info" fontSize="small" />
               </ListItemIcon>
               <ListItemText
-                primary={customerData.lastSeen}
+                primary={dateFormate(data.updated_at)}
                 secondary="Last Seen"
               />
             </ListItem>

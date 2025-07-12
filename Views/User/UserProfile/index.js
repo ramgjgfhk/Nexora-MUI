@@ -4,13 +4,17 @@ import UserDetails from "./userDetails";
 import UserActivity from "./userActivity";
 import UserEngagement from "./userEngagement";
 import UserProfiles from "./userProfile";
+import { useRouter } from "next/router";
 
 const UserProfile = () => {
+  const router = useRouter()
   const [activeTab, setActiveTab] = React.useState("profile");
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
+
+  
 
   return (
     <Box className="content" sx={{ fontFamily: "Roboto, sans-serif",mt:{xs:10,md:1,lg:0} }}>

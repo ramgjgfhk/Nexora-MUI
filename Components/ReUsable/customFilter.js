@@ -42,7 +42,7 @@ const FilterModalComponent = ({
 }) => {
   const [open, setOpen] = useState(false);
   // const [appliedFilters, setAppliedFilters] = useState({});
-  console.log("filter", appliedFilters);
+  // console.log("filter", appliedFilters);
 
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

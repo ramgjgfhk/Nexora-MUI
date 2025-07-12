@@ -462,6 +462,15 @@ const SegmentList = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+
+  const handleNavigateUserPage = () => {
+    const encodedId = btoa(selectedRow?.nexora_id);
+    router.push({
+      pathname: "/user-profile",
+      query: { id: encodedId },
+    });
+    console.log(selectedRow?.nexora_id);
+  };
   return (
     <Box
       sx={{ display: "flex", gap: 2, flexDirection: "column", width: "100%" }}
@@ -644,7 +653,7 @@ const SegmentList = () => {
         >
           Delete
         </MenuItem>
-        <MenuItem onClick={() => router.push("/user-profile")}>
+        <MenuItem onClick={() => handleNavigateUserPage()}>
           View Details
         </MenuItem>
       </Menu>
