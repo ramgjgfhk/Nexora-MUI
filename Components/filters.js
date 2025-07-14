@@ -10,11 +10,18 @@ import {
   Typography,
   FormControl,
   Divider,
+  Stack,
 } from "@mui/material";
-import { Add, Delete, Tune } from "@mui/icons-material";
+import {
+  Add,
+  Cancel,
+  Delete,
+  DisabledByDefaultRounded,
+  Tune,
+} from "@mui/icons-material";   import { useTheme, useMediaQuery } from "@mui/material";
 
 const operatorMap = {
-  string: ["contains", "startsWith", "endsWith", "equals", "not"],
+  string: ["contains", "startsssssssssssssssssssssssssssWith", "endsWith", "equals", "not"],
   number: ["=", "!=", "<", "<=", ">", ">="],
   date: ["before", "after", "on"],
   boolean: ["is true", "is false"],
@@ -32,6 +39,13 @@ export default function AdvancedFilterButton({
   setFilterModell,
   columns,
 }) {
+ 
+
+// inside your component
+const theme = useTheme();
+const isSm = useMediaQuery(theme.breakpoints.down("sm"));
+const isMd = useMediaQuery(theme.breakpoints.down("md"));
+
   const [filterModel, setFilterModel] = useState(filterModell);
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -79,10 +93,10 @@ export default function AdvancedFilterButton({
     return (
       <TextField
         size="small"
-        value={rule.value}
+        value={rule.value}fullWidth
         onChange={(e) => handleChange(idx, "value", e.target.value)}
         placeholder="Value"
-        sx={{ flex: 1 }}
+        
       />
     );
   };
@@ -98,96 +112,153 @@ export default function AdvancedFilterButton({
         <Typography variant="subtitle2">Filters</Typography>
       </Button>
 
-      <Popover
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-        PaperProps={{ sx: { p: 2, width: 560 } }}
+
+<Popover
+  open={open}
+  anchorEl={anchorEl}
+  onClose={handleClose}
+  anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+  PaperProps={{
+    sx: {
+      p: 2,
+      my: 1,
+      width: isSm ? "90%" : isMd ? "60%" : "40%",
+      minWidth: isSm ? "none" : "400px",
+      maxWidth: "95vw",
+    },
+  }}
+>
+  <Stack direction="row" justifyContent="space-between" alignItems="center" mb={1}>
+    <Typography variant="subtitle2">Advanced Filters</Typography>
+    <DisabledByDefaultRounded
+      onClick={handleClose}
+      fontSize="small"
+      sx={{
+        color: "#C92424",
+        cursor: "pointer",
+        borderRadius: "6px",
+        transition: "all 0.2s ease",
+        "&:hover": {
+          backgroundColor: "rgba(255, 102, 102, 0.15)",
+          transform: "scale(1.1)",
+        },
+      }}
+    />
+  </Stack>
+
+  <Box display="flex" alignItems="center" gap={1} mb={1}>
+    <FormControl size="small" sx={{ width: isSm ? "50%" : "20%" }}>
+      <Select
+        size="small"
+        value={filterModel.logic}
+        onChange={handleLogicChange}
       >
-        <Typography variant="subtitle2" mb={1}>
-          Advanced Filters
-        </Typography>
+        <MenuItem value="AND">All (AND)</MenuItem>
+        <MenuItem value="OR">Any (OR)</MenuItem>
+      </Select>
+    </FormControl>
+  </Box>
 
-        <Box display="flex" alignItems="center" gap={1} mb={1}>
-          {/* <Typography variant='subtitle1'>Match</Typography> */}
-          <FormControl size="small" sx={{ minWidth: 100 }}>
-            <Select
-              size="small"
-              value={filterModel.logic}
-              onChange={handleLogicChange}
-            >
-              <MenuItem value="AND">All (AND)</MenuItem>
-              <MenuItem value="OR">Any (OR)</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
+  <Divider sx={{ mb: 1 }} />
 
-        <Divider sx={{ mb: 1 }} />
-
-        {filterModel.rules.map((rule, idx) => {
-          const colType = getType(columns, rule.colId);
-          return (
-            <Box key={idx} display="flex" gap={1} alignItems="center" mb={1}>
-              <FormControl size="small" sx={{ minWidth: 100 }}>
-                <Select
-                  value={rule.colId}
-                  onChange={(e) => handleChange(idx, "colId", e.target.value)}
-                >
-                  {columns.map((col) => (
-                    <MenuItem key={col.field} value={col.field}>
-                      {col.headerName || col.field}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              <FormControl size="small" sx={{ minWidth: 100 }}>
-                <Select
-                  value={rule.operator}
-                  onChange={(e) =>
-                    handleChange(idx, "operator", e.target.value)
-                  }
-                >
-                  {operatorMap[colType].map((op) => (
-                    <MenuItem key={op} value={op}>
-                      {op}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              {renderValueInput(rule, idx)}
-              <IconButton
-                size="small"
-                onClick={() => handleRemove(idx)}
-                sx={{
-                  backgroundColor: "rgba(211, 47, 47, 0.15)", // light red background
-                  "&:hover": {
-                    backgroundColor: "rgba(211, 47, 47, 0.25)", // darker red on hover
-                  },
-                  color: "#d32f2f", // error color explicitly for icon
-                }}
-              >
-                <Delete fontSize="small" color="error" />
-              </IconButton>
-            </Box>
-          );
-        })}
-
-        <Box display="flex" justifyContent="space-between" mt={2}>
-          <Button size="small" startIcon={<Add />} onClick={handleAddRule}>
-            Add Rule
-          </Button>
-          <Button
-            size="small"
-            variant="contained"
-            onClick={() => {
-              handleClose(), setFilterModell(filterModel);
-            }}
+  {filterModel.rules.map((rule, idx) => {
+    const colType = getType(columns, rule.colId);
+    return (
+      <Box
+        key={idx}
+        display="flex"
+        gap={1}
+        alignItems="center"
+        mb={1}
+        flexWrap="wrap"
+      >
+        <FormControl size="small" sx={{ minWidth: isSm ? "45%" : 100, flex: 0.7 }}>
+          <Select
+            value={rule.colId}
+            onChange={(e) => handleChange(idx, "colId", e.target.value)}
           >
-            Apply
-          </Button>
+            {columns.map((col) => (
+              <MenuItem key={col.field} value={col.field}>
+                {col.headerName || col.field}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+        <FormControl size="small" sx={{ minWidth: isSm ? "45%" : 100, flex: 0.7 }}>
+          <Select
+            value={rule.operator}
+            onChange={(e) => handleChange(idx, "operator", e.target.value)}
+          >
+            {operatorMap[colType].map((op) => (
+              <MenuItem key={op} value={op}>{op}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+        <Box sx={{ flex: isSm ? "1 1 80%" : 2 }}>
+          {renderValueInput(rule, idx)}
         </Box>
-      </Popover>
+
+        <IconButton
+          size="small"
+          onClick={() => handleRemove(idx)}
+          sx={{
+            backgroundColor: "rgba(211, 47, 47, 0.15)",
+            "&:hover": { backgroundColor: "rgba(211, 47, 47, 0.25)" },
+            color: "#d32f2f",
+          }}
+        >
+          <Delete fontSize="small" color="error" />
+        </IconButton>
+      </Box>
+    );
+  })}
+
+  <Box
+    display="flex"
+    justifyContent={isSm ? "center" : "space-between"}
+    mt={2}
+    flexDirection={isSm ? "column" : "row"}
+    gap={isSm ? 1 : 0}
+  >
+    <Button
+      size="small"
+      startIcon={<Add />}
+      onClick={handleAddRule}
+      fullWidth={isSm}
+    >
+      Add Rule
+    </Button>
+
+    <Box display="flex" gap={1} justifyContent={isSm ? "center" : "unset"}>
+      <Button
+        size="small"
+        color="error"
+        variant="outlined"
+        onClick={() => {
+          handleClose();
+          setFilterModell({logic: "AND", rules: [] });
+        }}
+        fullWidth={isSm}
+      >
+        Remove Filters
+      </Button>
+      <Button
+        size="small"
+        variant="contained"
+        onClick={() => {
+          handleClose();
+          setFilterModell(filterModel);
+        }}
+        fullWidth={isSm}
+      >
+        Apply
+      </Button>
+    </Box>
+  </Box>
+</Popover>
+
     </>
   );
 }

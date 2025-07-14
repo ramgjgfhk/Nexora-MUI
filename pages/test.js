@@ -21,15 +21,15 @@ const SegmentPage = () => {
   ];
   return (
     <>
-      <SortPopupButton
+      {/* <SortPopupButton
         sortModel={sortModel}
         setSortModel={setSortModel}
         sortableColumns={columns.map((col) => ({
           colId: col.field,
           headerName: col.headerName,
         }))}
-      />
-      <AdvancedSortButton
+      /> */}
+      {/* <AdvancedSortButton
         sortModel={sortModel}
         setSortModel={setSortModel}
         sortableColumns={sortableColumns}
@@ -38,7 +38,7 @@ const SegmentPage = () => {
         filterModel={filterModel}
         setFilterModel={setFilterModel}
         columns={columns}
-      />{" "}
+      />{" "} */}
       <Box sx={{ width: "100%", maxWidth: 500 }}>
         <Typography variant="h1" gutterBottom>
           h1. Heading
