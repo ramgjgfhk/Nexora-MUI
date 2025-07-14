@@ -1,25 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
-  Button, Popover, Box, IconButton, MenuItem, Select,
-  TextField, Typography, FormControl, Divider
-} from '@mui/material';
-import { Add, Delete, Tune } from '@mui/icons-material';
+  Button,
+  Popover,
+  Box,
+  IconButton,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+  FormControl,
+  Divider,
+} from "@mui/material";
+import { Add, Delete, Tune } from "@mui/icons-material";
 
 const operatorMap = {
-  string: ['contains', 'startsWith', 'endsWith', 'equals', 'not'],
-  number: ['=', '!=', '<', '<=', '>', '>='],
-  date: ['before', 'after', 'on'],
-  boolean: ['is true', 'is false']
+  string: ["contains", "startsWith", "endsWith", "equals", "not"],
+  number: ["=", "!=", "<", "<=", ">", ">="],
+  date: ["before", "after", "on"],
+  boolean: ["is true", "is false"],
 };
-
-const defaultLogic = 'AND';
+// useEffect(() => {
+//  setFilterModel(filterModell)
+// }, [filtermodell]);
+const defaultLogic = "AND";
 
 const getType = (columns, colId) =>
-  columns.find(col => col.field === colId)?.type || 'string';
+  columns.find((col) => col.field === colId)?.type || "string";
 
 export default function AdvancedFilterButton({
-  filterModel, setFilterModel, columns
+  filterModell,
+  setFilterModell,
+  columns,
 }) {
+  const [filterModel, setFilterModel] = useState(filterModell);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const open = Boolean(anchorEl);
@@ -29,10 +42,10 @@ export default function AdvancedFilterButton({
   const handleAddRule = () => {
     const firstCol = columns[0];
     const colId = firstCol.field;
-    const type = firstCol.type || 'string';
+    const type = firstCol.type || "string";
     const operator = operatorMap[type][0];
-    const value = type === 'boolean' ? 'is true' : '';
-    setFilterModel(prev => ({
+    const value = type === "boolean" ? "is true" : "";
+    setFilterModel((prev) => ({
       ...prev,
       rules: [...(prev.rules || []), { colId, operator, value }],
     }));
@@ -42,10 +55,10 @@ export default function AdvancedFilterButton({
     const updatedRules = [...filterModel.rules];
     updatedRules[index][field] = value;
     // Reset operator/value when column changes
-    if (field === 'colId') {
+    if (field === "colId") {
       const type = getType(columns, value);
       updatedRules[index].operator = operatorMap[type][0];
-      updatedRules[index].value = '';
+      updatedRules[index].value = "";
     }
     setFilterModel({ ...filterModel, rules: updatedRules });
   };
@@ -62,12 +75,12 @@ export default function AdvancedFilterButton({
 
   const renderValueInput = (rule, idx) => {
     const type = getType(columns, rule.colId);
-    if (type === 'boolean') return null;
+    if (type === "boolean") return null;
     return (
       <TextField
         size="small"
         value={rule.value}
-        onChange={(e) => handleChange(idx, 'value', e.target.value)}
+        onChange={(e) => handleChange(idx, "value", e.target.value)}
         placeholder="Value"
         sx={{ flex: 1 }}
       />
@@ -82,17 +95,19 @@ export default function AdvancedFilterButton({
         // variant="outlined"
         startIcon={<Tune />}
       >
-    <Typography variant='subtitle2'>Filters</Typography> 
+        <Typography variant="subtitle2">Filters</Typography>
       </Button>
 
       <Popover
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
         PaperProps={{ sx: { p: 2, width: 560 } }}
       >
-        <Typography variant="subtitle2" mb={1}>Advanced Filters</Typography>
+        <Typography variant="subtitle2" mb={1}>
+          Advanced Filters
+        </Typography>
 
         <Box display="flex" alignItems="center" gap={1} mb={1}>
           {/* <Typography variant='subtitle1'>Match</Typography> */}
@@ -117,9 +132,9 @@ export default function AdvancedFilterButton({
               <FormControl size="small" sx={{ minWidth: 100 }}>
                 <Select
                   value={rule.colId}
-                  onChange={(e) => handleChange(idx, 'colId', e.target.value)}
+                  onChange={(e) => handleChange(idx, "colId", e.target.value)}
                 >
-                  {columns.map(col => (
+                  {columns.map((col) => (
                     <MenuItem key={col.field} value={col.field}>
                       {col.headerName || col.field}
                     </MenuItem>
@@ -129,22 +144,30 @@ export default function AdvancedFilterButton({
               <FormControl size="small" sx={{ minWidth: 100 }}>
                 <Select
                   value={rule.operator}
-                  onChange={(e) => handleChange(idx, 'operator', e.target.value)}
+                  onChange={(e) =>
+                    handleChange(idx, "operator", e.target.value)
+                  }
                 >
-                  {operatorMap[colType].map(op => (
-                    <MenuItem key={op} value={op}>{op}</MenuItem>
+                  {operatorMap[colType].map((op) => (
+                    <MenuItem key={op} value={op}>
+                      {op}
+                    </MenuItem>
                   ))}
                 </Select>
               </FormControl>
               {renderValueInput(rule, idx)}
-              <IconButton size="small" onClick={() => handleRemove(idx)}  sx={{
-    backgroundColor: "rgba(211, 47, 47, 0.15)", // light red background
-    "&:hover": {
-      backgroundColor: "rgba(211, 47, 47, 0.25)", // darker red on hover
-    },
-    color: "#d32f2f", // error color explicitly for icon
-  }}>
-                <Delete fontSize="small" color="error"/>
+              <IconButton
+                size="small"
+                onClick={() => handleRemove(idx)}
+                sx={{
+                  backgroundColor: "rgba(211, 47, 47, 0.15)", // light red background
+                  "&:hover": {
+                    backgroundColor: "rgba(211, 47, 47, 0.25)", // darker red on hover
+                  },
+                  color: "#d32f2f", // error color explicitly for icon
+                }}
+              >
+                <Delete fontSize="small" color="error" />
               </IconButton>
             </Box>
           );
@@ -157,7 +180,9 @@ export default function AdvancedFilterButton({
           <Button
             size="small"
             variant="contained"
-            onClick={handleClose}
+            onClick={() => {
+              handleClose(), setFilterModell(filterModel);
+            }}
           >
             Apply
           </Button>

@@ -7,9 +7,9 @@ import { Add, Delete, Sort } from '@mui/icons-material';
 
 const directions = ['asc', 'desc'];
 
-const SortPopupButton = ({ sortableColumns, sortModel, setSortModel }) => {
+const SortPopupButton = ({ sortableColumns, sortModell, setSortModell }) => {
   const [anchorEl, setAnchorEl] = useState(null);
-
+const [sortModel, setSortModel] = useState(sortModell);
   const open = Boolean(anchorEl);
   const handleOpen = (e) => setAnchorEl(e.currentTarget);
   const handleClose = () => setAnchorEl(null);
@@ -108,7 +108,7 @@ const SortPopupButton = ({ sortableColumns, sortModel, setSortModel }) => {
             Add Rule
           </Button>
 
-          <Button variant="contained" size="small" onClick={handleClose}>
+          <Button variant="contained" size="small" onClick={()=>{handleClose(),setSortModell(sortModel)}}>
             Apply
           </Button>
         </Box>

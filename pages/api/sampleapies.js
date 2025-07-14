@@ -9,7 +9,7 @@ const nexora_url = process.env.NEXT_PUBLIC_NEXORA_URL;
 
 // verifierPage apies
 const uat_role_create = "api/master/role/create";
-const uat_qa_list = "api/data_entry/list";const uat_user_list = "api/customer/profile/list";const uat_system_list = "api/events/system_events";
+const uat_qa_list = "api/qa/list";const uat_user_list = "api/customer/profile/list";const uat_system_list = "api/events/system_events";
 const uat_case_details = "api/qa/get";const uat_custom_list = "api/events/custom_events";
 const uat_case_save = "api/qa/save";
 const uat_case_submit = "api/qa/submit";
@@ -43,7 +43,7 @@ async function fetchQAList({ pagination_detail, search, filters, user_id }) {
       headers,
       method,
       body: JSON.stringify({
-        user_id,
+        "user_id":220,
         pagination_detail,
         ...(search && { search }), // Only include 'search' if it's not empty
         ...(filters && { filters }), // Only include 'filters' if it's not empty
@@ -559,7 +559,7 @@ async function veriferSave(data, setAction, router, resetForm) {
 export const fetchQALList = async ({
   search = "",
   filters = {},
-  limit,
+  limit,sort,
   offset,
   //   cookieName = "data",
   //   setAction,
@@ -589,8 +589,8 @@ export const fetchQALList = async ({
       method,
       credentials,
       body: JSON.stringify({
-        pagination_detail: { limit, offset },
-        user_id: "201",
+        pagination_detail: { limit, offset },sort,
+        user_id: "219",
         ...(Object.keys(filters).length > 0 && { filters: filters }),
         ...(search !== "" && { search }),
       }),

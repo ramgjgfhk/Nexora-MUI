@@ -13,6 +13,7 @@ import {
 // import ServerSideGrid from "@/Components/ReUsable/gridfromscreenfacts";
 import {
   fetchCustomeventsNexora,
+  fetchQAList,
   fetchQALList,
   fetchSystemeventsNexora,
   fetchUserListNexora,
@@ -45,12 +46,160 @@ function CustomEvents() {
 5;
 function ConversionEvents() {
   return (
-    <Paper elevation={2} sx={{ p: 4, m: 2 }}>
-      <Typography variant="h6">Conversion Events Component</Typography>
-      <Typography>
-        This component displays conversion metrics and related events.
-      </Typography>
-    </Paper>
+    // <Paper elevation={2} sx={{ p: 4, m: 2 }}>
+    //   <Typography variant="h6">Conversion Events Component</Typography>
+    //   <Typography>
+    //     This component displays conversion metrics and related events.
+    //   </Typography>
+    // </Paper>
+    <ServerSideGrid
+      sortableColumns={[
+        { headerName: "Name", colId: "name" },
+        { headerName: "Age", colId: "age" },
+        { headerName: "City", colId: "city" },
+      ]}
+      columns={[
+        // ...(privilege.includes("view_qa_form")
+        //   ? [
+        //       {
+        //         field: "action",
+        //         headerName: "Action",
+        //         flex: 1,
+        //         minWidth: 90,
+        //         headerAlign: "center",
+        //         cellClassName: "sticky-action-column",
+        //         headerClassName: "sticky-action-header",
+        //         renderCell: (params) => (
+        //           <CustomViewButton
+        //             style={{ cursor: "pointer", padding: 5 }}
+        //             onClick={async () => {
+        //               setloader(true); // Start loader
+
+        //               try {
+        //                 const cookieData = getCookie("data");
+        //                 if (!cookieData)
+        //                   throw new Error("Cookie 'data' not found");
+
+        //                 const parsedData = JSON.parse(cookieData);
+        //                 const myObj = {
+        //                   id: params.row.id,
+        //                   user_id: parsedData.user_id,
+        //                 };
+
+        //                 console.log(
+        //                   "id-user_id",
+        //                   params.row.id,
+        //                   parsedData.user_id
+        //                 );
+
+        //                 const encodedData = btoa(JSON.stringify(myObj));
+
+        //                 await route.push({
+        //                   pathname: "/QA-form",
+        //                   query: { data: encodedData },
+        //                 });
+
+        //                 setloader(false); // Stop loader after successful navigation
+        //               } catch (error) {
+        //                 setloader(false); // Stop loader on error
+        //                 console.error("Error:", error);
+        //                 setAction((prev) => ({
+        //                   ...prev,
+        //                   openSnackbar: true,
+        //                   snackBarData: {
+        //                     title: "Error",
+        //                     text:
+        //                       error.message || "An unexpected error occurred.",
+        //                     severity: "error",
+        //                   },
+        //                 }));
+        //               }
+        //             }}
+        //           />
+        //         ),
+        //       },
+        //     ]
+        //   : []),
+        {
+          field: "slNo",
+          headerName: "Sl No",
+          flex: 1,
+          minWidth: 80,
+          headerAlign: "center",
+        },
+        {
+          field: "client_name",
+          headerName: "Client Name",
+          // width: 150,
+          headerAlign: "center",
+          flex: 3,
+          minWidth: 170,
+        },
+        {
+          field: "batch_no",
+          headerName: "Batch No",
+          flex: 1,
+          minWidth: 130,
+          headerAlign: "center",
+        },
+        {
+          field: "sf_ref_no",
+          headerName: "SF Ref No",
+          flex: 1,
+          minWidth: 130,
+          headerAlign: "center",
+        },
+
+        {
+          field: "candidate_name",
+          headerName: "Candidate Name",
+          flex: 4,
+          minWidth: 200,
+          headerAlign: "center",
+          valueGetter: (value, row) => {
+            return `${row?.candidate_fname || ""} ${
+              row?.candidate_lname || ""
+            }`;
+          },
+        },
+
+   
+      ]}
+      // colHeight={45}urlKey="system_events"
+      // rowss={list}
+      // fieldsForFilter={[
+      //   "client_name",
+      //   "batch_no",
+      //   "TAT",
+      //   "status",
+      //   "CV ID",
+      // ]}
+      fieldsForFilter={{
+        text: [
+          { label: "Name", name: "name" },
+          { label: "City", name: "city" },
+        ],
+        date: [
+          { label: "From", name: "startDate" },
+          { label: "To", name: "endDate" },
+          { label: "Created At", name: "created_at" },
+          { label: "Updated At", name: "updated_at" },
+        ],
+        autocomplete: [
+          {
+            label: "Statssus",
+            name: "status",
+            options: ["Active", "Inactive"],
+          },
+          {
+            label: "Type",
+            name: "status",
+            options: ["Past Behaviour", "Live Action"],
+          },
+        ],
+      }}
+      apiurl={fetchQALList}
+    />
   );
 }
 
@@ -105,8 +254,10 @@ export default function SchemaEvents() {
                 <b></b> {name || "-"}
               </Typography>
               <Typography sx={{ fontSize: "0.7rem" }}>
-                <ContentCopy sx={{ fontSize: "14px", mb: -0.5,color:'gray' }} /> <b>ID:</b>{" "}
-                {nexoraId || "-"}
+                <ContentCopy
+                  sx={{ fontSize: "14px", mb: -0.5, color: "gray" }}
+                />{" "}
+                <b>ID:</b> {nexoraId || "-"}
               </Typography>
             </Stack>
           </>
@@ -502,13 +653,14 @@ export default function SchemaEvents() {
           // />
 
           <ServerSideGrid
-              sortableColumns = {[
-      { headerName: "Name", colId: "name" },
-      { headerName: "Age", colId: "age" },
-      { headerName: "City", colId: "city"  },  
-    ]}
+            sortableColumns={[
+              { headerName: "Name", colId: "name" },
+              { headerName: "Age", colId: "age" },
+              { headerName: "City", colId: "city" },
+            ]}
             columns={columns}
-            colHeight={45}urlKey="system_events"
+            colHeight={45}
+            urlKey="system_events"
             // rowss={list}
             // fieldsForFilter={[
             //   "client_name",
@@ -545,11 +697,13 @@ export default function SchemaEvents() {
           />
         )}
         {tabIndex === 1 && (
-          <ServerSideGrid urlKey="custom_events"             sortableColumns = {[
-      { headerName: "Name", colId: "name" },
-      { headerName: "Age", colId: "age" },
-      { headerName: "City", colId: "city"  },  
-    ]}
+          <ServerSideGrid
+            urlKey="custom_events"
+            sortableColumns={[
+              { headerName: "Name", colId: "name" },
+              { headerName: "Age", colId: "age" },
+              { headerName: "City", colId: "city" },
+            ]}
             colHeight={45}
             columns={columns}
             // rowss={list}
@@ -590,7 +744,6 @@ export default function SchemaEvents() {
         {tabIndex === 2 && <ConversionEvents />}
         {tabIndex === 3 && <ChargedEvents />}
       </Box>
-      
     </Box>
   );
 }
