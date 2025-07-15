@@ -33,7 +33,7 @@ import {
   verticalListSortingStrategy,
   useSortable,
 } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
+import { CSS } from "@dnd-kit/utilities";import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 
 const directions = ["asc", "desc"];
 
@@ -43,20 +43,23 @@ function SortRuleItem({ rule, index, onChange, onRemove, sortableColumns }) {
 
   const style = {
     transform: CSS.Transform.toString(transform),
-    transition,
-    display: "flex",
-    alignItems: "center",
+    // transition,
+    // display: "flex",
+    // alignItems: "center",
     gap: 8,
     padding: 8,
     marginBottom: 4,
     background: "#f5f5f5",
     borderRadius: 8,
+// position: "relative"
+
   };
 
   return (
     <Box ref={setNodeRef} style={style} {...attributes}>
+      <Box sx={{display:"flex",alignItems:"center"}}>
       <Box sx={{ display: "flex" }} {...listeners}>
-        <DragIndicator sx={{ cursor: "grab" }} />
+        <DragIndicator sx={{ cursor: "grab",fontSize:"18px" }} />
       </Box>
       <FormControl size="small" sx={{ width: 150 }}>
         <Select
@@ -84,7 +87,7 @@ function SortRuleItem({ rule, index, onChange, onRemove, sortableColumns }) {
       </FormControl>
       <IconButton size="small" onClick={() => onRemove(index)}>
         <Delete fontSize="small" color="error" />
-      </IconButton>
+      </IconButton></Box>
     </Box>
   );
 }
@@ -159,7 +162,7 @@ export default function AdvancedSortButton({
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}
-          onDragEnd={handleDragEnd}
+          onDragEnd={handleDragEnd}modifiers={[restrictToVerticalAxis]}
         >
           <SortableContext
             items={sortModel.map((_, i) => i)}
