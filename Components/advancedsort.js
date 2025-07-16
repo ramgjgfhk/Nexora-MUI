@@ -8,18 +8,10 @@ import {
   MenuItem,
   Typography,
   FormControl,
-  Paper,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
-import { FaSort } from "react-icons/fa";
-import { BiSort } from "react-icons/bi";
-import {
-  Add,
-  Delete,
-  DragIndicator,
-  FilterList,
-  Sort,
-  SwapVert,
-} from "@mui/icons-material";
+import { Add, Delete, DragIndicator, FilterList } from "@mui/icons-material";
 import {
   DndContext,
   closestCenter,
@@ -33,36 +25,39 @@ import {
   verticalListSortingStrategy,
   useSortable,
 } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
+import { CSS } from "@dnd-kit/utilities";
+import {
+  restrictToParentElement,
+  restrictToVerticalAxis,
+} from "@dnd-kit/modifiers";
 
 const directions = ["asc", "desc"];
 
 function SortRuleItem({ rule, index, onChange, onRemove, sortableColumns }) {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: index });
+  const { attributes, listeners, setNodeRef, transform } = useSortable({
+    id: index,
+  });
 
   const style = {
     transform: CSS.Transform.toString(transform),
-    // transition,
-    // display: "flex",
-    // alignItems: "center",
-    gap: 8,
     padding: 8,
-    marginBottom: 4,
+    marginBottom: 6,
     background: "#f5f5f5",
     borderRadius: 8,
-// position: "relative"
-
+    display: "flex",
+    alignItems: "center",
+    gap: 8,
+    flexWrap: "wrap",
   };
 
   return (
     <Box ref={setNodeRef} style={style} {...attributes}>
-      <Box sx={{display:"flex",alignItems:"center"}}>
-      <Box sx={{ display: "flex" }} {...listeners}>
-        <DragIndicator sx={{ cursor: "grab",fontSize:"18px" }} />
+      <Box {...listeners} sx={{ display: "flex", alignItems: "center" }}>
+        <DragIndicator sx={{ cursor: "grab", fontSize: 18 }} />
       </Box>
-      <FormControl size="small" sx={{ width: 150 }}>
+      <FormControl size="small" sx={{ minWidth: 120, flexGrow: 1 }}>
         <Select
+          fullWidth
           value={rule.colId}
           onChange={(e) => onChange(index, "colId", e.target.value)}
         >
@@ -73,7 +68,7 @@ function SortRuleItem({ rule, index, onChange, onRemove, sortableColumns }) {
           ))}
         </Select>
       </FormControl>
-      <FormControl size="small" sx={{ width: 80 }}>
+      <FormControl size="small" sx={{ minWidth: 80 }}>
         <Select
           value={rule.sort}
           onChange={(e) => onChange(index, "sort", e.target.value)}
@@ -87,7 +82,7 @@ function SortRuleItem({ rule, index, onChange, onRemove, sortableColumns }) {
       </FormControl>
       <IconButton size="small" onClick={() => onRemove(index)}>
         <Delete fontSize="small" color="error" />
-      </IconButton></Box>
+      </IconButton>
     </Box>
   );
 }
@@ -98,8 +93,11 @@ export default function AdvancedSortButton({
   sortableColumns,
 }) {
   const [sortModel, setSortModel] = useState(sortModell);
-   
   const [anchorEl, setAnchorEl] = useState(null);
+
+  const theme = useTheme();
+  const isXs = useMediaQuery(theme.breakpoints.down("sm"));
+
   const open = Boolean(anchorEl);
   const handleOpen = (e) => setAnchorEl(e.currentTarget);
   const handleClose = () => setAnchorEl(null);
@@ -140,7 +138,6 @@ export default function AdvancedSortButton({
       <Button
         size="small"
         onClick={handleOpen}
-        // variant=""
         startIcon={<FilterList sx={{ mr: -0.8 }} />}
       >
         <Typography variant="subtitle2">Sort</Typography>
@@ -151,37 +148,43 @@ export default function AdvancedSortButton({
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-        PaperProps={{ sx: { p: 2, width: 350, m: 1 } }}
+        PaperProps={{
+          sx: {
+            p: 2,
+            width: isXs ? "90vw" : 350,
+            maxWidth: "95vw",
+            m: 1,
+          },
+        }}
       >
-        {/* <Typography variant="subtitle2" mb={1}>
-          Advanced Sorting
-        </Typography> */}
         <Typography variant="subtitle2" mb={1}>
           Advanced Sorting
         </Typography>
-        <DndContext
-          sensors={sensors}
-          collisionDetection={closestCenter}
-          onDragEnd={handleDragEnd}modifiers={[restrictToVerticalAxis]}
-        >
-          <SortableContext
-            items={sortModel.map((_, i) => i)}
-            strategy={verticalListSortingStrategy}
+        <Box maxHeight="50vh" overflow="auto">
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
+            modifiers={[restrictToVerticalAxis, restrictToParentElement]}
           >
-            {sortModel.map((rule, idx) => (
-              <SortRuleItem
-                key={idx}
-                rule={rule}
-                index={idx}
-                onChange={handleChange}
-                onRemove={handleRemove}
-                sortableColumns={sortableColumns}
-              />
-            ))}
-          </SortableContext>
-        </DndContext>
-
-        <Box mt={1} display="flex" justifyContent="space-between">
+            <SortableContext
+              items={sortModel.map((_, i) => i)}
+              strategy={verticalListSortingStrategy}
+            >
+              {sortModel.map((rule, idx) => (
+                <SortRuleItem
+                  key={idx}
+                  rule={rule}
+                  index={idx}
+                  onChange={handleChange}
+                  onRemove={handleRemove}
+                  sortableColumns={sortableColumns}
+                />
+              ))}
+            </SortableContext>
+          </DndContext>
+        </Box>
+        <Box mt={1} display="flex" justifyContent="space-between" flexWrap="wrap" gap={1}>
           <Button
             size="small"
             startIcon={<Add />}
@@ -190,7 +193,14 @@ export default function AdvancedSortButton({
           >
             Add Rule
           </Button>
-          <Button size="small" variant="contained" onClick={()=>{handleClose(),setSortModell(sortModel)}}>
+          <Button
+            size="small"
+            variant="contained"
+            onClick={() => {
+              handleClose();
+              setSortModell(sortModel);
+            }}
+          >
             Apply
           </Button>
         </Box>
