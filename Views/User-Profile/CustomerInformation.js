@@ -8,7 +8,6 @@ import {
   Schedule,
 } from "@mui/icons-material";
 import {
-  Card,
   CardContent,
   Divider,
   Grid,
@@ -28,18 +27,7 @@ const CustomerInformation = ({ data }) => {
   return (
     <GlassCard>
       <CardContent sx={{ p: 1 }}>
-        {/* <Typography
-          variant="body1"
-          sx={{  mb: 1,color:'black',fontSize:'1rem' }}
-        //   style={{
-        //     fontFamily: "Inter (ttf), Roboto, Helvetica, Arial, sans-serif",
-        //   }}
-        >
-          Customer Information
-        </Typography> */}
-
         <Grid container spacing={3}>
-          {/* Contact Information */}
           <Grid size={{ xs: 12 }}>
             <Paper elevation={0} sx={{ p: 3, borderRadius: 2 }}>
               <Typography

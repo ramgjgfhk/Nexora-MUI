@@ -1,22 +1,18 @@
 import * as React from "react";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import ChartUserByCountry from "./ChartUserByCountry";
-import CustomizedTreeView from "./CustomizedTreeView";
-import CustomizedDataGrid from "./CustomizedDataGrid";
-import HighlightedCard from "./HighlightedCard";
-import PageViewsBarChart from "./PageViewsBarChart";
 import SessionsChart from "./SessionsChart";
 import StatCard from "./StatCard";
-import Copyright from "./internals/components/Copyright";
-import TodayStatCard from "./todatStatCard";
-import { GlassCard } from "../User/UserProfile/UserProfileComponents/ProfileCard";
 import { Campaign } from "@mui/icons-material";
 import RecentCampaigns from "./RecentCampaigns";
 import AudienceSegmentsCard from "./AudienceCard";
 import QuickActionsCard from "./quickAction";
+import UserSegment from "./User-Segment";
+import { GlassCard } from "../User/UserProfile/UserProfileComponents/ProfileCard";
+import { Box } from "@mui/material";
+import CustomizedDataGrid from "./CustomizedDataGrid";
+import CustomizedTreeView from "./CustomizedTreeView";
+import PageViewsBarChart from "./PageViewsBarChart";
 
 const data = [
   {
@@ -64,17 +60,17 @@ export default function MainGrid() {
         spacing={1}
         columns={12}
         sx={{ mb: (theme) => theme.spacing(2) }}
-       >
+      >
         {/* <Grid container> */}
         <Grid size={{ xs: 12, lg: 6 }}>
-          <Typography  variant="subtitle2" gutterBottom>
+          <Typography variant="subtitle2" gutterBottom>
             Today
           </Typography>
           <StatCard />
         </Grid>
 
         <Grid size={{ xs: 12, lg: 6 }}>
-          <Typography  variant="subtitle2" gutterBottom>
+          <Typography variant="subtitle2" gutterBottom>
             This Month
           </Typography>
           <StatCard />
@@ -91,23 +87,43 @@ export default function MainGrid() {
         </Grid>
       </Grid>
       <Grid container spacing={2} sx={{ alignItems: "stretch", mt: 2 }}>
-        <Grid size={{ xs: 12, lg: 5 }} sx={{ display: "flex" }}>
-          <AudienceSegmentsCard />
+        {/* Left Grid */}
+        <Grid
+          size={{ xs: 12, lg: 5 }}
+          sx={{ display: "flex", flexDirection: "column" }}
+        >
+          <AudienceSegmentsCard sx={{ flexGrow: 1 }} />
         </Grid>
-        <Grid size={{ xs: 12, lg: 7 }} sx={{ display: "flex" }}>
-          <QuickActionsCard />
+
+        {/* Right Grid */}
+        <Grid
+          size={{ xs: 12, lg: 7 }}
+          sx={{ display: "flex", flexDirection: "column" }}
+        >
+          <Box sx={{ flexGrow: 1 }}>
+            <QuickActionsCard />
+          </Box>
+          <Box sx={{ flexGrow: 0 }}>
+            <Grid container>
+              <Grid size={{ xs: 12, md: 6 }}>
+                <PageViewsBarChart />
+              </Grid>
+              {/* <Grid size={{ xs: 12, md: 6 }}></Grid> */}
+            </Grid>
+          </Box>
         </Grid>
       </Grid>
-{/* 
-      <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
-        Details
-      </Typography>
 
+      {/* 
+      <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
+      Details
+      </Typography>
+      
       <Grid container spacing={2} columns={12}>
         <Grid item xs={12} lg={9}>
           <CustomizedDataGrid />
         </Grid>
-
+      
         <Grid item xs={12} lg={3}>
           <Stack gap={2} direction={{ xs: "column", sm: "row", lg: "column" }}>
             <CustomizedTreeView />
