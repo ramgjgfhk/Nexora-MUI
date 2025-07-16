@@ -1,7 +1,12 @@
 export const maskMobile = (mobile) => {
-  return mobile?.length > 1
-    ? mobile.slice(0, 3) + "*".repeat(mobile.length - 2)
-    : "*".repeat(mobile?.length || 0);
+  if (!mobile) return "";
+
+  const visibleDigits = 2;
+  const maskedLength = Math.max(mobile.length - visibleDigits, 0);
+  const maskedPart = "*".repeat(maskedLength);
+  const visiblePart = mobile.slice(-visibleDigits);
+
+  return maskedPart + visiblePart;
 };
 
 export const maskEmail = (email) => {

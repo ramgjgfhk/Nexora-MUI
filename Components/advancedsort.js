@@ -90,10 +90,12 @@ function SortRuleItem({ rule, index, onChange, onRemove, sortableColumns }) {
 }
 
 export default function AdvancedSortButton({
-  sortModel,
-  setSortModel,
+  sortModell,
+  setSortModell,
   sortableColumns,
 }) {
+  const [sortModel, setSortModel] = useState(sortModell);
+   
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleOpen = (e) => setAnchorEl(e.currentTarget);
@@ -185,7 +187,7 @@ export default function AdvancedSortButton({
           >
             Add Rule
           </Button>
-          <Button size="small" variant="contained" onClick={handleClose}>
+          <Button size="small" variant="contained" onClick={()=>{handleClose(),setSortModell(sortModel)}}>
             Apply
           </Button>
         </Box>

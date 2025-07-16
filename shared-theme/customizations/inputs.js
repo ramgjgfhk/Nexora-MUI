@@ -7,7 +7,7 @@ import { toggleButtonClasses } from "@mui/material/ToggleButton";
 import CheckBoxOutlineBlankRoundedIcon from "@mui/icons-material/CheckBoxOutlineBlankRounded";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
-import { gray, brand } from "../themePrimitives";
+import { gray, brand, red } from "../themePrimitives";
 
 /* eslint-disable import/prefer-default-export */
 export const inputsCustomizations = {
@@ -88,6 +88,45 @@ export const inputsCustomizations = {
               }),
             },
           },
+{
+  props: {
+    color: "error",
+    variant: "contained",
+  },
+  style: {
+    color: "white",
+    backgroundColor: red[400], // much lighter
+    backgroundImage: `linear-gradient(to bottom, ${red[300]}, ${red[400]})`,
+    // boxShadow: `inset 0 1px 0 ${red[200]}, inset 0 -1px 0 1px hsl(0, 0%, 0%)`,
+    border: `1px solid ${red[300]}`,
+    "&:hover": {
+      backgroundImage: "none",
+      backgroundColor: red[300],
+      boxShadow: "none",
+    },
+    "&:active": {
+      backgroundColor: red[500], // slight darkening on press
+    },
+    ...theme.applyStyles("dark", {
+      color: "black",
+      backgroundColor: red[50],
+      backgroundImage: `linear-gradient(to bottom, ${red[100]}, ${red[50]})`,
+      boxShadow: "inset 0 -1px 0 hsl(0, 30%, 80%)",
+      border: `1px solid ${red[100]}`,
+      "&:hover": {
+        backgroundImage: "none",
+        backgroundColor: red[100],
+        boxShadow: "none",
+      },
+      "&:active": {
+        backgroundColor: red[200],
+      },
+    }),
+  },
+},
+
+
+
           {
             props: {
               color: "secondary",
@@ -144,6 +183,38 @@ export const inputsCustomizations = {
               }),
             },
           },
+          {
+  props: {
+    color: "error",
+    variant: "outlined",
+  },
+  style: {
+    color: red[400], // readable but soft
+    border: "1px solid",
+    borderColor: red[300],
+    backgroundColor: alpha(red[50], 0.2),
+    "&:hover": {
+      backgroundColor: red[100],
+      borderColor: red[400],
+    },
+    "&:active": {
+      backgroundColor: red[200],
+    },
+    ...theme.applyStyles("dark", {
+      color: red[200],
+      backgroundColor: alpha(red[900], 0.2),
+      borderColor: red[700],
+      "&:hover": {
+        backgroundColor: alpha(red[800], 0.4),
+        borderColor: red[500],
+      },
+      "&:active": {
+        backgroundColor: alpha(red[800], 0.5),
+      },
+    }),
+  },
+},
+
           {
             props: {
               color: "secondary",

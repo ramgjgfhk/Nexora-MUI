@@ -45,26 +45,26 @@ import AdvancedFilterButton from "../filters";
 const CustomToolbar = ({
   handleApplyFilters,
   fieldsForFilter,
-  appliedFilters,
-  setAppliedFilters,
+  // appliedFilters,
+  // setAppliedFilters,
   searchTerm,
   setSearchTerm,
-  sortModel,
-  setSortModel,
+  sortModell,
+  setSortModell,
   sortableColumns,
-  filterModel,
-  setFilterModel,
+  filterModell,
+  setFilterModell,
   columns,
 }) => (
   <GridToolbarContainer sx={{pt:1, mb: 0, pr: 1, backgroundColor: "#f9fafb" }}>
     <AdvancedSortButton
-      sortModel={sortModel}
-      setSortModel={setSortModel}
+      sortModell={sortModell}
+      setSortModell={setSortModell}
       sortableColumns={sortableColumns}
     />{" "}
     <AdvancedFilterButton
-      filterModel={filterModel}
-      setFilterModel={setFilterModel}
+      filterModell={filterModell}
+      setFilterModell={setFilterModell}
       columns={columns}
     />
     {/* <FilterModalComponent
@@ -136,10 +136,18 @@ const ServerSideGrid = (
 ) => {
   const router = useRouter();
   const { query } = router;
-  const [sortModel, setSortModel] = useState(
-    query[`${urlKey}_sortModel`] || []
+    let parsedSort = [];
+  try {
+    parsedSort = query[`${urlKey}_sortModel`]
+      ? JSON.parse(query[`${urlKey}_sortModel`])
+      :[] ;
+  } catch (e) {
+    console.warn("Invalid filters in query string");
+  }
+  const [sortModell, setSortModell] = useState(
+   parsedSort
   );
-  const [filterModel, setFilterModel] = useState({ logic: "AND", rules: [] });
+ 
   const offset = parseInt(query[`${urlKey}_offset`] || "0", 10);
   const limitPerPage = parseInt(query[`${urlKey}_limit`] || 10);
   const currentPage = Math.floor(offset / limitPerPage);
@@ -148,13 +156,13 @@ const ServerSideGrid = (
   try {
     parsedFilters = query[`${urlKey}_filters`]
       ? JSON.parse(query[`${urlKey}_filters`])
-      : {};
+      :{logic: "AND", rules: [] };
   } catch (e) {
     console.warn("Invalid filters in query string");
   }
 
   const [rowCount, setRowCount] = useState(0);
-  const [appliedFilters, setAppliedFilters] = useState(parsedFilters);
+  const [filterModell, setFilterModell] = useState(parsedFilters);
   const [searchTerm, setSearchTerm] = useState(
     query[`${urlKey}_searchTerm`] || ""
   );
@@ -175,22 +183,22 @@ const ServerSideGrid = (
     try {
       const offset = paginationModel.page * paginationModel.pageSize;
 
-      const { data, total_count } = await apiurl({
-        search: searchTerm,
-        filters: appliedFilters,
+      const {rows, total } = await apiurl({
+        search: searchTerm,sort:sortModell,
+        filters: filterModell,
         limit: paginationModel.pageSize,
         offset,
         // setAction,
         // cookieName,
         client,
       });
-
-      const rowsWithSlNo = data.map((row, index) => ({
+// console.log(data,"data")
+      const rowsWithSlNo = rows.map((row, index) => ({
         ...row,
         slNo: offset + index + 1,
       }));
       setRows(rowsWithSlNo);
-      setRowCount(total_count);
+      setRowCount(total);
       setPreviousPaginationModel(paginationModel);
       const clientIsNotEmpty = client && Object.keys(client).length > 0;
       // router.replace(
@@ -216,8 +224,8 @@ const ServerSideGrid = (
             [`${urlKey}_offset`]: offset,
             [`${urlKey}_limit`]: paginationModel.pageSize,
             [`${urlKey}_searchTerm`]: searchTerm,
-            // [`${urlKey}_sortModel`]: sortModel,
-            [`${urlKey}_filters`]: JSON.stringify(appliedFilters),
+            [`${urlKey}_sortModel`]: JSON.stringify(sortModell),
+            [`${urlKey}_filters`]: JSON.stringify(filterModell),
             ...(clientIsNotEmpty && {
               [`${urlKey}_client`]: JSON.stringify(client),
             }),
@@ -332,7 +340,7 @@ const ServerSideGrid = (
     }, 400);
 
     return () => clearTimeout(timer);
-  }, [searchTerm, ]);
+  }, [searchTerm,filterModell ,sortModell]);
   const memoizedFieldsForFilter = useMemo(() => fieldsForFilter, []);
   const StyledGridOverlay = styled("div")(({ theme }) => ({
     display: "flex",
@@ -407,13 +415,13 @@ const ServerSideGrid = (
         }}
         slotProps={{
           toolbar: {
-            handleApplyFilters,filterModel,setFilterModel,columns,
-            appliedFilters,
-            setAppliedFilters,
+            handleApplyFilters,filterModell,setFilterModell,columns,
+            // appliedFilters,
+            // setAppliedFilters,
             fieldsForFilter: memoizedFieldsForFilter,
             searchTerm,
-            sortModel,
-            setSortModel,
+            sortModell,
+            setSortModell,
             sortableColumns,
             setSearchTerm,
           },
