@@ -11,8 +11,15 @@ import {
   useMediaQuery,
   useTheme,
   Stack,
+  Badge,
 } from "@mui/material";
-import { Add, Delete, DisabledByDefaultRounded, DragIndicator, FilterList } from "@mui/icons-material";
+import {
+  Add,
+  Delete,
+  DisabledByDefaultRounded,
+  DragIndicator,
+  FilterList,
+} from "@mui/icons-material";
 import {
   DndContext,
   closestCenter,
@@ -53,9 +60,7 @@ function SortRuleItem({ rule, index, onChange, onRemove, sortableColumns }) {
 
   return (
     <Box ref={setNodeRef} style={style} {...attributes}>
-      <Box {...listeners} sx={{ display: "flex", alignItems: "center" }}>
-        <DragIndicator sx={{ cursor: "grab", fontSize: 18 }} />
-      </Box>
+     
       <FormControl size="small" sx={{ minWidth: 120, flexGrow: 1 }}>
         <Select
           fullWidth
@@ -69,7 +74,7 @@ function SortRuleItem({ rule, index, onChange, onRemove, sortableColumns }) {
           ))}
         </Select>
       </FormControl>
-      <FormControl size="small" sx={{ minWidth: 80, }}>
+      <FormControl size="small" sx={{ minWidth: 80 }}>
         <Select
           value={rule.sort}
           onChange={(e) => onChange(index, "sort", e.target.value)}
@@ -80,10 +85,16 @@ function SortRuleItem({ rule, index, onChange, onRemove, sortableColumns }) {
             </MenuItem>
           ))}
         </Select>
-      </FormControl >
-      <IconButton sx={{mr:"auto"}} size="small" onClick={() => onRemove(index)}>
+      </FormControl>
+      <IconButton
+        sx={{ mr: "auto" }}
+        size="small"
+        onClick={() => onRemove(index)}
+      >
         <Delete fontSize="small" color="error" />
-      </IconButton>
+      </IconButton> <Box {...listeners} sx={{ display: "flex", alignItems: "center" }}>
+        <DragIndicator sx={{ cursor: "grab", fontSize: 18 }} />
+      </Box>
     </Box>
   );
 }
@@ -93,10 +104,10 @@ export default function AdvancedSortButton({
   setSortModell,
   sortableColumns,
 }) {
-     useEffect(() => {
-        setSortModel(sortModell);
-    }, [sortModell]);
-  console.log(sortModell)
+  useEffect(() => {
+    setSortModel(sortModell);
+  }, [sortModell]);
+  console.log(sortModell);
   const [sortModel, setSortModel] = useState(sortModell);
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -140,13 +151,58 @@ export default function AdvancedSortButton({
 
   return (
     <>
-      <Button
-        size="small"
-        onClick={handleOpen}
-        startIcon={<FilterList sx={{ mr: -0.8 }} />}
-      >
-        <Typography variant="subtitle2">Sort</Typography>
-      </Button>
+      {sortModell.length == 0 ? (
+        <Button
+          size="small"
+          onClick={handleOpen}
+          startIcon={<FilterList sx={{ mr: -0.8 }} />}
+        >
+          <Typography variant="subtitle2">Sort</Typography>
+        </Button>
+      ) : (        <Button
+          size="small"
+          onClick={handleOpen}sx={{backgroundColor:'#eaefe2'}}
+          startIcon={<FilterList sx={{ mr: -0.8 }} />}
+        >
+          <Typography variant="subtitle2">Sort</Typography>
+        </Button>
+        // <Badge
+        //   anchorOrigin={{
+        //     vertical: "top",
+        //     horizontal: "left",
+        //   }}
+        //   // color="secondary"
+        //   badgeContent={sortModell.length}
+        //   sx={{
+        //     color: "white",
+        //     "& .MuiBadge-badge": {
+        //       backgroundColor: "#00ff16",
+        //       fontSize: "11px",
+        //     },
+        //   }}
+        // >
+        //   <Button
+        //     size="small"
+        //     onClick={handleOpen}
+        //     variant="outlined"
+        //     startIcon={<FilterList sx={{ mr: -0.8 }} />}
+        //   >
+        //     <Typography variant="subtitle2">Sort</Typography>
+        //   </Button>{" "}
+        // </Badge>
+      )}
+
+      {/* <Button
+  size="small"
+  onClick={handleOpen}
+  startIcon={<FilterList sx={{ mr: -0.8, color: sortModell.length>0 ? "primary.main" : "inherit" }} />}
+  variant={sortModell.length>0 ? "contained" : "inherit"}
+  color={sortModell.length>0 ? "primary" : "inherit"}
+>
+  <Typography variant="subtitle2">
+    {sortModell.length>0 ? "Sort Applied" : "Sort"}
+  </Typography>
+</Button> */}
 
       <Popover
         open={open}
@@ -162,23 +218,30 @@ export default function AdvancedSortButton({
           },
         }}
       >
-     <Stack direction="row" justifyContent="space-between" alignItems="center" mb={1}>
-    <Typography variant="subtitle2">Advanced Sorting</Typography>
-    <DisabledByDefaultRounded
-      onClick={()=>{setSortModel(sortModell),handleClose()}}
-      fontSize="small"
-      sx={{
-        color: "#C92424",
-        cursor: "pointer",
-        borderRadius: "6px",
-        transition: "all 0.2s ease",
-        "&:hover": {
-          backgroundColor: "rgba(255, 102, 102, 0.15)",
-          transform: "scale(1.1)",
-        },
-      }}
-    />
-  </Stack>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          mb={1}
+        >
+          <Typography variant="subtitle2">Advanced Sorting</Typography>
+          <DisabledByDefaultRounded
+            onClick={() => {
+              setSortModel(sortModell), handleClose();
+            }}
+            fontSize="small"
+            sx={{
+              color: "#C92424",
+              cursor: "pointer",
+              borderRadius: "6px",
+              transition: "all 0.2s ease",
+              "&:hover": {
+                backgroundColor: "rgba(255, 102, 102, 0.15)",
+                transform: "scale(1.1)",
+              },
+            }}
+          />
+        </Stack>
         <Box maxHeight="50vh" overflow="auto">
           <DndContext
             sensors={sensors}
@@ -223,24 +286,28 @@ export default function AdvancedSortButton({
             Apply
           </Button>
         </Box> */}
-     
-          <Box
-            display="flex"
-            justifyContent={isXs ? "center" : "space-between"}
-            mt={1}
-            flexDirection={isXs ? "column" : "row"}
-            gap={isXs ? 1 : 0}
-          >
-            <Button
-              size="small"
-              startIcon={<Add />}
-              onClick={handleAddRule}
+
+        <Box
+          display="flex"
+          justifyContent={isXs ? "center" : "space-between"}
+          mt={1}
+          flexDirection={isXs ? "column" : "row"}
+          gap={isXs ? 1 : 0}
+        >
+          <Button
+            size="small"
+            startIcon={<Add />}
+            onClick={handleAddRule}
             disabled={sortModel.length >= sortableColumns.length}
+          >
+            Add Rule
+          </Button>
+          {sortModel.length !== 0 ? (
+            <Box
+              display="flex"
+              gap={1}
+              justifyContent={isXs ? "center" : "unset"}
             >
-              Add Rule
-            </Button>
-           {sortModel.length !== 0?
-            <Box display="flex" gap={1} justifyContent={isXs ? "center" : "unset"}>
               <Button
                 size="small"
                 color="error"
@@ -256,16 +323,17 @@ export default function AdvancedSortButton({
               <Button
                 size="small"
                 variant="contained"
-                     onClick={() => {
-              handleClose();
-              setSortModell(sortModel);
-            }}
+                onClick={() => {
+                  handleClose();
+                  setSortModell(sortModel);
+                }}
                 fullWidth={isXs}
               >
                 Apply
               </Button>
-            </Box>:null}
-          </Box>
+            </Box>
+          ) : null}
+        </Box>
       </Popover>
     </>
   );
