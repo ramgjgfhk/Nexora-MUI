@@ -3,7 +3,7 @@ import * as echarts from "echarts";
 import { Box, Typography, Stack, ButtonGroup, Button } from "@mui/material";
 import { GlassCard } from "../User/UserProfile/UserProfileComponents/ProfileCard";
 
-const buttonStyles = {
+export const buttonStyles = {
   bgcolor: "#03045e",
   color: "white",
   fontSize: "10px",

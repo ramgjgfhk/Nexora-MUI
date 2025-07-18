@@ -22,7 +22,7 @@ export default function AudienceSegmentsCard() {
         series: [
           {
             type: "pie",
-            radius: ["40%", "85%"],
+            radius: ["20%", "65%"],
             avoidLabelOverlap: false,
             label: { show: false },
             emphasis: { label: { show: false } },
@@ -62,7 +62,7 @@ export default function AudienceSegmentsCard() {
   }, []);
 
   return (
-    <GlassCard sx={{ p: 3, width: "100%" }}>
+    <>
       <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
         <Typography variant="h6" sx={{ fontWeight: 600 }}>
           Top Audience Segments - RFM
@@ -75,34 +75,47 @@ export default function AudienceSegmentsCard() {
         </Typography>
       </Box>
 
-      <Box
-        sx={{
-          height: 350,
-          width: "100%",
-          mb: 1,
-        }}
-       >
+      {/* === Side-by-side layout === */}
+      <Stack
+        direction="row"
+        spacing={4}
+        alignItems="center"
+        sx={{ width: "100%" }}
+      >
+        {/* Pie Chart Container */}
         <Box
-          ref={chartContainerRef}
           sx={{
-            height: "80%", // You control how much space chart takes inside box
-            width: "80%",
-            margin: "0 auto",
-            transformOrigin: "center center", // Keep center alignment
+            width: "50%",
+            height: 200,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
-        />
-      </Box>
+        >
+          <Box
+            ref={chartContainerRef}
+            sx={{
+              width: "100%",
+              height: "100%",
+            }}
+          />
+        </Box>
 
-      <Stack spacing={1}>
-        <LegendItem color="#00BFFF" label="Loyal Customers" value="32%" />
-        <LegendItem color="#4DD0E1" label="New Subscribers" value="28%" />
-        <LegendItem color="#FFB74D" label="High-Value Shoppers" value="24%" />
-        <LegendItem color="#FF7F7F" label="At-Risk Customers" value="16%" />
+        {/* Legend/Details */}
+        <Box sx={{ width: "50%" }}>
+          <Stack spacing={2}>
+            <LegendItem color="#00BFFF" label="Loyal Customers" value="32%" />
+            <LegendItem color="#4DD0E1" label="New Subscribers" value="28%" />
+            <LegendItem
+              color="#FFB74D"
+              label="High-Value Shoppers"
+              value="24%"
+            />
+            <LegendItem color="#FF7F7F" label="At-Risk Customers" value="16%" />
+          </Stack>
+        </Box>
       </Stack>
-    </GlassCard>
+    </>
   );
 }
 

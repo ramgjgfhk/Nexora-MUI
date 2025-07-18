@@ -37,18 +37,18 @@ export default function Header(props) {
     <Box sx={{ p: 1, zIndex: 2 }}>
       <AppBar
         position="static"
-        elevation={4}
+        elevation={0}
         sx={{
           borderRadius: "8px",
           height: "65px",
-          bgcolor: "#FFFFFF",
+          bgcolor: "#fff",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          boxShadow: "0 4px 20px rgba(0,0,0,0.1)", // extra depth
+          // boxShadow: "0 4px 20px rgba(0,0,0,0.1)", // extra depth
           // px: 2,
-          border: "1px solid",
-          borderColor: "divider",
+          // border: "1px solid",
+          // borderColor: "divider",
           width: "100%",
         }}
       >

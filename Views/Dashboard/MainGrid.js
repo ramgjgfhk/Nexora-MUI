@@ -2,88 +2,125 @@ import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import SessionsChart from "./SessionsChart";
-import StatCard from "./StatCard";
-import { Campaign } from "@mui/icons-material";
+import {  Group } from "@mui/icons-material";
 import RecentCampaigns from "./RecentCampaigns";
 import AudienceSegmentsCard from "./AudienceCard";
 import QuickActionsCard from "./quickAction";
-import UserSegment from "./User-Segment";
 import { GlassCard } from "../User/UserProfile/UserProfileComponents/ProfileCard";
-import { Box } from "@mui/material";
-import CustomizedDataGrid from "./CustomizedDataGrid";
-import CustomizedTreeView from "./CustomizedTreeView";
-import PageViewsBarChart from "./PageViewsBarChart";
+import { Box, Button, ButtonGroup, } from "@mui/material";
+import { analyticsData } from "@/Components/Variables/userActivityData";
+import AnalyticsCard from "./AnalyticsCard";
 
-const data = [
-  {
-    title: "All Users",
-    value: "14k",
-    // interval: "Last 30 days",
-    trend: "up",
-    data: [
-      200, 24, 220, 260, 240, 380, 100, 240, 280, 240, 300, 340, 320, 360, 340,
-      380, 360, 400, 380, 420, 400, 640, 340, 460, 440, 480, 460, 600, 880, 920,
-    ],
-    icon: <Campaign sx={{ color: "#0D7BF3" }} />,
-    color: "#0D7BF3",
-  },
-  {
-    title: "New User",
-    value: "325",
-    interval: "Last 30 days",
-    trend: "down",
-    data: [
-      1640, 1250, 970, 1130, 1050, 900, 720, 1080, 900, 450, 920, 820, 840, 600,
-      820, 780, 800, 760, 380, 740, 660, 620, 840, 500, 520, 480, 400, 360, 300,
-      220,
-    ],
-  },
-  {
-    title: "Event count",
-    value: "200k",
-    interval: "Last 30 days",
-    trend: "neutral",
-    data: [
-      500, 400, 510, 530, 520, 600, 530, 520, 510, 730, 520, 510, 530, 620, 510,
-      530, 520, 410, 530, 520, 610, 530, 520, 610, 530, 420, 510, 430, 520, 510,
-    ],
-  },
-];
-
+const buttonOptions = ["Year", "Month", "Week", "Today", "Last Hour"];
 export default function MainGrid() {
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [analytics, setAnalytics] = React.useState({});
+  const data = analyticsData;
+
+  const handleIndex = (index) => {
+    setSelectedIndex(index);
+  };
+
+  React.useEffect(() => {
+    const keys = ["yearly", "monthly", "weekly", "today", "hourly"];
+    const key = keys[selectedIndex]; // ✅ Use selectedIndex, not index
+
+    if (key) {
+      setAnalytics(data?.[key]);
+    }
+  }, [selectedIndex]); // ✅ useEffect depends on selectedIndex
+
   return (
     <>
-      {/* <Box sx={{ width: "100%", maxWidth: { sm: "100%", md: "1700px" } }}> */}
-      {/* <TodayStatCard /> */}
-      <Grid
-        container
-        spacing={1}
-        columns={12}
-        sx={{ mb: (theme) => theme.spacing(2) }}
-      >
-        {/* <Grid container> */}
-        <Grid size={{ xs: 12, lg: 6 }}>
-          <Typography variant="subtitle2" gutterBottom>
-            Today
-          </Typography>
-          <StatCard />
-        </Grid>
+      <Grid container spacing={2} alignItems="stretch">
+        <Grid size={{ xs: 12, md: 6 }}>
+          <GlassCard sx={{ height: "100%" }}>
+            {/* Row 1 */}
+            <Typography variant="h6">User Statics</Typography>
+            <Grid container spacing={5}>
+              <Grid size={{ xs: 12, md: 6 }} sx={{ mt: 3 }}>
+                
+                <AnalyticsCard
+                  analytics={analytics?.active_user}
+                  title="Active Users"
+                  titleIcon={Group}
+                  color="#1976d2"
+                />
+              </Grid>
+              <Grid size={{ xs: 12, md: 6 }}>
+                <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                  <ButtonGroup
+                    // variant="contained"
+                    // color="secondary"
+                    size="small"
+                    aria-label="Basic button group"
+                  >
+                    {buttonOptions?.map((item, index) => (
+                      <Button
+                        key={index}
+                        // sx={buttonStyles}
 
-        <Grid size={{ xs: 12, lg: 6 }}>
-          <Typography variant="subtitle2" gutterBottom>
-            This Month
-          </Typography>
-          <StatCard />
+                        sx={{ fontSize: 10 }}
+                        onClick={() => handleIndex(index)}
+                      >
+                        {item}
+                      </Button>
+                    ))}
+                  </ButtonGroup>
+                </Box>
+              </Grid>
+            </Grid>
+
+            {/* Row 2 */}
+            <Grid container spacing={5}>
+              <Grid size={{ xs: 12, md: 6 }}>
+                <AnalyticsCard
+                  analytics={analytics?.new_user}
+                  title="New Users"
+                  titleIcon={Group}
+                  color="#1976d2"
+                />
+              </Grid>
+              <Grid size={{ xs: 12, md: 6 }}>
+                <AnalyticsCard
+                  analytics={analytics?.duration}
+                  title="Avg. Time"
+                  titleIcon={Group}
+                  color="#1976d2"
+                />
+              </Grid>
+            </Grid>
+
+            {/* Row 3 */}
+            <Grid container spacing={5}>
+              <Grid size={{ xs: 12, md: 6 }}>
+                <AnalyticsCard
+                  analytics={analytics?.duration}
+                  title="Avg. Time"
+                  titleIcon={Group}
+                  color="#1976d2"
+                />
+              </Grid>
+              <Grid size={{ xs: 12, md: 6 }}>
+                <AnalyticsCard
+                  analytics={analytics?.duration}
+                  title="Avg. Time"
+                  titleIcon={Group}
+                  color="#1976d2"
+                />
+              </Grid>
+            </Grid>
+          </GlassCard>
         </Grid>
-        {/* </Grid> */}
+        <Grid size={{ xs: 12, md: 6 }}>
+          <GlassCard sx={{ flexGrow: 1 }}>
+            <AudienceSegmentsCard sx={{ flexGrow: 1 }} />
+          </GlassCard>
+        </Grid>
       </Grid>
-      <Grid container spacing={2} sx={{ alignItems: "stretch" }}>
-        <Grid size={{ xs: 12, lg: 7 }} sx={{ display: "flex" }}>
+      <Grid container spacing={2} sx={{ alignItems: "stretch" }} mt={2}>
+        <Grid size={{ xs: 12 }} sx={{ display: "flex" }}>
           <SessionsChart sx={{ flex: 1 }} />
-        </Grid>
-
-        <Grid size={{ xs: 12, lg: 5 }} sx={{ display: "flex" }}>
-          <RecentCampaigns sx={{ flex: 1 }} />
         </Grid>
       </Grid>
       <Grid container spacing={2} sx={{ alignItems: "stretch", mt: 2 }}>
@@ -92,7 +129,8 @@ export default function MainGrid() {
           size={{ xs: 12, lg: 5 }}
           sx={{ display: "flex", flexDirection: "column" }}
         >
-          <AudienceSegmentsCard sx={{ flexGrow: 1 }} />
+          {/* <AudienceSegmentsCard sx={{ flexGrow: 1 }} /> */}
+          <RecentCampaigns sx={{ flex: 1 }} />
         </Grid>
 
         {/* Right Grid */}
@@ -100,37 +138,9 @@ export default function MainGrid() {
           size={{ xs: 12, lg: 7 }}
           sx={{ display: "flex", flexDirection: "column" }}
         >
-          <Box sx={{ flexGrow: 1 }}>
-            <QuickActionsCard />
-          </Box>
-          <Box sx={{ flexGrow: 0 }}>
-            <Grid container>
-              <Grid size={{ xs: 12, md: 6 }}>
-                <PageViewsBarChart />
-              </Grid>
-              {/* <Grid size={{ xs: 12, md: 6 }}></Grid> */}
-            </Grid>
-          </Box>
+          <QuickActionsCard />
         </Grid>
       </Grid>
-
-      {/* 
-      <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
-      Details
-      </Typography>
-      
-      <Grid container spacing={2} columns={12}>
-        <Grid item xs={12} lg={9}>
-          <CustomizedDataGrid />
-        </Grid>
-      
-        <Grid item xs={12} lg={3}>
-          <Stack gap={2} direction={{ xs: "column", sm: "row", lg: "column" }}>
-            <CustomizedTreeView />
-            <ChartUserByCountry />
-          </Stack>
-        </Grid>
-      </Grid> */}
     </>
   );
 }

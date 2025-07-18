@@ -35,7 +35,6 @@ export default function PageViewsBarChart() {
     const convertedData = campaignData?.[mapKey].map((item) => item.converted);
     setData({ total: totalData, viewed: viewedData, converted: convertedData });
   }, [selectedIndex]);
-  console.log(data);
 
   return (
     <GlassCard variant="outlined" sx={{ width: "100%" }}>
