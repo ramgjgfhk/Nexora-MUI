@@ -1,6 +1,7 @@
 import { CustomLoader } from "@/Components/resuable components/customLoader";
 import MainLayout from "@/Layout/layout";
 import "@/styles/globals.css";
+// import "@/styles/styles.css"
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";

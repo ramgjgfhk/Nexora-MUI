@@ -1,3 +1,4 @@
+ @import "react-querybuilder/dist/query-builder.css";
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -88,3 +89,14 @@ a {
  .textFieldSize{
   font-size: 12px !important;
  }
+
+
+:root {
+  --rqb-background-color: white;
+  --rqb-border-color: lightgrey;
+  --rqb-border-radius: 0.45rem;
+  
+  /* --rqb-dnd-drop-indicator-color: red;
+  --rqb-dnd-drop-indicator-copy-color: white; */
+  
+}

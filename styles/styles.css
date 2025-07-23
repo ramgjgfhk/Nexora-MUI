@@ -1,0 +1,58 @@
+.svg-font-color svg > path {
+  fill: var(--ifm-font-color-base);
+}
+
+.donut-hole {
+  overflow-y: unset !important;
+}
+
+.queryBuilder {
+  min-width: 420px;
+}
+
+li.tabs__item {
+  white-space: nowrap;
+}
+
+/* Styles for when "Use validation" option is selected */
+.validateQuery .queryBuilder {
+  & .ruleGroup.queryBuilder-invalid {
+    /* Color invalid groups */
+    background-color: color-mix(in srgb, rebeccapurple, transparent 60%);
+
+    & .ruleGroup-addRule {
+      /* Bold the "+ Rule" button if the group has no child rules or groups */
+      font-weight: bold !important;
+    }
+
+    & > .ruleGroup-body {
+      display: block;
+    }
+
+    & > .ruleGroup-body::after {
+      /* Message to user about empty groups */
+      content: "Empty groups are considered invalid. Avoid them by using addRuleToNewGroups.";
+      color: white;
+    }
+  }
+
+  & .rule.queryBuilder-invalid .rule-value {
+    /* Purple background for empty text fields */
+    background-color: color-mix(in srgb, rebeccapurple, transparent 60%);
+
+    &::placeholder {
+      color: color-mix(in srgb, rebeccapurple, black 30%);
+    }
+  }
+}
+
+/* Styles for when "Use validation" option is selected (dark theme variations) */
+html[data-theme="dark"]
+  .validateQuery
+  .queryBuilder
+  .rule.queryBuilder-invalid
+  .rule-value::placeholder {
+  color: color-mix(in srgb, rebeccapurple, white 30%);
+}.queryBuilder-justified .ruleGroup-combinators+.ruleGroup-addRule, .queryBuilder-justified .ruleGroup-combinators+.ruleGroup-addGroup, .queryBuilder-justified .ruleGroup-combinators+.ruleGroup-cloneGroup, .queryBuilder-justified .ruleGroup-combinators+.ruleGroup-lock, .queryBuilder-justified .ruleGroup-combinators+.ruleGroup-remove, .queryBuilder-justified .ruleGroup-combinators+.rule-cloneRule, .queryBuilder-justified .ruleGroup-combinators+.rule-lock, .queryBuilder-justified .ruleGroup-combinators+.rule-remove, .queryBuilder-justified .ruleGroup-notToggle+.ruleGroup-addRule, .queryBuilder-justified .ruleGroup-notToggle+.ruleGroup-addGroup, .queryBuilder-justified .ruleGroup-notToggle+.ruleGroup-cloneGroup, .queryBuilder-justified .ruleGroup-notToggle+.ruleGroup-lock, .queryBuilder-justified .ruleGroup-notToggle+.ruleGroup-remove, .queryBuilder-justified .ruleGroup-notToggle+.rule-cloneRule, .queryBuilder-justified .ruleGroup-notToggle+.rule-lock, .queryBuilder-justified .ruleGroup-notToggle+.rule-remove, .queryBuilder-justified .shiftActions+.ruleGroup-addRule, .queryBuilder-justified .shiftActions+.ruleGroup-addGroup, .queryBuilder-justified .shiftActions+.ruleGroup-cloneGroup, .queryBuilder-justified .shiftActions+.ruleGroup-lock, .queryBuilder-justified .shiftActions+.ruleGroup-remove, .queryBuilder-justified .shiftActions+.rule-cloneRule, .queryBuilder-justified .shiftActions+.rule-lock, .queryBuilder-justified .shiftActions+.rule-remove, .queryBuilder-justified .queryBuilder-dragHandle+.ruleGroup-addRule, .queryBuilder-justified .queryBuilder-dragHandle+.ruleGroup-addGroup, .queryBuilder-justified .queryBuilder-dragHandle+.ruleGroup-cloneGroup, .queryBuilder-justified .queryBuilder-dragHandle+.ruleGroup-lock, .queryBuilder-justified .queryBuilder-dragHandle+.ruleGroup-remove, .queryBuilder-justified .queryBuilder-dragHandle+.rule-cloneRule, .queryBuilder-justified .queryBuilder-dragHandle+.rule-lock, .queryBuilder-justified .queryBuilder-dragHandle+.rule-remove, .queryBuilder-justified .ruleGroup-notToggle+.ruleGroup-addRule, .queryBuilder-justified .ruleGroup-notToggle+.ruleGroup-addGroup, .queryBuilder-justified .ruleGroup-notToggle+.ruleGroup-cloneGroup, .queryBuilder-justified .ruleGroup-notToggle+.ruleGroup-lock, .queryBuilder-justified .ruleGroup-notToggle+.ruleGroup-remove, .queryBuilder-justified .ruleGroup-notToggle+.rule-cloneRule, .queryBuilder-justified .ruleGroup-notToggle+.rule-lock, .queryBuilder-justified .ruleGroup-notToggle+.rule-remove, .queryBuilder-justified .ruleGroup-header+.ruleGroup-addRule, .queryBuilder-justified .ruleGroup-header+.ruleGroup-addGroup, .queryBuilder-justified .ruleGroup-header+.ruleGroup-cloneGroup, .queryBuilder-justified .ruleGroup-header+.ruleGroup-lock, .queryBuilder-justified .ruleGroup-header+.ruleGroup-remove, .queryBuilder-justified .ruleGroup-header+.rule-cloneRule, .queryBuilder-justified .ruleGroup-header+.rule-lock, .queryBuilder-justified .ruleGroup-header+.rule-remove, .queryBuilder-justified .rule-operators+.ruleGroup-addRule, .queryBuilder-justified .rule-operators+.ruleGroup-addGroup, .queryBuilder-justified .rule-operators+.ruleGroup-cloneGroup, .queryBuilder-justified .rule-operators+.ruleGroup-lock, .queryBuilder-justified .rule-operators+.ruleGroup-remove, .queryBuilder-justified .rule-operators+.rule-cloneRule, .queryBuilder-justified .rule-operators+.rule-lock, .queryBuilder-justified .rule-operators+.rule-remove, .queryBuilder-justified .rule-value+.ruleGroup-addRule, .queryBuilder-justified .rule-value+.ruleGroup-addGroup, .queryBuilder-justified .rule-value+.ruleGroup-cloneGroup, .queryBuilder-justified .rule-value+.ruleGroup-lock, .queryBuilder-justified .rule-value+.ruleGroup-remove, .queryBuilder-justified .rule-value+.rule-cloneRule, .queryBuilder-justified .rule-value+.rule-lock, .queryBuilder-justified .rule-value+.rule-remove, .queryBuilder-justified .control+.ruleGroup-addRule, .queryBuilder-justified .control+.ruleGroup-addGroup, .queryBuilder-justified .control+.ruleGroup-cloneGroup, .queryBuilder-justified .control+.ruleGroup-lock, .queryBuilder-justified .control+.ruleGroup-remove, .queryBuilder-justified .control+.rule-cloneRule, .queryBuilder-justified .control+.rule-lock, .queryBuilder-justified .control+.rule-remove, .queryBuilder-justified .chakra-select__wrapper+.ruleGroup-addRule, .queryBuilder-justified .chakra-select__wrapper+.ruleGroup-addGroup, .queryBuilder-justified .chakra-select__wrapper+.ruleGroup-cloneGroup, .queryBuilder-justified .chakra-select__wrapper+.ruleGroup-lock, .queryBuilder-justified .chakra-select__wrapper+.ruleGroup-remove, .queryBuilder-justified .chakra-select__wrapper+.rule-cloneRule, .queryBuilder-justified .chakra-select__wrapper+.rule-lock, .queryBuilder-justified .chakra-select__wrapper+.rule-remove, .queryBuilder-justified input[type=hidden]+.ruleGroup-addRule, .queryBuilder-justified input[type=hidden]+.ruleGroup-addGroup, .queryBuilder-justified input[type=hidden]+.ruleGroup-cloneGroup, .queryBuilder-justified input[type=hidden]+.ruleGroup-lock, .queryBuilder-justified input[type=hidden]+.ruleGroup-remove, .queryBuilder-justified input[type=hidden]+.rule-cloneRule, .queryBuilder-justified input[type=hidden]+.rule-lock, .queryBuilder-justified input[type=hidden]+.rule-remove, .queryBuilder-justified .ruleGroup-addRule:first-child, .queryBuilder-justified .ruleGroup-addGroup:first-child {
+    margin-left: auto !important;
+}

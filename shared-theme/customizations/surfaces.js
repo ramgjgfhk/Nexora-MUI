@@ -64,7 +64,7 @@ export const surfacesCustomizations = {
           transition: 'all 100ms ease',
           backgroundColor: gray[50],
           borderRadius: (theme.vars || theme).shape.borderRadius,
-          border: `1px solid ${(theme.vars || theme).palette.divider}`,
+          // border: `0.3px solid ${(theme.vars || theme).palette.divider}`,
           boxShadow: 'none',
           ...theme.applyStyles('dark', {
             backgroundColor: gray[800],

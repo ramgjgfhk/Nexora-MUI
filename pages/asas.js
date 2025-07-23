@@ -5,10 +5,11 @@ import * as ReactDndHtml5Backend from 'react-dnd-html5-backend';
 import * as ReactDndTouchBackend from 'react-dnd-touch-backend';
 import { QueryBuilder } from 'react-querybuilder';
 // import { fields } from './fields';
-import 'react-querybuilder/dist/query-builder.css';
-
+// import 'react-querybuilder/dist/query-builder.css';
+// import "@/styles/styles.css"
 // import { QueryBuilderMaterial } from '@react-querybuilder/material';
 import { fieldsss } from '@/Components/fieldss';
+import { controlElements } from '@/Components/querybuildercomponents';
 
 
 // Define initial query (removed RuleGroupType typing)
@@ -29,8 +30,14 @@ const App = () => {
             onQueryChange={setQuery}
             addRuleToNewGroups
             debugMode
-            showCloneButtons
-            useDateTimePackage
+              listsAsArrays
+        parseNumbers="strict-limited"
+        showCloneButtons
+        // showShiftActions
+            // showCloneButtons
+            
+            // useDateTimePackage
+              controlElements={controlElements}
             controlClassnames={{
               queryBuilder: 'queryBuilder-branches queryBuilder-justified',
             }}

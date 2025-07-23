@@ -1,4 +1,44 @@
 import { Plus_Jakarta_Sans } from "next/font/google";
+import React from 'react';
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+
+// Create a custom styled Button with a green success theme
+export const SuccessButton = styled(Button)({
+  // Base styles
+  backgroundColor: '#4caf50', // Green success color
+  color: '#fff', // White text
+  padding: '6px 12px', // Smaller padding for compact size
+  fontSize: '14px', // Smaller font size
+  fontWeight: 500,
+  textTransform: 'none', // Avoid uppercase text
+  borderRadius: '6px', // Slightly rounded corners
+  lineHeight: 1.5,
+  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Subtle shadow
+  // Hover effect
+  '&:hover': {
+    backgroundColor: '#45a049', // Slightly darker green on hover
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', // Enhanced shadow on hover
+    transform: 'translateY(-1px)', // Slight lift effect
+  },
+  // Active effect
+  '&:active': {
+    backgroundColor: '#3d8b40', // Even darker green when clicked
+    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', // Reduced shadow
+    transform: 'translateY(0)', // Reset lift
+  },
+  // Disabled state
+  '&:disabled': {
+    backgroundColor: '#a5d6a7', // Light green for disabled
+    color: '#e0e0e0', // Light text for disabled
+    cursor: 'not-allowed',
+  },
+  // Ensure no inherited styles interfere
+  fontFamily: 'inherit',
+  border: 'none',
+});
+
+
 
 export const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin-ext"],

@@ -7,7 +7,7 @@ import { toggleButtonClasses } from "@mui/material/ToggleButton";
 import CheckBoxOutlineBlankRoundedIcon from "@mui/icons-material/CheckBoxOutlineBlankRounded";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
-import { gray, brand, red } from "../themePrimitives";
+import { gray, brand, red, green } from "../themePrimitives";
 
 /* eslint-disable import/prefer-default-export */
 export const inputsCustomizations = {
@@ -87,7 +87,43 @@ export const inputsCustomizations = {
                 },
               }),
             },
-          },
+          },{
+  props: {
+    color: "success",
+    variant: "contained",
+  },
+  style: {
+    color: "#3D4700",
+    backgroundColor:  "#cfef00",
+    // backgroundImage: `linear-gradient(to bottom, ${green[700]}, ${green[500]})`,
+    // boxShadow: `inset 0 1px 0 ${green[600]}, inset 0 -1px 0 1px hsl(150, 0%, 0%)`,
+    // border: `1px solid ${green[700]}`,
+    "&:hover": {
+      backgroundImage: "none",
+      backgroundColor: "#c4e201",
+      boxShadow: "none",
+    },
+    "&:active": {
+      backgroundColor: green[800],
+    },
+    ...theme.applyStyles("dark", {
+      color: "black",
+      backgroundColor: green[50],
+      backgroundImage: `linear-gradient(to bottom, ${green[100]}, ${green[50]})`,
+      boxShadow: "inset 0 -1px 0 hsl(150, 30%, 80%)",
+      border: `1px solid ${green[50]}`,
+      "&:hover": {
+        backgroundImage: "none",
+        backgroundColor: green[300],
+        boxShadow: "none",
+      },
+      "&:active": {
+        backgroundColor: green[400],
+      },
+    }),
+  },
+}
+,
 {
   props: {
     color: "error",
@@ -459,7 +495,7 @@ export const inputsCustomizations = {
         padding: 0,
       },
       root: ({ theme }) => ({
-        padding: "8px 12px",
+        padding: "8px 12px",fontSize:"0.6rem",
         color: (theme.vars || theme).palette.text.primary,
         borderRadius: (theme.vars || theme).shape.borderRadius,
         border: `1px solid ${(theme.vars || theme).palette.divider}`,
