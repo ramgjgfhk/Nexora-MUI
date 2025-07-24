@@ -31,22 +31,22 @@ export default function AudienceSegmentsCard() {
               {
                 value: 32,
                 name: "Loyal Customers",
-                itemStyle: { color: "#00BFFF" },
+                itemStyle: { color: "#34D399" },
               },
               {
                 value: 28,
                 name: "New Subscribers",
-                itemStyle: { color: "#4DD0E1" },
+                itemStyle: { color: "#3B82F6" },
               },
               {
                 value: 24,
                 name: "High-Value Shoppers",
-                itemStyle: { color: "#FFB74D" },
+                itemStyle: { color: "#F59E0B" },
               },
               {
                 value: 16,
                 name: "At-Risk Customers",
-                itemStyle: { color: "#FF7F7F" },
+                itemStyle: { color: "#EF4444" },
               },
             ],
           },
@@ -104,14 +104,14 @@ export default function AudienceSegmentsCard() {
         {/* Legend/Details */}
         <Box sx={{ width: "50%" }}>
           <Stack spacing={2}>
-            <LegendItem color="#00BFFF" label="Loyal Customers" value="32%" />
-            <LegendItem color="#4DD0E1" label="New Subscribers" value="28%" />
+            <LegendItem color="#34D399 " label="Loyal Customers" value="32%" />
+            <LegendItem color="#3B82F6" label="New Subscribers" value="28%" />
             <LegendItem
-              color="#FFB74D"
+              color="#F59E0B"
               label="High-Value Shoppers"
               value="24%"
             />
-            <LegendItem color="#FF7F7F" label="At-Risk Customers" value="16%" />
+            <LegendItem color="#EF4444" label="At-Risk Customers" value="16%" />
           </Stack>
         </Box>
       </Stack>

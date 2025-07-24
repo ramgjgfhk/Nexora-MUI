@@ -5,10 +5,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import { menuItems } from "@/Components/Variables/sideMenus";
-import {
-  ExpandLess,
-  ExpandMore,
-} from "@mui/icons-material";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { Collapse, Typography } from "@mui/material";
 
 export default function MenuContent(props) {
@@ -33,19 +30,17 @@ export default function MenuContent(props) {
           }}
           sx={{
             // pl: `${paddingLeft}px`,
-            maxHeight: 38,
-            opacity: level > 0 ? 0.8 : 1,
+            maxHeight: 30,
+            opacity: isSelected ? 1 : level > 0 ? 0.8 : 1,
             borderRadius: "8px",
             color: "#fff",
-            // Move selected styling into `.Mui-selected`
             "&.Mui-selected": {
               bgcolor: "#fff",
               color: "#000",
               "&:hover": {
-                bgcolor: "#E0EEF5", // optional: keep same on hover
+                bgcolor: "#E0EEF5",
               },
             },
-
             "&:hover": {
               bgcolor: "#5C7599",
             },
@@ -72,13 +67,11 @@ export default function MenuContent(props) {
             primary={
               <Typography
                 variant="subtitle2"
-                // sx={{ fontWeight: isSelected ? 800 : 400 }}
+                sx={{ fontWeight: isSelected ? 800 : 400 }}
               >
                 {item.title}
               </Typography>
             }
-
-            
           />
 
           {hasChildren &&
