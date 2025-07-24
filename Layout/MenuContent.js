@@ -5,7 +5,10 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import { menuItems } from "@/Components/Variables/sideMenus";
-import { ChevronRight, ExpandLess, ExpandMore } from "@mui/icons-material";
+import {
+  ExpandLess,
+  ExpandMore,
+} from "@mui/icons-material";
 import { Collapse, Typography } from "@mui/material";
 
 export default function MenuContent(props) {
@@ -29,44 +32,53 @@ export default function MenuContent(props) {
             }
           }}
           sx={{
-            pl: `${paddingLeft}px`,
+            // pl: `${paddingLeft}px`,
             maxHeight: 38,
             opacity: level > 0 ? 0.8 : 1,
             borderRadius: "8px",
-
+            color: "#fff",
             // Move selected styling into `.Mui-selected`
             "&.Mui-selected": {
-              bgcolor: "#EBF5FF",
+              bgcolor: "#fff",
+              color: "#000",
               "&:hover": {
                 bgcolor: "#E0EEF5", // optional: keep same on hover
               },
             },
 
             "&:hover": {
-              bgcolor: "#EBF5FF",
+              bgcolor: "#5C7599",
             },
           }}
         >
           <ListItemIcon sx={{ minWidth: 25 }}>
-            {level === 0 ? (
-              React.cloneElement(item.icon, {
-                sx: {
-                  color: "black",
-                  fontSize: 15,
-                },
-              })
-            ) : (
-              <ChevronRight
-                sx={{
-                  fontSize: 15,
-                  color: "black",
-                }}
-              />
-            )}
+            {/* {item.icon && React.cloneElement(item.icon, {
+              sx: {
+                color: isSelected ? "#000" : "#fff",
+                fontSize: 15,
+              },
+            })} */}
+            {level === 0
+              ? React.cloneElement(item.icon, {
+                  sx: {
+                    color: isSelected ? "#000" : "#fff",
+                    fontSize: 15,
+                  },
+                })
+              : null}
           </ListItemIcon>
 
           <ListItemText
-            primary={<Typography variant="subtitle2">{item.title}</Typography>}
+            primary={
+              <Typography
+                variant="subtitle2"
+                // sx={{ fontWeight: isSelected ? 800 : 400 }}
+              >
+                {item.title}
+              </Typography>
+            }
+
+            
           />
 
           {hasChildren &&

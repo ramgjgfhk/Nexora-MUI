@@ -37,7 +37,7 @@ const actions = [
 
 export default function QuickActionsCard() {
   return (
-    <GlassCard sx={{ width: "100%" }}>
+    <GlassCard sx={{py:2}}>
       <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
         Quick Actions
       </Typography>
@@ -78,7 +78,8 @@ export default function QuickActionsCard() {
                 <action.icon />
               </Box>
               <Typography
-                sx={{ fontWeight: 500, color: "#1f2937", textAlign: "center" }}
+              variant="subtitle2"
+                sx={{ color: "#1f2937", textAlign: "center" }}
               >
                 {action.label}
               </Typography>

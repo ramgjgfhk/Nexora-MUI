@@ -10,7 +10,7 @@ export default function SideMenu(props) {
       sx={{
         width: drawerWidth,
         flexShrink: 0,
-        bgcolor: "#FCFCFC",
+        bgcolor: "#334155",
         height: "100%",
         display: { xs: "none", md: "block" },
       }}

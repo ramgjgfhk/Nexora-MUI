@@ -9,7 +9,7 @@ export default function Logo() {
         margin:'0 auto',
       }}
     >
-      <Image src="/en_full_logo.png" alt="Logo" width={100} height={20} />
+      <Image src="/nexora_logo.svg" alt="Logo" width={100} height={20} />
     </div>
   );
 }

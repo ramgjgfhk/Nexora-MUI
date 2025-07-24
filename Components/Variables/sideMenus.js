@@ -6,6 +6,7 @@ import {
   Cable,
   Campaign,
   Dashboard,
+  FilterList,
   Group,
   Hub,
   Notifications,
@@ -50,7 +51,7 @@ export const menuItems = [
       {
         id: "interactions",
         title: "Interaction",
-        icon: <BarChart />,
+        icon: <FilterList />,
         name: "Analytics / Interaction",
       },
       {
@@ -135,13 +136,6 @@ export const menuItems = [
     icon: <Schema />,
     children: [
       {
-        id: "events",
-        title: "Events",
-        icon: <BarChart />,
-        name: "Schema / Event",
-        path: "/Schema/Events/schema",
-      },
-      {
         id: "user_properties",
         title: "User Properties",
         icon: <BarChart />,
@@ -149,52 +143,6 @@ export const menuItems = [
       },
     ],
   },
-  // {
-  //   id: "users",
-  //   title: "User Management",
-  //   icon: <People />,
-  //   children: [
-  //     {
-  //       id: "user-list",
-  //       title: "Users",
-  //       icon: <Group />,
-  //       path: "/users",
-  //       name: "User Management / Users",
-  //     },
-  //     // {
-  //     //   id: "user-roles",
-  //     //   title: "Roles & Permissions",
-  //     //   icon: <AdminPanelSettings />,
-  //     //   children: [
-  //     //     {
-  //     //       id: "roles",
-  //     //       title: "Roles",
-  //     //       path: "/users/roles/list",
-  //     //       name: "User Management / Role & Permission / Roles",
-  //     //     },
-  //     //     {
-  //     //       id: "permissions",
-  //     //       title: "Permissions",
-  //     //       path: "/users/roles/permissions",
-  //     //       name: "User Management / Role & Permission / Permissions",
-  //     //     },
-  //     //     {
-  //     //       id: "assignments",
-  //     //       title: "Assignments",
-  //     //       path: "/users/roles/assignments",
-  //     //       name: "User Management / Role & Permission / Assignments",
-  //     //     },
-  //     //   ],
-  //     // },
-  //     // {
-  //     //   id: "add-user",
-  //     //   title: "Add User",
-  //     //   icon: <PersonAdd />,
-  //     //   path: "/users/add",
-  //     //   name: "User Management / Add user",
-  //     // },
-  //   ],
-  // },
   {
     id: "settings",
     title: "Settings",
@@ -272,6 +220,13 @@ export const menuItems = [
             title: "Logs",
             path: "/settings/system/logs",
             name: "Setting / System / Logs",
+          },
+          {
+            id: "events",
+            title: "Events",
+            icon: <BarChart />,
+            name: "Schema / Event",
+            path: "/Schema/Events/schema",
           },
         ],
       },

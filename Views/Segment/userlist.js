@@ -29,6 +29,7 @@ import UserDetailsModal from "../User/UserList/userDetails";
 import { FaEdit, FaEye, FaTrashAlt } from "react-icons/fa";
 import { useRouter } from "next/router";
 import { maskEmail, maskMobile } from "@/utils/MaskFunction";
+import UserCard from "./userCard";
 // import FromToDatePicker from "./FromToDatePicker";
 // import dayjs from "dayjs";
 
@@ -475,6 +476,7 @@ const SegmentList = () => {
     <Box
       sx={{ display: "flex", gap: 2, flexDirection: "column", width: "100%" }}
     >
+      <UserCard />
       <Stack
         direction="row"
         sx={{ justifyContent: "end", mt: 0, alignItems: "end" }}

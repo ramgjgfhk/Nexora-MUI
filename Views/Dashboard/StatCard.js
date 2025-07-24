@@ -161,10 +161,11 @@ import { GlassCard } from "../User/UserProfile/UserProfileComponents/ProfileCard
 
 const stats = [
   {
-    title: "All Users",
+    title: "Active Users",
     value: "12,345",
     icon: Group,
     color: "#1976d2", // blue
+    
   },
   {
     title: "New Users",
@@ -190,7 +191,7 @@ export default function TodayStatCard() {
   return (
     <Grid container spacing={1}>
       {stats.map((stat, index) => (
-        <Grid size={{ xs: 6, md: 3 }} key={index}>
+        <Grid size={{ xs: 6 }} key={index}>
           <GlassCard
             sx={{
               // height: { xs: 100, sm: 110, md: 70 },
@@ -199,7 +200,7 @@ export default function TodayStatCard() {
               border: "1px solid #e0e0e0",
               transition: "all 0.3s ease-in-out",
               backgroundColor: "white",
-              cursor:'pointer',
+              // cursor:'pointer',
               "&:hover": {
                 transform: "translateY(-4px)",
                 boxShadow: `0 8px 25px ${stat.color}25`,

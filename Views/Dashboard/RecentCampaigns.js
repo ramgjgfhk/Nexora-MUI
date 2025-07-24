@@ -57,24 +57,6 @@ export default function RecentCampaigns() {
       icon: <MailIcon sx={{ color: "#F87171" }} />,
       subText: "Running",
     },
-    {
-      title: "Flash Sale Notification",
-      type: "Push",
-      status: "Draft",
-      statusColor: "#E5E7EB",
-      icon: <NotificationsActiveIcon sx={{ color: "#2BB6AA" }} />,
-      subText: "Draft",
-      color: "#fbbf24",
-    },
-    {
-      title: "Abandoned Cart Recovery",
-      type: "Email",
-      status: "Active",
-      color: "#21FF51",
-      statusColor: "#D1FAE5",
-      icon: <MailIcon sx={{ color: "#F87171" }} />,
-      subText: "Running",
-    },
   ];
 
   const [anchorEl, setAnchorEl] = useState(null);
