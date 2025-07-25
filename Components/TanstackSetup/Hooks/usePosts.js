@@ -2,20 +2,29 @@ import { useQuery } from "@tanstack/react-query";
 import client from "../Api/client";
 import toast from "react-hot-toast";
 
-export function usePosts({ user_id, pagination_details, search, filters }) {
+export function usePosts({
+  user_id = "219",
+  limit,
+  sort,
+  offset,
+  search = "",
+  filters = {},
+}) {
   return useQuery({
-    queryKey: ["posts", { user_id, pagination_details, search, filters }],
+    queryKey: ["posts", { user_id, limit, offset, sort, search, filters }],
     queryFn: async () => {
       try {
-        const res = await client.post("/api/qa/list", {
-          params: {
-            user_id,
-            pagination_details,
-            ...(search && { search }), // Only include 'search' if it's not empty
-            ...(filters && { filters }),
-          },
+       const res = await client.post("/api/qa/list", {
+          user_id,
+          pagination_detail: { limit, offset },
+          sort,
+          ...(search && { search }),
+          ...(filters && { filters }),
         });
-        return res.data;
+        return {
+          rows: res.data.data,
+          total: res.data.total_count || 0,
+        };
       } catch (error) {
         toast.error("Failed to load posts");
         throw error;

@@ -8,10 +8,15 @@ import { Toaster } from 'react-hot-toast';
 import Loader from '../Components/Loader';
 
 const queryClient = new QueryClient({
-  defaultOptions: {
+ defaultOptions: {
     queries: {
-      retry: 1,
+      staleTime: 5 * 60 * 1000, // cache for 5 minutes
+      cacheTime: 15 * 60 * 1000,
+      retry: 2,
       refetchOnWindowFocus: false,
+    },
+    mutations: {
+      retry: 1,
     },
   },
 });
@@ -26,6 +31,7 @@ export default function ReactQueryProvider({ children }) {
     <QueryClientProvider client={queryClient}>
       <GlobalLoader />
       <Toaster position="top-right" />
+          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       {children}
     </QueryClientProvider>
   );

@@ -87,81 +87,79 @@ export const inputsCustomizations = {
                 },
               }),
             },
-          },{
-  props: {
-    color: "success",
-    variant: "contained",
-  },
-  style: {
-    color: "#3D4700",
-    backgroundColor:  "#cfef00",
-    // backgroundImage: `linear-gradient(to bottom, ${green[700]}, ${green[500]})`,
-    // boxShadow: `inset 0 1px 0 ${green[600]}, inset 0 -1px 0 1px hsl(150, 0%, 0%)`,
-    // border: `1px solid ${green[700]}`,
-    "&:hover": {
-      backgroundImage: "none",
-      backgroundColor: "#c4e201",
-      boxShadow: "none",
-    },
-    "&:active": {
-      backgroundColor: green[800],
-    },
-    ...theme.applyStyles("dark", {
-      color: "black",
-      backgroundColor: green[50],
-      backgroundImage: `linear-gradient(to bottom, ${green[100]}, ${green[50]})`,
-      boxShadow: "inset 0 -1px 0 hsl(150, 30%, 80%)",
-      border: `1px solid ${green[50]}`,
-      "&:hover": {
-        backgroundImage: "none",
-        backgroundColor: green[300],
-        boxShadow: "none",
-      },
-      "&:active": {
-        backgroundColor: green[400],
-      },
-    }),
-  },
-}
-,
-{
-  props: {
-    color: "error",
-    variant: "contained",
-  },
-  style: {
-    color: "white",
-    backgroundColor: red[400], // much lighter
-    backgroundImage: `linear-gradient(to bottom, ${red[300]}, ${red[400]})`,
-    // boxShadow: `inset 0 1px 0 ${red[200]}, inset 0 -1px 0 1px hsl(0, 0%, 0%)`,
-    border: `1px solid ${red[300]}`,
-    "&:hover": {
-      backgroundImage: "none",
-      backgroundColor: red[300],
-      boxShadow: "none",
-    },
-    "&:active": {
-      backgroundColor: red[500], // slight darkening on press
-    },
-    ...theme.applyStyles("dark", {
-      color: "black",
-      backgroundColor: red[50],
-      backgroundImage: `linear-gradient(to bottom, ${red[100]}, ${red[50]})`,
-      boxShadow: "inset 0 -1px 0 hsl(0, 30%, 80%)",
-      border: `1px solid ${red[100]}`,
-      "&:hover": {
-        backgroundImage: "none",
-        backgroundColor: red[100],
-        boxShadow: "none",
-      },
-      "&:active": {
-        backgroundColor: red[200],
-      },
-    }),
-  },
-},
-
-
+          },
+          {
+            props: {
+              color: "success",
+              variant: "contained",
+            },
+            style: {
+              color: "#3D4700",
+              backgroundColor: "#cfef00",
+              // backgroundImage: `linear-gradient(to bottom, ${green[700]}, ${green[500]})`,
+              // boxShadow: `inset 0 1px 0 ${green[600]}, inset 0 -1px 0 1px hsl(150, 0%, 0%)`,
+              // border: `1px solid ${green[700]}`,
+              "&:hover": {
+                backgroundImage: "none",
+                backgroundColor: "#c4e201",
+                boxShadow: "none",
+              },
+              "&:active": {
+                backgroundColor: green[800],
+              },
+              ...theme.applyStyles("dark", {
+                color: "black",
+                backgroundColor: green[50],
+                backgroundImage: `linear-gradient(to bottom, ${green[100]}, ${green[50]})`,
+                boxShadow: "inset 0 -1px 0 hsl(150, 30%, 80%)",
+                border: `1px solid ${green[50]}`,
+                "&:hover": {
+                  backgroundImage: "none",
+                  backgroundColor: green[300],
+                  boxShadow: "none",
+                },
+                "&:active": {
+                  backgroundColor: green[400],
+                },
+              }),
+            },
+          },
+          {
+            props: {
+              color: "error",
+              variant: "contained",
+            },
+            style: {
+              color: "white",
+              backgroundColor: red[400], // much lighter
+              backgroundImage: `linear-gradient(to bottom, ${red[300]}, ${red[400]})`,
+              // boxShadow: `inset 0 1px 0 ${red[200]}, inset 0 -1px 0 1px hsl(0, 0%, 0%)`,
+              border: `1px solid ${red[300]}`,
+              "&:hover": {
+                backgroundImage: "none",
+                backgroundColor: red[300],
+                boxShadow: "none",
+              },
+              "&:active": {
+                backgroundColor: red[500], // slight darkening on press
+              },
+              ...theme.applyStyles("dark", {
+                color: "black",
+                backgroundColor: red[50],
+                backgroundImage: `linear-gradient(to bottom, ${red[100]}, ${red[50]})`,
+                boxShadow: "inset 0 -1px 0 hsl(0, 30%, 80%)",
+                border: `1px solid ${red[100]}`,
+                "&:hover": {
+                  backgroundImage: "none",
+                  backgroundColor: red[100],
+                  boxShadow: "none",
+                },
+                "&:active": {
+                  backgroundColor: red[200],
+                },
+              }),
+            },
+          },
 
           {
             props: {
@@ -220,36 +218,36 @@ export const inputsCustomizations = {
             },
           },
           {
-  props: {
-    color: "error",
-    variant: "outlined",
-  },
-  style: {
-    color: red[400], // readable but soft
-    border: "1px solid",
-    borderColor: red[300],
-    backgroundColor: alpha(red[50], 0.2),
-    "&:hover": {
-      backgroundColor: red[100],
-      borderColor: red[400],
-    },
-    "&:active": {
-      backgroundColor: red[200],
-    },
-    ...theme.applyStyles("dark", {
-      color: red[200],
-      backgroundColor: alpha(red[900], 0.2),
-      borderColor: red[700],
-      "&:hover": {
-        backgroundColor: alpha(red[800], 0.4),
-        borderColor: red[500],
-      },
-      "&:active": {
-        backgroundColor: alpha(red[800], 0.5),
-      },
-    }),
-  },
-},
+            props: {
+              color: "error",
+              variant: "outlined",
+            },
+            style: {
+              color: red[400], // readable but soft
+              border: "1px solid",
+              borderColor: red[300],
+              backgroundColor: alpha(red[50], 0.2),
+              "&:hover": {
+                backgroundColor: red[100],
+                borderColor: red[400],
+              },
+              "&:active": {
+                backgroundColor: red[200],
+              },
+              ...theme.applyStyles("dark", {
+                color: red[200],
+                backgroundColor: alpha(red[900], 0.2),
+                borderColor: red[700],
+                "&:hover": {
+                  backgroundColor: alpha(red[800], 0.4),
+                  borderColor: red[500],
+                },
+                "&:active": {
+                  backgroundColor: alpha(red[800], 0.5),
+                },
+              }),
+            },
+          },
 
           {
             props: {
@@ -495,7 +493,8 @@ export const inputsCustomizations = {
         padding: 0,
       },
       root: ({ theme }) => ({
-        padding: "8px 12px",fontSize:"0.6rem",
+        padding: "8px 12px",
+        fontSize: "0.6rem",
         color: (theme.vars || theme).palette.text.primary,
         borderRadius: (theme.vars || theme).shape.borderRadius,
         border: `1px solid ${(theme.vars || theme).palette.divider}`,
