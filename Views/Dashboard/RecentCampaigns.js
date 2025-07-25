@@ -42,7 +42,7 @@ export default function RecentCampaigns() {
     {
       title: "Flash Sale Notification",
       type: "Push",
-      status: "Draft",
+      status: "Scheduled",
       statusColor: "#E5E7EB",
       icon: <NotificationsActiveIcon sx={{ color: "#2BB6AA" }} />,
       subText: "Draft",
@@ -135,10 +135,20 @@ export default function RecentCampaigns() {
                 <Chip
                   label={item.status}
                   size="medium"
+                  // variant="outlined"
+                  color={
+                    item.status === "Active"
+                      ? "success"
+                      : item.status === "Draft"
+                      ? "default"
+                      : item.status === "Scheduled"
+                      ? "info"
+                      : "default"
+                  }
                   sx={{
-                    border: "none",
-                    backgroundColor: `${item.color}29`, // 3% opacity
-                    color: item.color,
+                    // border: "none",
+                    // backgroundColor: `${item.color}29`, // 3% opacity
+                    // color: item.color,
                     borderRadius: "8px", // Rectangle with slight rounding
                     height: 24, // Optional: control height for rectangle
                     p: 1, // Optional: padding for better text fit

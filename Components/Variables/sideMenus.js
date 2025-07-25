@@ -130,19 +130,19 @@ export const menuItems = [
     path: "/timeline",
     name: "Timeline",
   },
-  {
-    id: "schema",
-    title: "Schema",
-    icon: <Schema />,
-    children: [
-      {
-        id: "user_properties",
-        title: "User Properties",
-        icon: <BarChart />,
-        name: "Schema / User Properties",
-      },
-    ],
-  },
+  // {
+  //   id: "schema",
+  //   title: "Schema",
+  //   icon: <Schema />,
+  //   children: [
+  //     {
+  //       id: "user_properties",
+  //       title: "User Properties",
+  //       icon: <BarChart />,
+  //       name: "Schema / User Properties",
+  //     },
+  //   ],
+  // },
   {
     id: "settings",
     title: "Settings",
@@ -223,7 +223,7 @@ export const menuItems = [
           },
           {
             id: "events",
-            title: "Events",
+            title: "Schema / Events",
             icon: <BarChart />,
             name: "Schema / Event",
             path: "/Schema/Events/schema",

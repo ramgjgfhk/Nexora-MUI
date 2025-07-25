@@ -18,7 +18,7 @@ const AnalyticsCard = ({ analytics, title }) => {
           <Typography variant="subtitle2">
             {title}-<b>{analytics?.count}</b>
           </Typography>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Box sx={{ display: "flex", alignItems: "center",mt:0.5 }}>
             <Chip
               label={`${analytics?.percentage}%`}
               color={
@@ -51,29 +51,6 @@ const AnalyticsCard = ({ analytics, title }) => {
               : "error"
           }
         />
-        {/* {Array.isArray(analytics?.chartData) &&
-        analytics.chartData.length > 0 ? (
-          <LineChart data={analytics?.chartData}>
-                <Line
-                  type="monotone"
-                  dataKey="value"
-                  stroke={
-                    color === "blue"
-                      ? "#3b82f6"
-                      : color === "green"
-                        ? "#10b981"
-                        : color === "purple"
-                          ? "#8b5cf6"
-                          : "#f59e0b"
-                  }
-                  strokeWidth={2}
-                  dot={false}
-                  activeDot={false}
-                />
-              </LineChart>
-        ) : (
-          <div style={{ color: "#888", fontSize: 12 }}>No data</div>
-        )} */}
       </div>
     </Box>
   );
