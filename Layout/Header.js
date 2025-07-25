@@ -45,10 +45,10 @@ export default function Header(props) {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          // boxShadow: "0 4px 20px rgba(0,0,0,0.1)", // extra depth
+          boxShadow: "0 4px 20px rgba(0,0,0,0.1)", // extra depth
           // px: 2,
           // border: "1px solid",
-          // borderColor: "divider",
+          borderColor: "divider",
           width: "100%",
         }}
       >

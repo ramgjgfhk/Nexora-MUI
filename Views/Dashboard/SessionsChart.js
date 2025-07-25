@@ -150,9 +150,9 @@ export default function CampaignPerformanceECharts() {
             Campaign Performance
           </Typography>
           <ButtonGroup size="small">
-            <Button sx={buttonStyles}>SMS</Button>
-            <Button sx={buttonStyles}>Email</Button>
-            <Button sx={buttonStyles}>Push</Button>
+            <Button>SMS</Button>
+            <Button>Email</Button>
+            <Button>Push</Button>
           </ButtonGroup>
         </Box>
 
